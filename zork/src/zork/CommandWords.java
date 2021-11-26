@@ -1,4 +1,4 @@
-package zork.src;
+package zork;
 
 public class CommandWords {
   // a constant array that holds all valid command words

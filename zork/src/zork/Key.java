@@ -1,4 +1,4 @@
-package zork.src;
+package zork;
 
 public class Key extends Item {
   private String keyId;

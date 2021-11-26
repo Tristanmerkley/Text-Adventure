@@ -1,4 +1,4 @@
-package zork.src;
+package zork;
 
 import java.io.IOException;
 import java.nio.file.Files;

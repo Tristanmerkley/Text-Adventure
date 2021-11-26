@@ -1,4 +1,4 @@
-package zork.src;
+package zork;
 
 public class Item extends OpenableObject {
   private int weight;

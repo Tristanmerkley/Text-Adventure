@@ -1,4 +1,4 @@
-package zork.src;
+package zork;
 
 public class OpenableObject {
   private Boolean isLocked;
