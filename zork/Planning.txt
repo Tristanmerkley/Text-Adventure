@@ -1,2 +1,0 @@
-5 rooms
-rooms - kitchen, dining room, bedroom, bathroom, living room, basement, outside, garage, shed, office, library, dungeon, bowling ally, recording studio, closet, bunker, cellar, hallway, cave, tree house
