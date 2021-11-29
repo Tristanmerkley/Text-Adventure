@@ -6,5 +6,6 @@ public class Zork {
     game.play();
 
     // comment KD
+    // comment VR
   }
 }
