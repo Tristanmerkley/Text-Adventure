@@ -4,13 +4,15 @@
             "id": "Hallway",
             "name": "Hallway",
             "description": "You are in a long hallway. There are family pictures on all of the walls.",
-            "weight": 5
+            "weight": 5,
+            "startingroom": "Bathroom"
         },
         {
             "id": "Hallway",
             "name": "Hallway",
             "description": "You are in a long hallway. There are family pictures on all of the walls.",
-            "weight": 5
+            "weight": 5,
+            "startingroom": "Bathroom"
         }
     ]
 }
