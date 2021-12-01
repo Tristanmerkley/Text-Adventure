@@ -12,9 +12,11 @@ import org.json.simple.parser.JSONParser;
 public class Game {
 
   public static HashMap<String, Room> roomMap = new HashMap<String, Room>();
+  public static HashMap<String, Item> itemMap = new HashMap<String, Item>();
 
   private Parser parser;
   private Room currentRoom;
+  private Inventory playerInventory;
 
   /**
    * Create the game and initialise its internal map.
@@ -23,10 +25,31 @@ public class Game {
     try {
       initRooms("src\\zork\\data\\rooms.json");
       currentRoom = roomMap.get("Bedroom");
+      initItems("src\\zork\\data\\items.json");
     } catch (Exception e) {
       e.printStackTrace();
     }
     parser = new Parser();
+  }
+
+  private void initItems(String fileName) throws Exception {
+    Path path = Path.of(fileName);
+    String jsonString = Files.readString(path);
+    JSONParser parser = new JSONParser();
+    JSONObject json = (JSONObject) parser.parse(jsonString);
+
+    JSONArray jsonItems = (JSONArray) json.get("items");
+
+    for (Object roomObj : jsonItems) {
+      Item item = new Item();
+      String itemName = (String) ((JSONObject) roomObj).get("name");
+      String itemId = (String) ((JSONObject) roomObj).get("id");
+      //int itemWeight = (int) ((JSONObject) roomObj).get("weight");
+      String startingRoom = (String) ((JSONObject) roomObj).get("startingroom");
+      //item.setWeight(itemWeight);
+      item.setName(itemName);
+      itemMap.put(itemId, item);
+    }
   }
 
   private void initRooms(String fileName) throws Exception {
@@ -86,8 +109,8 @@ public class Game {
    */
   private void printWelcome() {
     System.out.println();
-    System.out.println("Welcome to Zork!");
-    System.out.println("Zork is a new, incredibly boring adventure game.");
+    System.out.println("Welcome to Clue!");
+    System.out.println("Clue is a new, incredibly boring adventure game.");
     System.out.println("Type 'help' if you need help.");
     System.out.println();
     System.out.println(currentRoom.longDescription());
@@ -115,6 +138,8 @@ public class Game {
         return true; // signal that we want to quit
     } else if (commandWord.equals("eat")) {
       System.out.println("Do you really think you should be eating at a time like this?");
+    } else if (commandWord.equals("take")) {
+      playerInventory.addItem();
     }
     return false;
   }

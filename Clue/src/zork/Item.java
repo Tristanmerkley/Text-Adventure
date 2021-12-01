@@ -6,20 +6,28 @@ public class Item extends OpenableObject {
   private boolean isOpenable;
   private Inventory inventory;
 
-  public Item(int weight, String name, boolean isOpenable, int maxWeight ) {
+  public Item() {
+    isOpenable = false;
+  }
+
+  public Item(String name) {
+    this.name = name;
+  }
+
+  public Item(int weight, String name, boolean isOpenable, int maxWeight) {
     this.weight = weight;
     this.name = name;
     this.isOpenable = isOpenable;
-    
-    if(isOpenable)
-    inventory = new Inventory(maxWeight);
+
+    if (isOpenable)
+      inventory = new Inventory(maxWeight);
   }
 
-  public void displayInventory(){
+  public void displayInventory() {
     System.out.println(inventory);
   }
 
-  public String toString(){
+  public String toString() {
     //need to create a toString method to display the inventory
     return null;
   }
