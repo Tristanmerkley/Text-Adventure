@@ -1,18 +1,102 @@
 {
     "items": [
         {
-            "id": "knife",
+            "id": "Knife",
             "name": "Knife",
-            "description": "You are in a long hallway. There are family pictures on all of the walls.",
-            "weight": 5,
-            "startingroom": "Bedroom"
+            "description": "A small knife, If I knew how to lockpick, maybe this would be useful.",
+            "weight": 2,
+            "startingroom": "Kitchen"
         },
         {
-            "id": "Hallway",
-            "name": "Hallway",
+            "id": "Winebottle",
+            "name": "Wine Bottle",
             "description": "You are in a long hallway. There are family pictures on all of the walls.",
             "weight": 5,
             "startingroom": "Bathroom"
+        },
+        {
+            "id": "BowlingBall",
+            "name": "Bowling Ball",
+            "description": "I know I'm on a time limit here, but I wonder if I can get a strike.",
+            "weight": 5,
+            "startingroom": "BowlingAlley"
+        },
+        {
+            "id": "Cheese",
+            "name": "Cheese",
+            "description": "Cheese? I wonder how the rodents haven't gotten to it.",
+            "weight": 1,
+            "startingroom": "Kitchen"
+        },
+        {
+            "id": "RottenMilk",
+            "name": "Rotten Milk",
+            "description": "The smell makes you gag, but you see something shiny through the rotten chunks.",
+            "weight": 2,
+            "holdingWeight": 5,
+            "isOpenable": true,
+            "startingItem": "Fridge"
+        },
+        {
+            "id": "PantryKey",
+            "name": "Pantry key",
+            "description": "The key to the pantry, although it's covered in a gross liquid, you can make out the symbol of a pineapple",
+            "weight": 1,
+            "startingItem": "RottenMilk"
+        },
+        {
+            "id": "Coffee",
+            "name": "Coffee",
+            "description": "A cup of coffee, oddly, it's still warm",
+            "weight": 1,
+            "startingroom": "Kitchen"
+        },
+        {
+            "id": "Fridge",
+            "name": "Fridge",
+            "description": "A broken fridge, the door hanging off its hinges, it has some rotten milk and some cheese inside.",
+            "weight": 1000000,
+            "holdingWeight": 20,
+            "isOpenable": true,
+            "startingroom": "Kitchen"
+        },
+        {
+            "id": "MiceNote",
+            "name": "Mice's Note",
+            "description": "A note given to you by the Mice, it reads [don't forget your abc's].",
+            "weight": 0,
+            "startingroom": "Pantry"
+        },
+        {
+            "id": "LeftShoe",
+            "name": "Left Shoe",
+            "description": "A worn out left shoe",
+            "weight": 2,
+            "holdingWeight": 5,
+            "isOpenable": true,
+            "isCloseable": false,
+            "startingroom": "Closet"
+        },
+        {
+            "id": "RightShoe",
+            "name": "Right Shoe",
+            "description": "A broken fridge, the door hanging off its hinges, it has some rotten milk and some cheese inside.",
+            "weight": 2,
+            "holdingWeight": 20,
+            "isOpenable": true,
+            "isCloseable": false,
+            "startingroom": "Closet"
+        },
+        {
+            "id": "PeculiarCoin",
+            "name": "Peculiar Coin",
+            "description": " ",
+            "weight": 2,
+            "holdingWeight": 20,
+            "isOpenable": true,
+            "isCloseable": false,
+            "startingroom": "Closet"
         }
+        
     ]
 }
