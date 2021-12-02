@@ -8,29 +8,29 @@
         {
           "isLocked": true,
           "direction": "North",
-          "adjacentRoom": "Outside", 
+          "adjacentRoom": "Outside",
           "keyId": "frontKey"
         },
         {
           "isLocked": false,
           "direction": "South",
           "adjacentRoom": "Basement"
-        }
+        },
         {
           "isLocked":false,
           "direction":"SouthEast",
           "adjacentRoom":"Upstairs"
-        }
+        },
         {
           "isLocked":false,
           "direction":"SouthWest",
           "adjacentRoom":"Upstairs"
-        }
+        },
         {
           "isLocked":false,
           "direction":"East",
           "adjacentRoom":"DiningRoom"
-        }
+        },
         {
           "isLocked":false,
           "direction":"West",
