@@ -5,13 +5,10 @@ public class Item extends OpenableObject {
   private String name;
   private boolean isOpenable;
   private Inventory inventory;
+  private String description;
 
   public Item() {
-    isOpenable = false;
-  }
-
-  public Item(String name) {
-    this.name = name;
+    inventory = new Inventory(0);
   }
 
   public Item(int weight, String name, boolean isOpenable, int maxWeight) {
@@ -27,16 +24,12 @@ public class Item extends OpenableObject {
     System.out.println(inventory);
   }
 
-  public String toString() {
-    //need to create a toString method to display the inventory
-    return null;
+  public String getInventory() {
+    return toString();
   }
 
-
-  public void open() {
-    if (!isOpenable)
-      System.out.println("The " + name + " cannot be opened.");
-
+  public String toString() {
+    return name + ":" + description;
   }
 
   public int getWeight() {
@@ -61,6 +54,18 @@ public class Item extends OpenableObject {
 
   public void setOpenable(boolean isOpenable) {
     this.isOpenable = isOpenable;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
+  public void createInventory(int holdingWeight) {
+    inventory = new Inventory(holdingWeight);
+  }
+
+  public void addItem(Item item) {
+    inventory.addItem(item);
   }
 
 }
