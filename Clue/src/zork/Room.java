@@ -22,11 +22,13 @@ public class Room {
    * "description" is something like "a kitchen" or "an open court yard".
    */
   public Room(String description) {
+    inventory = new Inventory(100000000);
     this.description = description;
     exits = new ArrayList<Exit>();
   }
 
   public Room() {
+    inventory = new Inventory(100000000);
     roomName = "DEFAULT ROOM";
     description = "DEFAULT DESCRIPTION";
     exits = new ArrayList<Exit>();
@@ -111,5 +113,17 @@ public class Room {
 
   public void setDescription(String description) {
     this.description = description;
+  }
+
+  public boolean addItem(Item item) {
+    return inventory.addItem(item);
+  }
+
+  public Item contains(String itemName) {
+    return inventory.contains(itemName);
+  }
+
+  public Item removeItem(String itemName) {
+    return inventory.removeItem(itemName);
   }
 }
