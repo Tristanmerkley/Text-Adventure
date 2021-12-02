@@ -3,7 +3,7 @@
          {
             "id": "Vcr",
             "name": "Cassette",
-            "description": "",
+            "description": "An old Cassette, I wonder whats it",
             "weight": 1,
             "startingRoom": "Theatre"
         },
@@ -11,7 +11,7 @@
             "id": "VcrPlayer",
             "name": "Vcr player",
             "description": "",
-            "weight": 1,
+            "weight": 1000000,
             "startingRoom": "Theatre"
         },
         {
@@ -31,7 +31,7 @@
         {
             "id": "BowlingPins",
             "name": "Bowling pins",
-            "description": "Cheese? I wonder how the rodents haven't gotten to it.",
+            "description": "Some dirty old pins",
             "weight": 1,
             "startingRoom": "BowlingAlley"
         },
@@ -39,21 +39,21 @@
             "id": "GrandEntryPainting",
             "name": "Painting",
             "description": "",
-            "weight": 1,
+            "weight": 1000000,
             "startingRoom": "GrandEntryRoom"
         },
          {
             "id": "DiningRoomChairs",
             "name": "Chairs",
             "description": "",
-            "weight": 1,
+            "weight": 1000000,
             "startingRoom": "DiningRoom"
         },
          {
             "id": "DiningRoomTable",
             "name": "Round table",
             "description": "",
-            "weight": 1,
+            "weight": 1000000,
             "startingRoom": "DiningRoom"
         },
          {
@@ -81,7 +81,7 @@
             "id": "Fridge",
             "name": "Fridge",
             "description": "",
-            "weight": 1,
+            "weight": 1000000,
             "holdingWeight": 1,
             "isOpenable": true,
             "startingRoom": "Kitchen"
@@ -113,7 +113,7 @@
             "id": "PantryMice",
             "name": "Mice",
             "description": "",
-            "weight": 1,
+            "weight": 1000000,
             "startingRoom": "Pantry"
         },
         {
@@ -134,13 +134,13 @@
             "id": "Couch",
             "name": "Couch",
             "description": "",
-            "weight": 1,
+            "weight": 1000000,
             "startingRoom": "LivingRoom"
         },
         {
             "id": "CouchCushion",
             "name": "Couch cushion",
-            "description": "",
+            "description": "The cushion of a couch, it has a tear in it",
             "weight": 1,
             "startingItem": "Couch"
         },
@@ -155,7 +155,7 @@
             "id": "FirePlace",
             "name": "Fireplace",
             "description": "",
-            "weight": 1,
+            "weight": 1000000,
             "startingRoom": "LivingRoom"
         },
         {
@@ -171,14 +171,14 @@
         {
             "id": "NoteFromLeftShoe",
             "name": "Note from left shoe",
-            "description": "",
+            "description": "A note that says [Find the pair]",
             "weight": 1,
             "startingItem": "LeftShoe"
         },
         {
             "id": "RightShoe",
             "name": "Right shoe",
-            "description": "A broken fridge, the door hanging off its hinges, it has some rotten milk and some cheese inside.",
+            "description": "A worn out right shoe, it seems to match the left one",
             "weight": 1,
             "holdingWeight": 1,
             "isOpenable": true,
@@ -190,16 +190,13 @@
             "name": "Peculiar Coin",
             "description": " ",
             "weight": 1,
-            "holdingWeight": 1,
-            "isOpenable": true,
-            "isCloseable": false,
             "startingItem": "RightShoe"
         },
         {
             "id": "Desk",
             "name": "Desk",
             "description": "",
-            "weight": 1,
+            "weight": 1000000,
             "startingRoom": "Office1"
         },
         {
@@ -212,10 +209,81 @@
         {
             "id": "Floor0Map",
             "name": "Floor0 map",
-            "description": "",
+            "description": "A map of floor 0, this will be useful",
             "weight": 1,
             "startingItem": "Desk"
-        }
+        },
+        {
+            "id": "LooseFloorBoard",
+            "name": "Floor Board",
+            "description": "",
+            "weight": 1000000,
+            "holdingWeight": 1,
+            "startingRoom": "Attic"
+        },
+        {
+            "id": "GateKey",
+            "name": "Gate key",
+            "description": "A key with the symbol of the gate on it",
+            "weight": 1,
+            "startingItem": "Hole"
+        },
+        {
+            "id": "Hole",
+            "name": "Hole",
+            "description": "",
+            "weight": 1000000,
+            "startingRoom": "Garden"
+        },
+        {
+            "id": "shovel",
+            "name": "Piggy bank",
+            "description": "",
+            "weight": 1,
+            "startingRoom": "Office1"
+        },
+        {
+            "id": "LockPickingBook",
+            "name": "Piggy bank",
+            "description": "",
+            "weight": 1,
+            "startingRoom": "Office1"
+        },
+        {
+            "id": "FrontDoorKey",
+            "name": "Piggy bank",
+            "description": "",
+            "weight": 1,
+            "startingRoom": "Office1"
+        },
+        {
+            "id": "Floor1Map1",
+            "name": "Piggy bank",
+            "description": "",
+            "weight": 1,
+            "startingRoom": "Office1"
+        },
+        {
+            "id": "Floor1Map2",
+            "name": "Piggy bank",
+            "description": "",
+            "weight": 1,
+            "startingRoom": "Office1"
+        },
+        {
+            "id": "Floor1MapWhole",
+            "name": "Piggy bank",
+            "description": "",
+            "weight": 1,
+            "startingRoom": "Office1"
+        },
+        {
+            "id": "RippedPaper",
+            "name": "Piggy bank",
+            "description": "",
+            "weight": 1,
+            "startingRoom": "Office1"
+        },
         
     ]
 }

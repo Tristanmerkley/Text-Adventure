@@ -1,55 +1,70 @@
 {
   "rooms": [
     {
-      "id": "Hallway",
-      "name": "Hallway",
-      "description": "You are in a long hallway. There are family pictures on all of the walls.",
+      "id": "GrandEntry",
+      "name": "Grand Entry",
+      "description": "You are in the Grand Entry. The front door is to the North, but it's locked. There are stairs leading downstairs to the South. There are two sets of stairs leading upwards on either side of the downward stairs(SouthEast and SouthWest). To the East, there is a dinning room. To the West, there is a hallway. ADD DESCRIPTION(painting)",
       "exits": [
         {
-          "isLocked": false,
+          "isLocked": true,
           "direction": "North",
-          "adjacentRoom": "Bedroom"
+          "adjacentRoom": "Outside", 
+          "keyId": "frontKey"
         },
         {
-          "isLocked": true,
-          "direction": "East",
-          "adjacentRoom": "Bathroom",
-          "keyId": "1234"
+          "isLocked": false,
+          "direction": "South",
+          "adjacentRoom": "Basement"
+        }
+        {
+          "isLocked":false,
+          "direction":"SouthEast",
+          "adjacentRoom":"Upstairs"
+        }
+        {
+          "isLocked":false,
+          "direction":"SouthWest",
+          "adjacentRoom":"Upstairs"
+        }
+        {
+          "isLocked":false,
+          "direction":"East",
+          "adjacentRoom":"DiningRoom"
+        }
+        {
+          "isLocked":false,
+          "direction":"West",
+          "adjacentRoom":"Hallway1"
         }
       ]
     },
     {
-      "id": "Bedroom",
-      "name": "Bedroom",
-      "description": "You are in a large bedroom",
+      "id": "DiningRoom",
+      "name": "Dining Room",
+      "description": "You are in the dining room. You see three magenta chairs around a round table decorated by a candle. The kitchen is to the South. The Grand Entry is to the West.",
       "exits": [
         {
           "isLocked": false,
           "direction": "South",
-          "adjacentRoom": "Hallway"
-        },
-        {
-          "isLocked": false,
-          "direction": "SouthEast",
-          "adjacentRoom": "Bathroom"
+          "adjacentRoom": "Kitchen"
         },
         {
           "isLocked": false,
           "direction": "East",
-          "adjacentRoom": "Closet"
+          "adjacentRoom": "GrandEntry"
         }
       ]
     },
     {
-      "id": "Bathroom",
-      "name": "Bathroom",
-      "description": "You are in a blue bathroom",
+      "id": "Kitchen",
+      "name": "Kitchen",
+      "description": "You are in the kitchen. The dining room is to the North. There is a hallway to the East. A pantry is to the SouthWest. ADD DESCRIPTION",
       "exits": [
         {
           "isLocked": true,
-          "direction": "West",
-          "adjacentRoom": "Hallway",
-          "keyId": "1234"
+          "direction": "SouthWest",
+          "adjacentRoom": "Pantry",
+          "keyId": "milkKey"
         },
         {
           "isLocked": false,
