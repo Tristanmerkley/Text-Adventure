@@ -24,8 +24,9 @@ public class Game {
   public Game() {
     try {
       initRooms("src\\zork\\data\\rooms.json");
-      currentRoom = roomMap.get("Bedroom");
       initItems("src\\zork\\data\\items.json");
+      currentRoom = roomMap.get("GrandEntry"); //! spawn room
+      playerInventory = new Inventory(300); //! player max inventory weight
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -37,18 +38,48 @@ public class Game {
     String jsonString = Files.readString(path);
     JSONParser parser = new JSONParser();
     JSONObject json = (JSONObject) parser.parse(jsonString);
-
     JSONArray jsonItems = (JSONArray) json.get("items");
-
-    for (Object roomObj : jsonItems) {
+    HashMap<String, String> roomPlacement = new HashMap<String, String>();
+    HashMap<String, String> itemPlacement = new HashMap<String, String>();
+    for (Object itemObj : jsonItems) {
       Item item = new Item();
-      String itemName = (String) ((JSONObject) roomObj).get("name");
-      String itemId = (String) ((JSONObject) roomObj).get("id");
-      //int itemWeight = (int) ((JSONObject) roomObj).get("weight");
-      String startingRoom = (String) ((JSONObject) roomObj).get("startingroom");
-      //item.setWeight(itemWeight);
+      String itemName = (String) ((JSONObject) itemObj).get("name");
+      String itemId = (String) ((JSONObject) itemObj).get("id");
+      long weight = (Long) ((JSONObject) itemObj).get("weight");
+      long holdingWeight = ((JSONObject) itemObj).get("holdingWeight") != null ? (Long) ((JSONObject) itemObj).get("holdingWeight") : 0; //! how much an item can hold in its inventory
+      boolean isLocked = ((JSONObject) itemObj).get("isLocked") != null ? (Boolean) ((JSONObject) itemObj).get("isLocked") : false;
+      boolean isOpenable = ((JSONObject) itemObj).get("isOpenable") != null ? (Boolean) ((JSONObject) itemObj).get("isOpenable") : false;
+
+      String itemDescription = (String) ((JSONObject) itemObj).get("description");
+      String startingRoom = ((JSONObject) itemObj).get("startingroom") != null ? (String) ((JSONObject) itemObj).get("startingroom") : null;
+      String startingItem = ((JSONObject) itemObj).get("startingitem") != null ? (String) ((JSONObject) itemObj).get("startingitem") : null;
+
+      item.setDescription(itemDescription);
       item.setName(itemName);
+      item.setLocked(isLocked);
+      item.setOpenable(isOpenable);
+      item.setWeight((int) weight);
+      item.createInventory((int) holdingWeight);
+
+      if (startingRoom != null)
+        roomPlacement.put(itemId, startingRoom);
+
+      if (startingItem != null)
+        itemPlacement.put(itemId, startingItem);
+
       itemMap.put(itemId, item);
+    }
+
+    for (String itemId : roomPlacement.keySet()) {
+      Item item = itemMap.get(itemId);
+      Room room = roomMap.get(roomPlacement.get(itemId));
+      room.addItem(item);
+    }
+
+    for (String itemId : itemPlacement.keySet()) {
+      Item item = itemMap.get(itemId);
+      Item openableItem = itemMap.get(itemPlacement.get(itemId));
+      openableItem.addItem(item);
     }
   }
 
@@ -109,8 +140,8 @@ public class Game {
    */
   private void printWelcome() {
     System.out.println();
-    System.out.println("Welcome to Clue!");
-    System.out.println("Clue is a new, incredibly boring adventure game.");
+    System.out.println("Welcome to Zork!");
+    System.out.println("Zork is a new, incredibly boring adventure game.");
     System.out.println("Type 'help' if you need help.");
     System.out.println();
     System.out.println(currentRoom.longDescription());
@@ -138,8 +169,6 @@ public class Game {
         return true; // signal that we want to quit
     } else if (commandWord.equals("eat")) {
       System.out.println("Do you really think you should be eating at a time like this?");
-    } else if (commandWord.equals("take")) {
-      playerInventory.addItem();
     }
     return false;
   }
