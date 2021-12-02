@@ -30,4 +30,17 @@ public class Inventory {
     }
   }
 
+  public Item contains(String itemName) {
+    for (int i = 0; i < items.size(); i++) {
+      if (items.get(i).getName().equals(itemName))
+        return items.get(i);
+    }
+    return null;
+  }
+
+  public Item removeItem(String itemName) {
+    Item item = contains(itemName);
+    items.remove(item);
+    return item;
+  }
 }
