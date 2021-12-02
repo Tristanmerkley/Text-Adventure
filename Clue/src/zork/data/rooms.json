@@ -84,6 +84,18 @@
           "adjacentRoom": "Bedroom"
         }
       ]
+    },
+    {
+      "id": "Kitchen",
+      "name": "Kitchen",
+      "description": "You are in a rundown kitchen you can see a fridge with its door hanging open.",
+      "exits": [
+        {
+          "isLocked": false,
+          "direction": "West",
+          "adjacentRoom": "Bedroom"
+        }
+      ]
     }
   ]
 }

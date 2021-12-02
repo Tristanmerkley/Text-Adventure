@@ -2,7 +2,6 @@ package zork;
 
 import java.util.Scanner;
 
-// test VR
 public class Parser {
   private CommandWords commands; // holds all valid command words
   private Scanner in;
