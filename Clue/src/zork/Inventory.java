@@ -43,4 +43,10 @@ public class Inventory {
     items.remove(item);
     return item;
   }
+
+  public void displayInventory() {
+    for (Item i : items) {
+      System.out.println(i);
+    }
+  }
 }
