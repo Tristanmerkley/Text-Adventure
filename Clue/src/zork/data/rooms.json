@@ -58,7 +58,7 @@
     {
       "id": "Kitchen",
       "name": "Kitchen",
-      "description": "You are in the kitchen. The dining room is to the North. There is a hallway to the East. A pantry is to the SouthWest. ADD DESCRIPTION",
+      "description": "You are in the kitchen. The dining room is to the North. There is a hallway to the East. A pantry is to the SouthWest. ADD DESCRIPTION(items)",
       "exits": [
         {
           "isLocked": true,
@@ -68,32 +68,234 @@
         },
         {
           "isLocked": false,
-          "direction": "NorthWest",
-          "adjacentRoom": "Bedroom"
+          "direction": "North",
+          "adjacentRoom": "DiningRoom"
+        },
+        {
+          "isLocked":false,
+          "direction":"East",
+          "adjacentRoom":"Hallway2"
         }
       ]
     },
     {
-      "id": "Closet",
-      "name": "Closet",
-      "description": "You are in the closet. It is dark.",
+      "id": "LivingRoom",
+      "name": "Living Room",
+      "description": "You are in the living room. There is a door leading outside to the East and a hallway to the South.",
       "exits": [
         {
           "isLocked": false,
-          "direction": "West",
-          "adjacentRoom": "Bedroom"
+          "direction": "South",
+          "adjacentRoom": "Hallway2"
+        },
+        {
+          "isLocked":false,
+          "direction":"East",
+          "adjacentRoom":"Patio"
         }
       ]
     },
     {
-      "id": "Kitchen",
-      "name": "Kitchen",
-      "description": "You are in a rundown kitchen you can see a fridge with its door hanging open.",
+      "id": "Hallway2",
+      "name": "Hallway",
+      "description": "You are in a long dark hallway. The Living room is North and there is a bathroom to the South. The entrance to the kitchen is to the West. Going further East, the hallway continues to reveal other rooms.",
       "exits": [
         {
           "isLocked": false,
-          "direction": "West",
-          "adjacentRoom": "Bedroom"
+          "direction": "North",
+          "adjacentRoom": "LivingRoom"
+        },
+        {
+          "isLocked":false,
+          "direction":"South",
+          "adjacentRoom":"Bathroom1"
+        },
+        {
+          "isLocked":false,
+          "direction":"East",
+          "adjacentRoom":"Hallway3"
+        },
+        {
+          "isLocked":false,
+          "direction":"West",
+          "adjacentRoom":"Kitchen"
+        }
+      ]
+    },
+    {
+      "id":"Bathroom1",
+      "name":"Bathroom",
+      "description":"You are in a bathroom. You notice there are 5 periwinkle toilet paper rolls in a basket. Go North to leave the bathroom.",
+      "exits":[
+        {
+          "isLocked":false,
+          "direction":"North",
+          "adjacentRoom":"Hallway2"
+        }
+      ]
+    },
+    {
+      "id":"Hallway3",
+      "name":"Hallway",
+      "description":"You are in a long dark hallway. Going further West, the hallway continues to reveal other rooms. There is a door leading outside to the East. There is a small coat closet to the South.",
+      "exits":[
+        {
+          "isLocked":false,
+          "direction":"West",
+          "adjacentRoom":"Hallway2"
+        },
+        {
+          "isLocked":false,
+          "direction":"South",
+          "adjacentRoom":"Closet1"
+        },
+        {
+          "isLocked":false,
+          "direction":"East",
+          "adjacentRoom":"Path1"
+        }
+      ]
+    },
+    {
+      "id":"Closet1",
+      "name":"Closet",
+      "description":"You are in a small coat closet. Theres a shoe on the floor with...Is that a coin?",
+      "exits":[
+        {
+          "isLocked":false,
+          "direction":"North",
+          "adjacentRoom":"Hallway3"
+        }
+      ]
+    },
+    {
+      "id":"Pantry",
+      "name":"Pantry",
+      "description":"You are in the pantry. DESPCRIPTIONOF ITEMS",
+      "exits":[
+        {
+          "isLocked":false,
+          "direction":"NorthEast",
+          "adjacentRoom":"Kitchen"
+        }
+      ]
+    },
+    {
+      "id":"Hallway1",
+      "name":"Hallway",
+      "description":"You are in a hallway. The grand entry is to the East. There is an office to the South. The garage is to the West.",
+      "exits":[
+        {
+          "isLocked":false,
+          "direction":"South",
+          "adjacentRoom":"Office1"
+        },
+        {
+          "isLocked":false,
+          "direction":"East",
+          "adjacentRoom":"GrandEntry"
+        },
+        {
+          "isLocked":false,
+          "direction":"West",
+          "adjacentRoom":"Garage"
+        }
+      ]
+    },
+    {
+      "id":"Garage",
+      "name":"Garage",
+      "description":"You are in the garage. To exit the garage, go to the East. DESPCRIPTION OF ITEMS",
+      "exits":[
+        {
+          "isLocked":false,
+          "direction":"East",
+          "adjacentRoom":"Hallway1"
+        }
+      ]
+    },
+    {
+      "id":"Office1",
+      "name":"Office",
+      "description":"You are in an office. To exit the office, go to the North. DESPCRIPTION OF ITEMS",
+      "exits":[
+        {
+          "isLocked":false,
+          "direction":"North",
+          "adjacentRoom":"Hallway1"
+        }
+      ]
+    },
+    {
+      "id":"BowlingAlley",
+      "name":"BowlingAlley",
+      "description":"You are in the bowling alley. To exit the bowling alley, go to the East. DESPCRIPTION OF ITEMS",
+      "exits":[
+        {
+          "isLocked":false,
+          "direction":"East",
+          "adjacentRoom":"Basement"
+        }
+      ]
+    },
+    {
+      "id":"Upstairs",
+      "name":"Upstairs",
+      "description":"You are now upstairs. To return the downstairs, go to the NorthEast or NorthWest. There are hallways to the East and West. DESPCRIPTION OF ITEMS",
+      "exits":[
+        {
+          "isLocked":false,
+          "direction":"NorthEast",
+          "adjacentRoom":"GrandEntry"
+        },
+        {
+          "isLocked":false,
+          "direction":"NorthWest",
+          "adjacentRoom":"GrandEntry"
+        },
+        {
+          "isLocked":false,
+          "direction":"East",
+          "adjacentRoom":"Hallway5"
+        },
+        {
+          "isLocked":false,
+          "direction":"West",
+          "adjacentRoom":"Hallway4"
+        }
+      ]
+    },
+    {
+      "id":"Hallway4",
+      "name":"Hallway4",
+      "description":"You are in a hallway. There are bedrooms to the South and West. To return towards the stairs and other hallway, go East.",
+      "exits":[
+        {
+          "isLocked":false,
+          "direction":"East",
+          "adjacentRoom":"Upstairs"
+        },
+        {
+          "isLocked":false,
+          "direction":"South",
+          "adjacentRoom":"Bedroom3"
+        },
+        {
+          "isLocked":false,
+          "direction":"West",
+          "adjacentRoom":"Bedroom4"
+        }
+      ]
+    },
+    {
+      "id":"Bedroom3",
+      "name":"Bedroom",
+      "description":"You are in a bedroom. To return to the hallway, go to the North. DESPCRIPTION OF ITEMS",
+      "exits":[
+        {
+          "isLocked":false,
+          "direction":"North",
+          "adjacentRoom":"Hallway4"
         }
       ]
     }
