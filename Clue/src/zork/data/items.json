@@ -1,23 +1,9 @@
 {
     "items": [
-         {
-            "id": "Vcr",
-            "name": "Cassette",
-            "description": "An old Cassette, I wonder whats it",
-            "weight": 1,
-            "startingroom": "GrandEntry"
-        },
-         {
-            "id": "VcrPlayer",
-            "name": "Vcr player",
-            "description": "",
-            "weight": 1000000,
-            "startingroom": "Theatre"
-        },
         {
             "id": "WineBottle",
             "name": "Wine bottle",
-            "description": "",
+            "description": "Will getting drunk help me escape faster?",
             "weight": 1,
             "startingroom": "Cellar"
         },
@@ -31,57 +17,41 @@
         {
             "id": "BowlingPins",
             "name": "Bowling pins",
-            "description": "Some dirty old pins",
+            "description": "I should spend some time winning a game.",
             "weight": 1,
             "startingroom": "BowlingAlley"
         },
          {
             "id": "GrandEntryPainting",
             "name": "Painting",
-            "description": "",
-            "weight": 1000000,
-            "startingroom": "GrandEntryRoom"
-        },
-         {
-            "id": "DiningRoomChairs",
-            "name": "Chairs",
-            "description": "",
-            "weight": 1000000,
-            "startingroom": "DiningRoom"
-        },
-         {
-            "id": "DiningRoomTable",
-            "name": "Round table",
-            "description": "",
-            "weight": 1000000,
-            "startingroom": "DiningRoom"
+            "description": "This is a beautiful painting with shades of purple covering the canvas.",
+            "startingroom": "GrandEntry"
         },
          {
             "id": "Candle",
             "name": "Candle",
-            "description": "",
+            "description": "This candle looks like it won't last much longer.",
             "weight": 1,
             "startingroom": "DiningRoom"
         },
          {
             "id": "KitchenKnife",
             "name": "Kitchen knife",
-            "description": "",
+            "description": "This kitchen knife looks oddly thin.",
             "weight": 1,
             "startingroom": "Kitchen"
         },
          {
             "id": "Coffee",
             "name": "Coffee",
-            "description": "A cup of coffee, oddly, it's still warm",
+            "description": "A cup of coffee, oddly, it's still warm.",
             "weight": 1,
             "startingroom": "Kitchen"
         },
           {
             "id": "Fridge",
             "name": "Fridge",
-            "description": "",
-            "weight": 1000000,
+            "description": "Taking a snack break might help me speed up my progress.",
             "holdingWeight": 1,
             "isOpenable": true,
             "startingroom": "Kitchen"
@@ -89,7 +59,7 @@
         {
             "id": "RottenMilk",
             "name": "Rotten milk",
-            "description": "The smell makes you gag, but you see something shiny through the rotten chunks.",
+            "description": "A cup of milk sits on one of the fridge shelves. The smell makes you gag, but you see something shiny through the rotten chunks.",
             "weight": 1,
             "holdingWeight": 1,
             "isOpenable": true,
@@ -98,70 +68,67 @@
          {
             "id": "PantryKey",
             "name": "Key from rotten milk",
-            "description": "",
+            "description": "A shiny key with an engraving of a block of cheese. I wonder what this unlocks.",
             "weight": 1,
             "startingitem": "RottenMilk"
         },
          {
             "id": "Cheese",
             "name": "Cheese",
-            "description": "",
+            "description": "A block of cheese sits by the milk. Who do you think this cheese is meant for?",
             "weight": 1,
             "startingitem": "Fridge"
         },
          {
-            "id": "PantryMice",
-            "name": "Mice",
-            "description": "",
-            "weight": 1000000,
+            "id": "PantryMouse",
+            "name": "Mouse",
+            "description": "A small brown mouse is sitting scurrying around the room. It seems to be holding something in its teeth.",
             "startingroom": "Pantry"
         },
         {
-            "id": "MiceNote",
-            "name": "Note from Mice",
-            "description": "A note given to you by the Mice, it reads [don't forget your abc's].",
+            "id": "MouseNote",
+            "name": "Note from Mouse",
+            "description": "A note given to you by the Mouse, it reads [don't forget your abc's].",
             "weight": 0,
-            "startingitem": "PantryMice"
+            "startingitem": "PantryMouse"
         },
         {
             "id": "ToiletPaperRolls",
             "name": "Toilet paper rolls",
-            "description": "",
+            "description": "5 periwinkle toilet paper rolls are stacked in a pyramid",
             "weight": 1,
             "startingroom": "Bathroom1"
         },
         {
             "id": "Couch",
             "name": "Couch",
-            "description": "",
-            "weight": 1000000,
+            "description": "A big brown couch with 3 cushions, one of the cushions seems to have some stitches on it",
             "startingroom": "LivingRoom"
         },
         {
             "id": "CouchCushion",
             "name": "Couch cushion",
-            "description": "The cushion of a couch, it has a tear in it",
+            "description": "The cushion of a couch, a couple stiches hold the fabric together.",
             "weight": 1,
             "startingitem": "Couch"
         },
         {
             "id": "BackDoor/PatioDoorKey",
             "name": "Key from couch cushion",
-            "description": "",
+            "description": "Another key with an engraving of a flower on it, does it open more doors?",
             "weight": 1,
             "startingitem": "CouchCushion"
         },
         {
             "id": "FirePlace",
             "name": "Fireplace",
-            "description": "",
-            "weight": 1000000,
+            "description": "The fireplace is lit and doesn't seem like dying out anytime soon.",
             "startingroom": "LivingRoom"
         },
         {
             "id": "LeftShoe",
             "name": "Left shoe",
-            "description": "A worn out left shoe",
+            "description": "A worn out left shoe.",
             "weight": 1,
             "holdingWeight": 1,
             "isOpenable": true,
@@ -183,12 +150,12 @@
             "holdingWeight": 1,
             "isOpenable": true,
             "isCloseable": false,
-            "startingroom": "Closet"
+            "startingroom": "Closet1"
         },
         {
             "id": "PeculiarCoin",
-            "name": "Peculiar Coin",
-            "description": " ",
+            "name": "Peculiar coin",
+            "description": "A small gold coin is found in the right shoe, do I have to start collecting money now?",
             "weight": 1,
             "startingitem": "RightShoe"
         },
@@ -196,7 +163,6 @@
             "id": "Desk",
             "name": "Desk",
             "description": "",
-            "weight": 1000000,
             "startingroom": "Office1"
         },
         {
@@ -212,78 +178,69 @@
             "description": "A map of floor 0, this will be useful",
             "weight": 1,
             "startingitem": "Desk"
+        },  
+        {
+            "id": "Floor1Map1/2",
+            "name": "Half of Floor1 map",
+            "description": "",
+            "weight": 1,
+            "startingroom": "Balcony"
+        },
+         {
+            "id": "LockPickingBook",
+            "name": "Book",
+            "description": "",
+            "weight": 1,
+            "startingroom": "Office2"
+        },
+         {
+            "id": "Floor1MapWhole",
+            "name": "Floor1 map",
+            "description": "",
+            "weight": 1,
+            "startingroom": "Library"
         },
         {
             "id": "LooseFloorBoard",
-            "name": "Floor Board",
+            "name": "Floor board",
             "description": "",
-            "weight": 1000000,
+            "weight":1,
             "holdingWeight": 1,
             "startingroom": "Attic"
         },
         {
-            "id": "GateKey",
-            "name": "Gate key",
-            "description": "A key with the symbol of the gate on it",
+            "id": "FrontDoorKey",
+            "name": "Key from attic",
+            "description": "",
             "weight": 1,
-            "startingitem": "Hole"
+            "startingitem": "Attic"
+        },
+        {
+            "id": "NoteOnPatioTable",
+            "name": "Patio table note",
+            "description": "",
+            "weight": 1,
+            "startingroom": "Patio"
+        },
+         {
+            "id": "Shovel",
+            "name": "Shovel",
+            "description": "",
+            "weight": 1,
+            "startingroom": "Shed"
         },
         {
             "id": "Hole",
             "name": "Hole",
             "description": "",
-            "weight": 1000000,
-            "startingroom": "Garden"
+            "startingroom": "Shed"
         },
-        {
-            "id": "shovel",
-            "name": "Piggy bank",
-            "description": "",
+         {
+            "id": "GateKey",
+            "name": "Key from hole",
+            "description": "A key with the symbol of the gate on it",
             "weight": 1,
-            "startingroom": "Office1"
-        },
-        {
-            "id": "LockPickingBook",
-            "name": "Piggy bank",
-            "description": "",
-            "weight": 1,
-            "startingroom": "Office1"
-        },
-        {
-            "id": "FrontDoorKey",
-            "name": "Piggy bank",
-            "description": "",
-            "weight": 1,
-            "startingroom": "Office1"
-        },
-        {
-            "id": "Floor1Map1",
-            "name": "Piggy bank",
-            "description": "",
-            "weight": 1,
-            "startingroom": "Office1"
-        },
-        {
-            "id": "Floor1Map2",
-            "name": "Piggy bank",
-            "description": "",
-            "weight": 1,
-            "startingroom": "Office1"
-        },
-        {
-            "id": "Floor1MapWhole",
-            "name": "Piggy bank",
-            "description": "",
-            "weight": 1,
-            "startingroom": "Office1"
-        },
-        {
-            "id": "RippedPaper",
-            "name": "Piggy bank",
-            "description": "",
-            "weight": 1,
-            "startingroom": "Office1"
+            "startingitem": "Hole"
         }
-        
     ]
 }
