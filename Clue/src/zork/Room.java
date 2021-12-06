@@ -22,13 +22,13 @@ public class Room {
    * "description" is something like "a kitchen" or "an open court yard".
    */
   public Room(String description) {
-    inventory = new Inventory(100000000);
+    inventory = new Inventory(Long.MAX_VALUE);
     this.description = description;
     exits = new ArrayList<Exit>();
   }
 
   public Room() {
-    inventory = new Inventory(100000000);
+    inventory = new Inventory(Long.MAX_VALUE);
     roomName = "DEFAULT ROOM";
     description = "DEFAULT DESCRIPTION";
     exits = new ArrayList<Exit>();
