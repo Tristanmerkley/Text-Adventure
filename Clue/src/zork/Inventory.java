@@ -32,7 +32,7 @@ public class Inventory {
 
   public Item contains(String itemName) {
     for (int i = 0; i < items.size(); i++) {
-      if (items.get(i).getName().equals(itemName))
+      if (items.get(i).getName().toLowerCase().equals(itemName.toLowerCase()))
         return items.get(i);
     }
     return null;
@@ -49,4 +49,9 @@ public class Inventory {
       System.out.println(i);
     }
   }
+
+  public ArrayList<Item> getInventory() {
+    return items;
+  }
+
 }
