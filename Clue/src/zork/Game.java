@@ -27,7 +27,7 @@ public class Game {
     try {
       initRooms("src\\zork\\data\\rooms.json");
       initItems("src\\zork\\data\\items.json");
-      currentRoom = roomMap.get("GrandEntry"); // ! spawn room
+      currentRoom = roomMap.get("BowlingAlley"); // ! spawn room
       playerInventory = new Inventory(300); // ! player max inventory weight
     } catch (Exception e) {
       e.printStackTrace();
@@ -54,7 +54,7 @@ public class Game {
       if (!isOpenable)
         holdingWeight = 0;
       else
-        holdingWeight = ((JSONObject) itemObj).get("holdingWeight") != null ? (Long) ((JSONObject) itemObj).get("holdingWeight") : Long.MAX_VALUE; 
+        holdingWeight = ((JSONObject) itemObj).get("holdingWeight") != null ? (Long) ((JSONObject) itemObj).get("holdingWeight") : Long.MAX_VALUE;
 
       String itemDescription = (String) ((JSONObject) itemObj).get("description");
       String startingRoom = ((JSONObject) itemObj).get("startingroom") != null ? (String) ((JSONObject) itemObj).get("startingroom") : null;
@@ -144,7 +144,7 @@ public class Game {
    * Print out the opening message for the player.
    */
   private void printWelcome() {
-    welcome.title();
+    //!welcome.title(); //disabled for testing
     System.out.println();
     System.out.println("Welcome to _____."); // TODO need to pick game name
     System.out.println("Type 'help' if you need help.");
@@ -167,7 +167,7 @@ public class Game {
       return false;
     }
 
-    String commandWord = command.getCommandWord();
+    String commandWord = command.getCommandWord().toLowerCase();
     if (commandWord.equals("help"))
       printHelp();
     else if (commandWord.equals("go"))
@@ -182,21 +182,38 @@ public class Game {
     } else if (commandWord.equals("inventory")) {
       printInventory();
     } else if (commandWord.equals("take")) {
-      printInventory();
-    } else if (commandWord.equals("drop")) {
+      takeItem(command);
+    } else if (commandWord.equals("drop") || commandWord.equals("throw")) {
       dropItem(command);
     } else if (commandWord.equals("give")) { // give cheese to mouse
       System.out.println(""); // say something about note mouse dropped
       placeItem(command);
-    } else if (commandWord.equals("look")) { // gives room definition and items in the room
-      printInventory();
+    } else if (commandWord.equals("look")) {
+      lookAround();
+      // gives room definition and items in the room
+      //printInventory();
       /*} else if (commandWord.equals("put")) { // put item into another items inventory
       placeItem();
-      */}
+      */ }
     return false;
   }
 
   // implementations of user commands:
+
+  private void lookAround() {
+    System.out.println(currentRoom.longDescription());
+    currentRoom.displayInventory();
+  }
+
+  private void takeItem(Command command) {
+    if (!command.hasSecondWord()) {
+      System.out.println("Take what?");
+      return;
+    }
+    if (currentRoom.contains(command.getSecondWord()) != null)
+      playerInventory.addItem(currentRoom.removeItem(command.getSecondWord()));
+    return;
+  }
 
   private void dropItem(Command command) {
     if (!command.hasSecondWord()) {
@@ -204,7 +221,15 @@ public class Game {
       return;
     }
     String item = command.getSecondWord();
-    playerInventory.removeItem(item);
+    currentRoom.addItem(playerInventory.removeItem(item));
+    if (item == "Bowling ball")
+      bowling();
+  }
+
+  private void bowling() {
+    if ((int) (Math.random()) == 0) {
+
+    }
   }
 
   private void placeItem(Command command) {
@@ -257,10 +282,12 @@ public class Game {
     String direction = command.getSecondWord();
 
     // Try to leave current room.
-    Room nextRoom = currentRoom.nextRoom(direction);
+    Room nextRoom = currentRoom.nextRoom(direction, currentRoom);
 
     if (nextRoom == null)
       System.out.println("There is no door!");
+    else if (nextRoom == currentRoom)
+      System.out.println("You cannot go there, it is locked.");
     else {
       currentRoom = nextRoom;
       System.out.println(currentRoom.longDescription());
