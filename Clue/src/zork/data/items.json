@@ -60,7 +60,6 @@
             "id": "Fridge",
             "name": "Fridge",
             "description": "Taking a snack break might help me speed up my progress.",
-            "holdingWeight": 5,
             "isOpenable": true,
             "startingroom": "Kitchen"
         },
@@ -69,7 +68,6 @@
             "name": "Rotten milk",
             "description": "A cup of milk sits on one of the fridge shelves. The smell makes you gag, but you see something shiny through the rotten chunks.",
             "weight": 1,
-            "holdingWeight": 1,
             "isOpenable": true,
             "startingitem": "Fridge"
         },
@@ -91,7 +89,8 @@
             "id": "PantryMouse",
             "name": "Mouse",
             "description": "A small brown mouse is sitting scurrying around the room. It seems to be holding something in its teeth.",
-            "startingroom": "Pantry"
+            "startingroom": "Pantry",
+            "isOpenable": true
         },
         {
             "id": "MouseNote",
@@ -144,7 +143,6 @@
             "name": "Left shoe",
             "description": "A worn out left shoe.",
             "weight": 2,
-            "holdingWeight": 1,
             "isOpenable": true,
             "startingitem": "FirePlace"
         },
@@ -160,7 +158,6 @@
             "name": "Right shoe",
             "description": "A worn out right shoe, it seems to match the left one",
             "weight": 2,
-            "holdingWeight": 1,
             "isOpenable": true,
             "startingroom": "Closet1"
         },
@@ -175,7 +172,6 @@
             "id": "Desk",
             "name": "Desk",
             "description": "A big oak desk with a piggy bank on the top left corner of it. There is also 4 drawers on the other side of the desk, there could be something useful in there.",
-            "holdingWeight": 2,
             "isOpenable": true,
             "startingroom": "Office1"
         },
@@ -220,7 +216,6 @@
             "name": "Floor board",
             "description": "A thinner piece of floorboard which looks out of place.",
             "weight": 2,
-            "holdingWeight": 1,
             "isOpenable": true,
             "startingroom": "Attic"
         },
@@ -229,7 +224,7 @@
             "name": "Key from attic",
             "description": "A shiny key that has a design of an ornate door on it.",
             "weight": 1,
-            "startingitem": "Attic"
+            "startingiroom": "Attic"
         },
         {
             "id": "NoteOnPatioTable",
@@ -249,7 +244,6 @@
             "id": "Hole",
             "name": "Hole",
             "description": "There seems to be something at the bottom of this hole.",
-            "holdingWeight": 1,
             "isOpenable": true,
             "startingroom": "Shed"
         },

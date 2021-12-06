@@ -60,7 +60,7 @@ public class Item extends OpenableObject {
     this.description = description;
   }
 
-  public void createInventory(int holdingWeight) {
+  public void createInventory(long holdingWeight) {
     inventory = new Inventory(holdingWeight);
   }
 

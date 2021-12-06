@@ -47,10 +47,14 @@ public class Game {
       Item item = new Item();
       String itemName = (String) ((JSONObject) itemObj).get("name");
       String itemId = (String) ((JSONObject) itemObj).get("id");
-      long weight = ((JSONObject) itemObj).get("weight") != null ? (Long) ((JSONObject) itemObj).get("weight") : Long.MAX_VALUE;
-      long holdingWeight = ((JSONObject) itemObj).get("holdingWeight") != null ? (Long) ((JSONObject) itemObj).get("holdingWeight") : 0; // ! how much an item can hold in its inventory
+      long weight = ((JSONObject) itemObj).get("weight") != null ? (Long) ((JSONObject) itemObj).get("weight") : Integer.MAX_VALUE;
+      long holdingWeight; // ! how much an item can hold in its inventory
       boolean isLocked = ((JSONObject) itemObj).get("isLocked") != null ? (Boolean) ((JSONObject) itemObj).get("isLocked") : false;
       boolean isOpenable = ((JSONObject) itemObj).get("isOpenable") != null ? (Boolean) ((JSONObject) itemObj).get("isOpenable") : false;
+      if (!isOpenable)
+        holdingWeight = 0;
+      else
+        holdingWeight = ((JSONObject) itemObj).get("holdingWeight") != null ? (Long) ((JSONObject) itemObj).get("holdingWeight") : Long.MAX_VALUE; 
 
       String itemDescription = (String) ((JSONObject) itemObj).get("description");
       String startingRoom = ((JSONObject) itemObj).get("startingroom") != null ? (String) ((JSONObject) itemObj).get("startingroom") : null;
@@ -61,7 +65,7 @@ public class Game {
       item.setLocked(isLocked);
       item.setOpenable(isOpenable);
       item.setWeight((int) weight);
-      item.createInventory((int) holdingWeight);
+      item.createInventory(holdingWeight);
 
       if (startingRoom != null)
         roomPlacement.put(itemId, startingRoom);
