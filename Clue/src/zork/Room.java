@@ -72,16 +72,17 @@ public class Room {
    * Return the room that is reached if we go from this room in direction
    * "direction". If there is no room in that direction, return null.
    */
-  public Room nextRoom(String direction) {
+  public Room nextRoom(String direction, Room currentRoom) {
     try {
       for (Exit exit : exits) {
 
-        if (exit.getDirection().equalsIgnoreCase(direction)) {
+        if (exit.getDirection().equalsIgnoreCase(direction) && !exit.isLocked()) {
           String adjacentRoom = exit.getAdjacentRoom();
 
           return Game.roomMap.get(adjacentRoom);
+        } else {
+          return currentRoom;
         }
-
       }
     } catch (IllegalArgumentException ex) {
       System.out.println(direction + " is not a valid direction.");
@@ -107,10 +108,6 @@ public class Room {
     this.roomName = roomName;
   }
 
-  public String getDescription() {
-    return description;
-  }
-
   public void setDescription(String description) {
     this.description = description;
   }
@@ -125,5 +122,11 @@ public class Room {
 
   public Item removeItem(String itemName) {
     return inventory.removeItem(itemName);
+  }
+
+  public void displayInventory() {
+    for (Item i : inventory.getInventory()) {
+      System.out.println(i.getName() + ": " + i.getDescription());
+    }
   }
 }
