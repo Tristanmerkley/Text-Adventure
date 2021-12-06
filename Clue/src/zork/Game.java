@@ -144,6 +144,7 @@ public class Game {
    * Print out the opening message for the player.
    */
   private void printWelcome() {
+    welcome.title();
     System.out.println();
     System.out.println("Welcome to _____."); // TODO need to pick game name
     System.out.println("Type 'help' if you need help.");
