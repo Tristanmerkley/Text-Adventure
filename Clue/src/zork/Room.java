@@ -129,4 +129,8 @@ public class Room {
       System.out.println(i.getName() + ": " + i.getDescription());
     }
   }
+
+  public ArrayList<Item> getInventory() {
+    return inventory.getInventory();
+  }
 }
