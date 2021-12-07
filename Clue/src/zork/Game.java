@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Scanner;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -14,6 +15,7 @@ public class Game {
   public static HashMap<String, Room> roomMap = new HashMap<String, Room>();
   public static HashMap<String, Item> itemMap = new HashMap<String, Item>();
 
+  private Scanner input;
   private Parser parser;
   private Room currentRoom;
   private Inventory playerInventory;
@@ -25,7 +27,7 @@ public class Game {
     try {
       initRooms("src\\zork\\data\\rooms.json");
       initItems("src\\zork\\data\\items.json");
-      currentRoom = roomMap.get("GrandEntry"); // ! spawn room
+      currentRoom = roomMap.get("BowlingAlley"); // ! spawn room
       playerInventory = new Inventory(300); // ! player max inventory weight
     } catch (Exception e) {
       e.printStackTrace();
@@ -45,32 +47,25 @@ public class Game {
       Item item = new Item();
       String itemName = (String) ((JSONObject) itemObj).get("name");
       String itemId = (String) ((JSONObject) itemObj).get("id");
-      long weight = ((JSONObject) itemObj).get("weight") != null ? (Long) ((JSONObject) itemObj).get("weight")
-          : Long.MAX_VALUE;
-      long holdingWeight = ((JSONObject) itemObj).get("holdingWeight") != null
-          ? (Long) ((JSONObject) itemObj).get("holdingWeight")
-          : 0; // ! how much an item can hold in its inventory
-      boolean isLocked = ((JSONObject) itemObj).get("isLocked") != null
-          ? (Boolean) ((JSONObject) itemObj).get("isLocked")
-          : false;
-      boolean isOpenable = ((JSONObject) itemObj).get("isOpenable") != null
-          ? (Boolean) ((JSONObject) itemObj).get("isOpenable")
-          : false;
+      long weight = ((JSONObject) itemObj).get("weight") != null ? (Long) ((JSONObject) itemObj).get("weight") : Integer.MAX_VALUE;
+      long holdingWeight; // ! how much an item can hold in its inventory
+      boolean isLocked = ((JSONObject) itemObj).get("isLocked") != null ? (Boolean) ((JSONObject) itemObj).get("isLocked") : false;
+      boolean isOpenable = ((JSONObject) itemObj).get("isOpenable") != null ? (Boolean) ((JSONObject) itemObj).get("isOpenable") : false;
+      if (!isOpenable)
+        holdingWeight = 0;
+      else
+        holdingWeight = ((JSONObject) itemObj).get("holdingWeight") != null ? (Long) ((JSONObject) itemObj).get("holdingWeight") : Long.MAX_VALUE;
 
       String itemDescription = (String) ((JSONObject) itemObj).get("description");
-      String startingRoom = ((JSONObject) itemObj).get("startingroom") != null
-          ? (String) ((JSONObject) itemObj).get("startingroom")
-          : null;
-      String startingItem = ((JSONObject) itemObj).get("startingitem") != null
-          ? (String) ((JSONObject) itemObj).get("startingitem")
-          : null;
+      String startingRoom = ((JSONObject) itemObj).get("startingroom") != null ? (String) ((JSONObject) itemObj).get("startingroom") : null;
+      String startingItem = ((JSONObject) itemObj).get("startingitem") != null ? (String) ((JSONObject) itemObj).get("startingitem") : null;
 
       item.setDescription(itemDescription);
       item.setName(itemName);
       item.setLocked(isLocked);
       item.setOpenable(isOpenable);
       item.setWeight((int) weight);
-      item.createInventory((int) holdingWeight);
+      item.createInventory(holdingWeight);
 
       if (startingRoom != null)
         roomPlacement.put(itemId, startingRoom);
@@ -131,7 +126,6 @@ public class Game {
    */
   public void play() {
     printWelcome();
-
     boolean finished = false;
     while (!finished) {
       Command command;
@@ -150,8 +144,9 @@ public class Game {
    * Print out the opening message for the player.
    */
   private void printWelcome() {
+    //!welcome.title(); //disabled for testing
     System.out.println();
-    System.out.println("Welcome to _____.");
+    System.out.println("Welcome to _____."); // TODO need to pick game name
     System.out.println("Type 'help' if you need help.");
     System.out.println("You have 24 hours to escape the house and pass the gate, or else you will be killed.");
     System.out.println("Every ten decisions made, an hour will pass.");
@@ -172,7 +167,7 @@ public class Game {
       return false;
     }
 
-    String commandWord = command.getCommandWord();
+    String commandWord = command.getCommandWord().toLowerCase();
     if (commandWord.equals("help"))
       printHelp();
     else if (commandWord.equals("go"))
@@ -182,15 +177,92 @@ public class Game {
         System.out.println("Quit what?");
       else
         return true; // signal that we want to quit
-    } else if (commandWord.equals("eat")) {
-      System.out.println("Do you really think you should be eating at a time like this?");
+    } else if (commandWord.equals("eat") || commandWord.equals("drink") || commandWord.equals("consume")) {
+      consumeItem();
     } else if (commandWord.equals("inventory")) {
       printInventory();
-    }
+    } else if (commandWord.equals("take")) {
+      takeItem(command);
+    } else if (commandWord.equals("drop") || commandWord.equals("throw")) {
+      dropItem(command);
+    } else if (commandWord.equals("give")) { // give cheese to mouse
+      System.out.println(""); // say something about note mouse dropped
+      placeItem(command);
+    } else if (commandWord.equals("look")) {
+      lookAround();
+      // gives room definition and items in the room
+      //printInventory();
+      /*} else if (commandWord.equals("put")) { // put item into another items inventory
+      placeItem();
+      */ }
     return false;
   }
 
   // implementations of user commands:
+
+  private void lookAround() {
+    System.out.println(currentRoom.longDescription());
+    currentRoom.displayInventory();
+  }
+
+  private void takeItem(Command command) {
+    if (!command.hasSecondWord()) {
+      System.out.println("Take what?");
+      return;
+    }
+    if (command.getSecondWord().equals("all")) {
+      ArrayList<Item> inventory = currentRoom.getInventory();
+      String taken = "";
+      while (inventory.size() > 0) {
+        Item remove = currentRoom.removeItem(inventory.get(0).getName());
+        playerInventory.addItem(remove);
+        taken += remove.getName() + ", ";
+      }
+      System.out.println("You took: " + taken.substring(0, taken.length() - 2));
+    } else if (currentRoom.contains(command.getSecondWord()) != null) {
+      playerInventory.addItem(currentRoom.removeItem(command.getSecondWord()));
+      System.out.println("You took: " + command.getSecondWord());
+    } else
+      System.out.println(command.getSecondWord() + " is not a vaild item");
+    return;
+  }
+
+  private void dropItem(Command command) {
+    if (!command.hasSecondWord()) {
+      System.out.println("Drop what?");
+      return;
+    }
+    String item = command.getSecondWord();
+    currentRoom.addItem(playerInventory.removeItem(item));
+    if (item == "Bowling ball")
+      bowling();
+  }
+
+  private void bowling() {
+    if ((int) (Math.random()) == 0) {
+
+    }
+  }
+
+  private void placeItem(Command command) {
+    if (!command.hasSecondWord()) {
+      System.out.println("Place what?");
+      return;
+    }
+    String item = command.getSecondWord();
+    System.out.println("Where do you want to put " + item + "?");
+    String area = input.nextLine();
+    while (currentRoom.contains(area) == null) {
+      System.out.println(area + " is not a valid object");
+      System.out.println("Where do you want to put " + item + "?");
+      area = input.nextLine();
+    }
+    currentRoom.contains(area).addItem(playerInventory.removeItem(item));
+  }
+
+  private void consumeItem() {
+
+  }
 
   private void printInventory() {
     System.out.println("Player Inventory :");
@@ -204,8 +276,7 @@ public class Game {
   private void printHelp() {
     System.out.println("You are lost. You are alone. You wander");
     System.out.println("around at Monash Uni, Peninsula Campus.");
-    System.out.println();
-    System.out.println("Your command words are:");
+    System.out.println("\nYour command words are:");
     parser.showCommands();
   }
 
@@ -223,10 +294,12 @@ public class Game {
     String direction = command.getSecondWord();
 
     // Try to leave current room.
-    Room nextRoom = currentRoom.nextRoom(direction);
+    Room nextRoom = currentRoom.nextRoom(direction, currentRoom);
 
     if (nextRoom == null)
       System.out.println("There is no door!");
+    else if (nextRoom == currentRoom)
+      System.out.println("You cannot go there, it is locked.");
     else {
       currentRoom = nextRoom;
       System.out.println(currentRoom.longDescription());

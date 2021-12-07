@@ -21,7 +21,7 @@ public class Item extends OpenableObject {
   }
 
   public void displayInventory() {
-    System.out.println(inventory);
+    inventory.displayInventory();
   }
 
   public String getInventory() {
@@ -29,7 +29,7 @@ public class Item extends OpenableObject {
   }
 
   public String toString() {
-    return name + ":" + description;
+    return name;
   }
 
   public int getWeight() {
@@ -60,12 +60,16 @@ public class Item extends OpenableObject {
     this.description = description;
   }
 
-  public void createInventory(int holdingWeight) {
+  public void createInventory(long holdingWeight) {
     inventory = new Inventory(holdingWeight);
   }
 
   public void addItem(Item item) {
     inventory.addItem(item);
+  }
+
+  public String getDescription() {
+    return description;
   }
 
 }

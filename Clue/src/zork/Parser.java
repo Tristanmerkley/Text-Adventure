@@ -19,8 +19,7 @@ public class Parser {
 
     inputLine = in.nextLine();
 
-    words = inputLine.split(" ");
-
+    words = inputLine.split(" ", 2);
     String word1 = words[0];
     String word2 = null;
     if (words.length > 1)

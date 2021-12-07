@@ -5,6 +5,10 @@ public class welcome {
         public static final String TEXT_RESET = "\u001B[0m";
 
         public static void main(String[] args) {
+                title();
+        }
+
+        public static void title() {
                 slowtext(TEXT_RED
                                 + "-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------",
                                 0);
