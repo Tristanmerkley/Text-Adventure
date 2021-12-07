@@ -859,6 +859,18 @@
           "adjacentRoom":"Maze4"
         }
       ]
+    },
+    {
+      "id":"Theatre",
+      "name":"Theatre",
+      "description":"You are in the theatre. To continue exploring the basement, go South.",
+      "exits":[
+        {
+          "isLocked":false,
+          "direction":"South",
+          "adjacentRoom":"Basement"
+        }
+      ]
     }
   ]
 }
