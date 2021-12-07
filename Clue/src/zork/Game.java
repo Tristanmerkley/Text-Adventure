@@ -210,8 +210,20 @@ public class Game {
       System.out.println("Take what?");
       return;
     }
-    if (currentRoom.contains(command.getSecondWord()) != null)
+    if (command.getSecondWord().equals("all")) {
+      ArrayList<Item> inventory = currentRoom.getInventory();
+      String taken = "";
+      while (inventory.size() > 0) {
+        Item remove = currentRoom.removeItem(inventory.get(0).getName());
+        playerInventory.addItem(remove);
+        taken += remove.getName() + ", ";
+      }
+      System.out.println("You took: " + taken.substring(0, taken.length() - 2));
+    } else if (currentRoom.contains(command.getSecondWord()) != null) {
       playerInventory.addItem(currentRoom.removeItem(command.getSecondWord()));
+      System.out.println("You took: " + command.getSecondWord());
+    } else
+      System.out.println(command.getSecondWord() + " is not a vaild item");
     return;
   }
 
