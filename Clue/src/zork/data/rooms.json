@@ -3,7 +3,7 @@
     {
       "id": "GrandEntry",
       "name": "Grand Entry",
-      "description": "You are in the Grand Entry. The front door is to the North, but it's locked. There are stairs leading downstairs to the South. There are two sets of stairs leading upwards on either side of the downward stairs(SouthEast and SouthWest). To the East, there is a dinning room. To the West, there is a hallway. ADD DESCRIPTION(painting)",
+      "description": "You are in the Grand Entry. A painting swings on it's hinges to reveal a hidden safe. There are two sets of grand stairs leading up, and another set leading down inbetween them. You look up to see a shiny chandelier hanging from the ceiling.",
       "exits": [
         {
           "isLocked": true,
@@ -41,7 +41,7 @@
     {
       "id": "DiningRoom",
       "name": "Dining Room",
-      "description": "You are in the dining room. You see three magenta chairs around a round table decorated by a candle. The kitchen is to the South. The Grand Entry is to the West.",
+      "description": "You are in the dining room. The walls are covered in flowered wallpaper with empty picture frames hanging on the walls. The lights are dim and the table is set for 4.",
       "exits": [
         {
           "isLocked": false,
@@ -58,7 +58,7 @@
     {
       "id": "Kitchen",
       "name": "Kitchen",
-      "description": "You are in the kitchen. The dining room is to the North. There is a hallway to the East. A pantry is to the SouthWest. ADD DESCRIPTION(items)",
+      "description": "You are in the kitchen. The paint is chipping and the tiles are cracked, but the kitchen still looks grand thanks to an impressive island in the middle of the room.",
       "exits": [
         {
           "isLocked": true,
@@ -81,7 +81,7 @@
     {
       "id": "LivingRoom",
       "name": "Living Room",
-      "description": "You are in the living room. There is a door leading outside to the East and a hallway to the South.",
+      "description": "You are in the living room. You can feel a cool breeze coming in from the door, but the fireplace gives off a comforting heat. Out of all the seating in the room, the couch looks the oldest by at least a decade. The carpet is fraying on the ends and is covered in stains, proving it's age.",
       "exits": [
         {
           "isLocked": false,
@@ -98,7 +98,7 @@
     {
       "id": "Hallway2",
       "name": "Hallway",
-      "description": "You are in a long dark hallway. The Living room is North and there is a bathroom to the South. The entrance to the kitchen is to the West. Going further East, the hallway continues to reveal other rooms.",
+      "description": "You are in a long dark hallway. There are sconces on both walls, creating just enough light to walk without walking into a wall.",
       "exits": [
         {
           "isLocked": false,
@@ -125,7 +125,7 @@
     {
       "id":"Bathroom1",
       "name":"Bathroom",
-      "description":"You are in a bathroom. You notice there are 5 periwinkle toilet paper rolls in a basket. Go North to leave the bathroom.",
+      "description":"You are in a bathroom. You notice there are 5 periwinkle toilet paper rolls in a basket on the floor. The sink is dripping and the light is flickering, giving you an eerie feeling.",
       "exits":[
         {
           "isLocked":false,
@@ -137,7 +137,7 @@
     {
       "id":"Hallway3",
       "name":"Hallway",
-      "description":"You are in a long dark hallway. Going further West, the hallway continues to reveal other rooms. There is a door leading outside to the East. There is a small coat closet to the South.",
+      "description":"You are in a long dark hallway. There are sconces on both walls, creating just enough light to continue without walking into a wall.",
       "exits":[
         {
           "isLocked":false,
@@ -159,7 +159,7 @@
     {
       "id":"Closet1",
       "name":"Closet",
-      "description":"You are in a small coat closet. Theres a shoe on the floor with...Is that a coin?",
+      "description":"You are in a small coat closet. There are some bent hangers and empty shelves along the back wall.",
       "exits":[
         {
           "isLocked":false,
@@ -171,7 +171,7 @@
     {
       "id":"Pantry",
       "name":"Pantry",
-      "description":"You are in the pantry. DESPCRIPTIONOF ITEMS",
+      "description":"You are in the pantry. There are shelves with rows of jars filled with mysterious substances along the walls. There is water dripping from the ceiling where a water stain grows.",
       "exits":[
         {
           "isLocked":false,
@@ -183,7 +183,7 @@
     {
       "id":"Hallway1",
       "name":"Hallway",
-      "description":"You are in a hallway. The grand entry is to the East. There is an office to the South. The garage is to the West.",
+      "description":"You are in a hallway. The walls are a boring white colour and the wood planks beneath you squeek with every step.",
       "exits":[
         {
           "isLocked":false,
@@ -205,7 +205,7 @@
     {
       "id":"Garage",
       "name":"Garage",
-      "description":"You are in the garage. To exit the garage, go to the East. DESPCRIPTION OF ITEMS",
+      "description":"You are in the garage. There are peg boards on each wall hanging tools and cords.",
       "exits":[
         {
           "isLocked":false,
@@ -217,7 +217,7 @@
     {
       "id":"Office1",
       "name":"Office",
-      "description":"You are in an office. To exit the office, go to the North. DESPCRIPTION OF ITEMS",
+      "description":"You are in an office. Wood panels line the room from floor to ceiling. There is a bear head coming out of the wall as a decoration. A cup with pens sit on the table next to a box of tissues.",
       "exits":[
         {
           "isLocked":false,
@@ -229,7 +229,7 @@
     {
       "id":"BowlingAlley",
       "name":"BowlingAlley",
-      "description":"You are in the bowling alley. To exit the bowling alley, go to the East. DESPCRIPTION OF ITEMS",
+      "description":"You are in the bowling alley. ",
       "exits":[
         {
           "isLocked":false,
@@ -863,7 +863,7 @@
     {
       "id":"Theatre",
       "name":"Theatre",
-      "description":"You are in the theatre. To continue exploring the basement, go South.",
+      "description":"You are in the theatre. The smell of popcorn still lingers in the air.",
       "exits":[
         {
           "isLocked":false,
