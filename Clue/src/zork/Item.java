@@ -72,4 +72,8 @@ public class Item extends OpenableObject {
     return description;
   }
 
+  public Item contains(String itemName) {
+    return inventory.contains(itemName);
+  }
+
 }
