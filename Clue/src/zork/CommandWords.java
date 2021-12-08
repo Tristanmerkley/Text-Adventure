@@ -2,7 +2,9 @@ package zork;
 
 public class CommandWords {
   // a constant array that holds all valid command words
-  private static final String validCommands[] = {"go", "quit", "help", "eat", "drink", "take", "drop", "give", "inspect", "inventory", "i", "look", "l", "throw", "insert", "place"}; //key words for lock picking and other unique action
+  private static final String validCommands[] = { "quit", "help", "eat", "drink", "take", "drop", "give", "inspect",
+      "inventory", "look", "throw", "insert", "place", "unlock", "time", "put" }; // time tells the player how much time
+                                                                                  // they have left
 
   /**
    * Constructor - initialise the command words.
