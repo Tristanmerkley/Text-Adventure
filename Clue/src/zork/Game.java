@@ -170,7 +170,7 @@ public class Game {
     String commandWord = command.getCommandWord().toLowerCase();
     if (commandWord.equals("help"))
       printHelp();
-    else if (commandWord.equals("go"))
+    else if (commandWord.equals("south") || commandWord.equals("north") || commandWord.equals("east") || commandWord.equals("west"))
       goRoom(command);
     else if (commandWord.equals("quit")) {
       if (command.hasSecondWord())
@@ -232,6 +232,9 @@ public class Game {
       System.out.println("Drop what?");
       return;
     }
+    if (currentRoom.contains("Cheese") != null) {
+      playerInventory.addItem(currentRoom.contains("PantryMouse").contains("MouseNote"));
+    }
     String item = command.getSecondWord();
     currentRoom.addItem(playerInventory.removeItem(item));
     if (item == "Bowling ball")
@@ -285,13 +288,7 @@ public class Game {
    * otherwise print an error message.
    */
   private void goRoom(Command command) {
-    if (!command.hasSecondWord()) {
-      // if there is no second word, we don't know where to go...
-      System.out.println("Go where?");
-      return;
-    }
-
-    String direction = command.getSecondWord();
+    String direction = command.getCommandWord();
 
     // Try to leave current room.
     Room nextRoom = currentRoom.nextRoom(direction, currentRoom);
@@ -303,9 +300,9 @@ public class Game {
     else {
       currentRoom = nextRoom;
       if (currentRoom.getInventory().size() > 0) {
-        System.out.println(currentRoom.longDescription() + "\nContains:\n");
+        System.out.println(currentRoom.longDescription() + "\nContains:");
         for (int i = 0; i < currentRoom.getInventory().size(); i++)
-          System.out.println(currentRoom.getDescription(i));
+          System.out.println(currentRoom.getInventory().get(i).getName() + " - " + currentRoom.getDescription(i));
       } else
         System.out.println(currentRoom.longDescription());
     }
