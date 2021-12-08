@@ -302,7 +302,12 @@ public class Game {
       System.out.println("You cannot go there, it is locked.");
     else {
       currentRoom = nextRoom;
-      System.out.println(currentRoom.longDescription());
+      if (currentRoom.getInventory().size() > 0) {
+        System.out.println(currentRoom.longDescription() + "\nContains:\n");
+        for (int i = 0; i < currentRoom.getInventory().size(); i++)
+          System.out.println(currentRoom.getDescription(i));
+      } else
+        System.out.println(currentRoom.longDescription());
     }
   }
 }

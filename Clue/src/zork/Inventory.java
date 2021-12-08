@@ -54,4 +54,7 @@ public class Inventory {
     return items;
   }
 
+  public String getDescription(int i) {
+    return items.get(i).getDescription();
+  }
 }
