@@ -228,22 +228,38 @@ public class Game {
   }
 
   private void dropItem(Command command) {
-    if (!command.hasSecondWord()) {
+    if (playerInventory.contains(command.getSecondWord()) == null) {
+      System.out.println("You do not have a " + command.getSecondWord());
+    }
+    if (!command.hasSecondWord() && command.getCommandWord().equals("drop")) {
       System.out.println("Drop what?");
+      return;
+    } else if (!command.hasSecondWord()) {
+      System.out.println("Throw what?");
       return;
     }
     if (currentRoom.contains("Cheese") != null) {
       playerInventory.addItem(currentRoom.contains("PantryMouse").contains("MouseNote"));
     }
-    String item = command.getSecondWord();
-    currentRoom.addItem(playerInventory.removeItem(item));
-    if (item == "Bowling ball")
-      bowling();
+    Item item = playerInventory.removeItem(command.getSecondWord());
+    currentRoom.addItem(item);
+    System.out.println("You dropped " + item.getName());
+    if (item.getName().equalsIgnoreCase("bowling ball"))
+      bowling(); // TODO finish bowling
   }
 
   private void bowling() {
+    if (currentRoom.contains("bowling pins") != null) {
+      System.out.println("I need bowling pins to bowl.");
+      return;
+    }
     if ((int) (Math.random()) == 0) {
-
+      System.out.println("Strike!!");
+      Item strikeKey = new Key("strikeKey", "Key", 1);
+      playerInventory.addItem(strikeKey);
+      currentRoom.removeItem("bowling pins");
+    } else {
+      System.out.println("Try again");
     }
   }
 
@@ -299,12 +315,8 @@ public class Game {
       System.out.println("You cannot go there, it is locked.");
     else {
       currentRoom = nextRoom;
-      if (currentRoom.getInventory().size() > 0) {
-        System.out.println(currentRoom.longDescription() + "\nContains:");
-        for (int i = 0; i < currentRoom.getInventory().size(); i++)
-          System.out.println(currentRoom.getInventory().get(i).getName() + " - " + currentRoom.getDescription(i));
-      } else
-        System.out.println(currentRoom.longDescription());
+      System.out.println(currentRoom.longDescription());
+      currentRoom.displayInventory();
     }
   }
 }
