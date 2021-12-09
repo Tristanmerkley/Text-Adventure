@@ -101,7 +101,9 @@
             "id": "PantryMouse",
             "name": "Mouse",
             "description": "A small brown mouse is sitting scurrying around the room. It seems to be holding something in its teeth.",
-            "startingroom": "Pantry"
+            "startingroom": "Pantry",
+            "isOpenable": true,
+            "holdingWeight": 1
         },
         {
             "id": "MouseNote",
@@ -130,7 +132,8 @@
             "name": "Couch cushion",
             "description": "The cushion of a couch, a couple stiches hold the fabric together.",
             "weight": 4,
-            "startingitem": "Couch"
+            "startingitem": "Couch",
+            "isOpenable": true
         },
         {
             "id": "BackDoor/PatioDoorKey",
@@ -143,7 +146,8 @@
             "id": "FirePlace",
             "name": "Fireplace",
             "description": "The fireplace is lit and doesn't seem like dying out anytime soon.",
-            "startingroom": "LivingRoom"
+            "startingroom": "LivingRoom",
+            "isOpenable": true
         },
         {
             "id": "LeftShoe",
@@ -151,7 +155,7 @@
             "description": "A worn out left shoe.",
             "weight": 2,
             "isOpenable": true,
-            "holdingWeight": 1,
+            "holdingWeight": 2,
             "startingitem": "FirePlace"
         },
         {
@@ -181,7 +185,8 @@
             "id": "Desk",
             "name": "Desk",
             "description": "A big oak desk with a piggy bank on the top left corner of it. There is also 4 drawers on the other side of the desk, there could be something useful in there.",
-            "startingroom": "Office1"
+            "startingroom": "Office1",
+            "isOpenable": true
         },
         {
             "id": "PiggyBank",
