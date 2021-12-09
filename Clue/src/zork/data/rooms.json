@@ -229,7 +229,7 @@
     {
       "id":"BowlingAlley",
       "name":"BowlingAlley",
-      "description":"You are in the bowling alley. ",
+      "description":"You are in the bowling alley. 6 lilac pins wait to be hit at the end of an aisle.",
       "exits":[
         {
           "isLocked":false,
@@ -241,7 +241,7 @@
     {
       "id":"Upstairs",
       "name":"Upstairs",
-      "description":"You are now upstairs. To return the downstairs, go to the NorthEast or NorthWest. There are hallways to the East and West. DESPCRIPTION OF ITEMS",
+      "description":"You are now upstairs. A couch is pushed against the wall opposite of the stairs. It looks so welcoming that you consider taking a break from your great escape... Too bad you're in such a rush.",
       "exits":[
         {
           "isLocked":false,
@@ -268,7 +268,7 @@
     {
       "id":"Hallway4",
       "name":"Hallway4",
-      "description":"You are in a hallway. There are bedrooms to the South and West. To return towards the stairs and other hallway, go East.",
+      "description":"You are in a hallway. Rooms line the walls of the long hallway ahead of you.",
       "exits":[
         {
           "isLocked":false,
@@ -290,7 +290,7 @@
     {
       "id":"Bedroom3",
       "name":"Bedroom",
-      "description":"You are in a bedroom. To return to the hallway, go to the North. DESPCRIPTION OF ITEMS",
+      "description":"You are in a bedroom. There is a sign on the door that says \"Warmer\". There is an empty set of drawers nest to a neatly made bed. Instead of a blanket, a layer of dust covers the matress.",
       "exits":[
         {
           "isLocked":false,
@@ -302,7 +302,7 @@
     {
       "id":"Hallway5",
       "name":"Hallway",
-      "description":"You are in a long hallway. To return towards the stairs and other hallway, go West. There is a small towel closet to the South. To go further down the hallway, go East.",
+      "description":"You are in a hallway. Rooms line the walls of the long hallway ahead of you.",
       "exits":[
         {
           "isLocked":false,
@@ -324,7 +324,7 @@
     {
       "id":"Hallway6",
       "name":"Hallway",
-      "description":"You are in a long hallway. The hallway continues to the East and West. There is a bedroom to the South.",
+      "description":"You are in a hallway. Rooms line the walls of the long hallway ahead of you.",
       "exits":[
         {
           "isLocked":false,
@@ -346,7 +346,7 @@
     {
       "id":"Bedroom2",
       "name":"Bedroom",
-      "description":"You are in a bedroom. To return to the hallway, go to the North. There is a small bathroom to the East. DESPCRIPTION OF ITEMS",
+      "description":"You are in a bedroom. There is a sign on the door that says \"Warm\". There is an empty set of drawers nest to a neatly made bed. Instead of a blanket, a layer of dust covers the matress.",
       "exits":[
         {
           "isLocked":false,
@@ -363,7 +363,7 @@
     {
       "id":"Bathroom2",
       "name":"Bathroom",
-      "description":"You are in a small bathroom. There are bedrooms to the East and West. DESPCRIPTION OF ITEMS",
+      "description":"You are in a small bathroom that connects two bedrooms. There is bubblegum toothpaste and decorated brushes on the counter, making you think the neighboring rooms were once occupied by children.",
       "exits":[
         {
           "isLocked":false,
@@ -380,7 +380,7 @@
     {
       "id":"Bedroom1",
       "name":"Bedroom",
-      "description":"You are in a bedroom. To return to the hallway, go North. There is a small bathroom to the West. DESPCRIPTION OF ITEMS",
+      "description":"You are in a bedroom. There is a sign on the door that says \"Cold\". There is an empty set of drawers nest to a neatly made bed. Instead of a blanket, a layer of dust covers the matress.",
       "exits":[
         {
           "isLocked":false,
@@ -397,7 +397,7 @@
     {
       "id":"Hallway7",
       "name":"Hallway",
-      "description":"You are in a long hallway. The hallway continues to the West. There is a locked door leading to a balcony to the West. There is an office to the North and a bedroom to the South.",
+      "description":"You are in a hallway. Rooms line the walls of the long hallway ahead of you.",
       "exits":[
         {
           "isLocked":false,
@@ -425,7 +425,7 @@
     {
       "id":"Balcony",
       "name":"Balcony",
-      "description":"You are on the balcony. To return to the hallway, go to the West. DESPCRIPTION OF ITEMS",
+      "description":"You are on the balcony. The cold air of the night hits you as you step outside.",
       "exits":[
         {
           "isLocked":false,
@@ -437,7 +437,7 @@
     {
       "id":"Library",
       "name":"Library",
-      "description":"You are in an old library filled with books. To return to the office, go South. On one of the shelves lies a ripped piece of paper.",
+      "description":"You are in an old library filled with books. On one of the shelves lies a ripped piece of paper.",
       "exits":[
         {
           "isLocked":false,
@@ -449,7 +449,7 @@
     {
       "id":"Office2",
       "name":"Office",
-      "description":"You are in an office. To return to the hallway, go South. There is a locked door leading to a library on the North wall. DESCRIPTION OF ITEMS",
+      "description":"You are in an office. A book lies on the desk called \"How To Pick a Lock with a Knife - For Dummies\". That could be helpful...",
       "exits":[
         {
           "isLocked":false,
@@ -467,7 +467,7 @@
     {
       "id":"Bedroom4",
       "name":"Bedroom",
-      "description":"You are in a bedroom. There is a small closet to the West. ADD DESCRIPTION OF ITEMS.",
+      "description":"You are in a bedroom. There is a sign on the door that says \"HOT\". There is an empty set of drawers nest to a neatly made bed. Instead of a blanket, a layer of dust covers the matress.",
       "exits":[
         {
           "isLocked":true,
@@ -485,7 +485,7 @@
     {
       "id":"Closet3",
       "name":"Closet",
-      "description":"You are in a small closet. To return to the bedroom, go East. There is a ladder leading to the attic, to the West. ADD DESCRIPTION OF ITEMS.",
+      "description":"You are in a small closet. You think back to your shoe collection and how perfectly they would fit on the empty shelves.",
       "exits":[
         {
           "isLocked":false,
@@ -502,7 +502,7 @@
     {
       "id":"Attic",
       "name":"Attic",
-      "description":"You are in a run down attic. To return to the closet, go East. While entering the room, you trip over a loose floor board.",
+      "description":"You are in a run down attic. While entering the room, you trip over a loose floor board.",
       "exits":[
         {
           "isLocked":false,
@@ -514,7 +514,7 @@
     {
       "id":"Basement",
       "name":"Basement",
-      "description":"You are in the basement. The theatre is North, and there is a bowling alley to the West. There are winding steps leading down to the East, and a larger set of stairs leading up to the South.",
+      "description":"You are in the basement. The smell of mold fills the old room. There are winding steps leading down, and a larger set of stairs leading up.",
       "exits":[
         {
           "isLocked":false,
@@ -542,7 +542,7 @@
     {
       "id":"Closet2",
       "name":"Closet2",
-      "description":"You are in a small closet with empty shelves. To return to the hallway, go North.",
+      "description":"You are in a small closet with empty shelves.",
       "exits":[
         {
           "isLocked":false,
@@ -554,7 +554,7 @@
     {
       "id":"Patio",
       "name":"Patio",
-      "description":"You are outside on the patio. To return to the inside, go West. There is a dirt path to the South.",
+      "description":"You are outside on the patio. The only light comes from the dim light shinning through the windows.",
       "exits":[
         {
           "isLocked":false,
@@ -571,7 +571,7 @@
     {
       "id":"Path1",
       "name":"Path",
-      "description":"You are on a dirt path. The patio is to the North and there is a flower garden to the South. The dirt path continues to the East. You can re-enter the house by going West.",
+      "description":"You are on a dirt path. Grass, weeds and mushrooms surround the path and provide shelter for lingering insects.",
       "exits":[
         {
           "isLocked":false,
@@ -598,7 +598,7 @@
     {
       "id":"Path",
       "name":"Path",
-      "description":"You are on a dirt path. There is a shed to the East. The dirt path continues to the North and West.",
+      "description":"You are on a dirt path. Grass, weeds and mushrooms surround the path and provide shelter for lingering insects.",
       "exits":[
         {
           "isLocked":false,
@@ -620,7 +620,7 @@
     {
       "id":"Path2",
       "name":"Path",
-      "description":"You are on a dirt path. The dirt path continues to the South. There is a ladder leading to a tree house to the North.",
+      "description":"You are on a dirt path. Grass, weeds and mushrooms surround the path and provide shelter for lingering insects.",
       "exits":[
         {
           "isLocked":false,
@@ -637,7 +637,7 @@
     {
       "id":"Shed",
       "name":"Shed",
-      "description":"You are in a small shed. To return to the dirt path, go West. Inside the shed there is a lawnmower and a shovel. You notice the dirt on the ground is uneven.",
+      "description":"You are in a small shed. You notice the dirt on the ground next to the door is uneven.",
       "exits":[
         {
           "isLocked":false,
@@ -649,7 +649,7 @@
     {
       "id":"TreeHouse",
       "name":"Tree House",
-      "description":"You are in a tree house above the ground. To return to the dirt path, go South. When You look out the window, you can see a piece of paper on the balcony.",
+      "description":"You are in a tree house above the ground. When You look out the window, you can see a piece of paper on the balcony.",
       "exits":[
         {
           "isLocked":false,
@@ -661,7 +661,7 @@
     {
       "id":"Garden",
       "name":"Garden",
-      "description":"You are in the garden. You are surrounded by flowers and theres one violet flower that stands out. To return to the dirt path, go North.",
+      "description":"You are in the garden. You are surrounded by flowers and theres one violet flower that stands out.",
       "exits":[
         {
           "isLocked":false,
@@ -673,7 +673,7 @@
     {
       "id":"Outside",
       "name":"Outside",
-      "description":"You are outside. The front gate is locked, to the North. To return inside, go South.",
+      "description":"You are outside. Weeds grow through the driveway tiles, and vines grow up the house.",
       "exits":[
         {
           "isLocked":true,
@@ -691,7 +691,7 @@
     {
       "id":"Cellar",
       "name":"Cellar",
-      "description":"You are in an empty cellar. There is one wine bottle on the ground. To go up the stairs, go West. There is a locked door to a bunker to the South, and a door leading to a confusing looking hallway to the East.",
+      "description":"You are in an empty cellar. It looks like there used to be a big wine collection, but the only bottle left.",
       "exits":[
         {
           "isLocked":true,
@@ -863,7 +863,7 @@
     {
       "id":"Theatre",
       "name":"Theatre",
-      "description":"You are in the theatre. The smell of popcorn still lingers in the air.",
+      "description":"You are in the theatre. The smell of popcorn still lingers in the air. At one point, this room was full of fun, animated with music and games. The only things that remain are old movie posters on the walls.",
       "exits":[
         {
           "isLocked":false,
