@@ -129,8 +129,10 @@ public class Room {
   }
 
   public void displayInventory() {
+    if (inventory.getInventory().size() > 0)
+      System.out.println("Contains:");
     for (Item i : inventory.getInventory()) {
-      System.out.println(i.getName() + ": " + i.getDescription());
+      System.out.println(i.getName() + " - " + i.getDescription());
     }
   }
 
