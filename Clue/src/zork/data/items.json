@@ -33,8 +33,10 @@
             "name": "Safe",
             "description": "There is a purple safe with a keypad to enter 4 numbers",
             "isOpenable": true,
+            "isLocked": true,
             "holdingWeight": 1,
-            "startingitem": "GrandEntryPainting"
+            "startingitem": "GrandEntryPainting",
+            "keyId": "6351"
         },
         {
             "id": "BalconyKey",
@@ -99,9 +101,7 @@
             "id": "PantryMouse",
             "name": "Mouse",
             "description": "A small brown mouse is sitting scurrying around the room. It seems to be holding something in its teeth.",
-            "startingroom": "Pantry",
-            "isOpenable": true,
-            "holdingWeight": 1
+            "startingroom": "Pantry"
         },
         {
             "id": "MouseNote",
@@ -130,8 +130,6 @@
             "name": "Couch cushion",
             "description": "The cushion of a couch, a couple stiches hold the fabric together.",
             "weight": 4,
-            "holdingWeight": 1,
-            "isOpenable": true,
             "startingitem": "Couch"
         },
         {
@@ -145,8 +143,6 @@
             "id": "FirePlace",
             "name": "Fireplace",
             "description": "The fireplace is lit and doesn't seem like dying out anytime soon.",
-            "holdingWeight": 2,
-            "isOpenable": true,
             "startingroom": "LivingRoom"
         },
         {
@@ -185,8 +181,6 @@
             "id": "Desk",
             "name": "Desk",
             "description": "A big oak desk with a piggy bank on the top left corner of it. There is also 4 drawers on the other side of the desk, there could be something useful in there.",
-            "isOpenable": true,
-            "holdingWeight": 2,
             "startingroom": "Office1"
         },
         {
@@ -194,8 +188,6 @@
             "name": "Piggy bank",
             "description": "A pink piggy bank with a slot to drop coins in, now I have a spot to place my coin.",
             "weight": 6,
-            "isOpenable": true,
-            "holdingWeight": 1,
             "startingroom": "Office1"
         },
         {
