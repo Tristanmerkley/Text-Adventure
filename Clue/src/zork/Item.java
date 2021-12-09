@@ -3,6 +3,7 @@ package zork;
 public class Item extends OpenableObject {
   private int weight;
   private String name;
+  private String alternateName;
   private boolean isOpenable;
   private Inventory inventory;
   private String description;
@@ -44,8 +45,16 @@ public class Item extends OpenableObject {
     return name;
   }
 
+  public String getAlternateName() {
+    return alternateName;
+  }
+
   public void setName(String name) {
     this.name = name;
+  }
+
+  public void setAlternateName(String alternateName) {
+    this.alternateName = alternateName;
   }
 
   public boolean isOpenable() {

@@ -195,7 +195,7 @@
             "name": "Floor0 map",
             "description": "A map of floor 0, this will be useful",
             "weight": 2,
-            "isOpenable":true,
+            "isOpenable": true,
             "startingitem": "Desk"
         },
         {
@@ -203,7 +203,7 @@
             "name": "Floor1 map(1/2)",
             "description": "East half of the floor1 map",
             "weight": 1,
-            "inOpenable":true,
+            "isOpenable": true,
             "startingroom": "Balcony"
         },
          {
@@ -218,7 +218,7 @@
             "name": "Floor1 map(2/2)",
             "description": "West half of the floor1 map",
             "weight": 1,
-            "isOpenable":true,
+            "isOpenable": true,
             "startingroom": "Library"
         },
         {
