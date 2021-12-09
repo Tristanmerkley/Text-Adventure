@@ -47,29 +47,18 @@ public class Game {
       Item item = new Item();
       String itemName = (String) ((JSONObject) itemObj).get("name");
       String itemId = (String) ((JSONObject) itemObj).get("id");
-      long weight = ((JSONObject) itemObj).get("weight") != null ? (Long) ((JSONObject) itemObj).get("weight")
-          : Integer.MAX_VALUE;
+      long weight = ((JSONObject) itemObj).get("weight") != null ? (Long) ((JSONObject) itemObj).get("weight") : Integer.MAX_VALUE;
       long holdingWeight; // ! how much an item can hold in its inventory
-      boolean isLocked = ((JSONObject) itemObj).get("isLocked") != null
-          ? (Boolean) ((JSONObject) itemObj).get("isLocked")
-          : false;
-      boolean isOpenable = ((JSONObject) itemObj).get("isOpenable") != null
-          ? (Boolean) ((JSONObject) itemObj).get("isOpenable")
-          : false;
+      boolean isLocked = ((JSONObject) itemObj).get("isLocked") != null ? (Boolean) ((JSONObject) itemObj).get("isLocked") : false;
+      boolean isOpenable = ((JSONObject) itemObj).get("isOpenable") != null ? (Boolean) ((JSONObject) itemObj).get("isOpenable") : false;
       if (!isOpenable)
         holdingWeight = 0;
       else
-        holdingWeight = ((JSONObject) itemObj).get("holdingWeight") != null
-            ? (Long) ((JSONObject) itemObj).get("holdingWeight")
-            : Long.MAX_VALUE;
+        holdingWeight = ((JSONObject) itemObj).get("holdingWeight") != null ? (Long) ((JSONObject) itemObj).get("holdingWeight") : Long.MAX_VALUE;
 
       String itemDescription = (String) ((JSONObject) itemObj).get("description");
-      String startingRoom = ((JSONObject) itemObj).get("startingroom") != null
-          ? (String) ((JSONObject) itemObj).get("startingroom")
-          : null;
-      String startingItem = ((JSONObject) itemObj).get("startingitem") != null
-          ? (String) ((JSONObject) itemObj).get("startingitem")
-          : null;
+      String startingRoom = ((JSONObject) itemObj).get("startingroom") != null ? (String) ((JSONObject) itemObj).get("startingroom") : null;
+      String startingItem = ((JSONObject) itemObj).get("startingitem") != null ? (String) ((JSONObject) itemObj).get("startingitem") : null;
 
       item.setDescription(itemDescription);
       item.setName(itemName);
@@ -181,26 +170,25 @@ public class Game {
     String commandWord = command.getCommandWord().toLowerCase();
     if (commandWord.equals("help"))
       printHelp();
-    else if (commandWord.equals("south") || commandWord.equals("north") || commandWord.equals("east")
-        || commandWord.equals("west"))
+    else if (commandWord.equals("south") || commandWord.equals("north") || commandWord.equals("east") || commandWord.equals("west"))
       goRoom(command);
     else if (commandWord.equals("quit")) {
       if (command.hasSecondWord())
         System.out.println("Quit what?");
       else
         return true; // signal that we want to quit
-    } else if (commandWord.equals("eat") || commandWord.equals("drink") || commandWord.equals("consume")) {
+    } else if (commandWord.equalsIgnoreCase("eat") || commandWord.equalsIgnoreCase("drink") || commandWord.equalsIgnoreCase("consume")) {
       consumeItem();
-    } else if (commandWord.equals("inventory")) {
+    } else if (commandWord.equalsIgnoreCase("inventory")) {
       printInventory();
-    } else if (commandWord.equals("take")) {
+    } else if (commandWord.equalsIgnoreCase("take")) {
       takeItem(command);
-    } else if (commandWord.equals("drop") || commandWord.equals("throw")) {
+    } else if (commandWord.equalsIgnoreCase("drop")) {
       dropItem(command);
-    } else if (commandWord.equals("give")) { // give cheese to mouse
+    } else if (commandWord.equalsIgnoreCase("give")) { // give cheese to mouse
       System.out.println(""); // say something about note mouse dropped
       placeItem(command);
-    } else if (commandWord.equals("look")) {
+    } else if (commandWord.equalsIgnoreCase("look")) {
       lookAround();
       // gives room definition and items in the room
       // printInventory();
@@ -208,11 +196,37 @@ public class Game {
        * } else if (commandWord.equals("put")) { // put item into another items
        * inventory
        * placeItem();
-       */ }
+      */ } else if (commandWord.equalsIgnoreCase("bowl")) {
+      bowling();
+    } else if (commandWord.equalsIgnoreCase("open")) {
+      openObject(command);
+    } else if (commandWord.equalsIgnoreCase("unlock")) {
+      unlockDoor(command);
+    }
     return false;
   }
 
   // implementations of user commands:
+
+  private void unlockDoor(Command command) {
+
+  }
+
+  private void openObject(Command command) {
+    if (command.getSecondWord() == null) {
+      System.out.println(command.getSecondWord() + " is not a valid object");
+    }
+    if (!command.hasSecondWord()) {
+      System.out.println("Open what?");
+      return;
+    }
+    Item object = currentRoom.contains(command.getSecondWord());
+    if (object.isLocked()) {
+      System.out.println("You must first unlock: " + object.getName());
+      return;
+    }
+    object.setOpen(true);
+  }
 
   private void lookAround() {
     System.out.println(currentRoom.longDescription());
@@ -230,50 +244,55 @@ public class Game {
       while (inventory.size() > 0) {
         Item remove = currentRoom.removeItem(inventory.get(0).getName());
         playerInventory.addItem(remove);
-        taken += remove.getName() + ", ";
+        taken += ", ";
+        taken += remove.getName();
       }
-      System.out.println("You took: " + taken.substring(0, taken.length() - 2));
-    } else if (currentRoom.contains(command.getSecondWord()) != null) {
+      System.out.println("You took: " + taken.replaceFirst(", ", ""));
+    }
+    if (currentRoom.contains(command.getSecondWord()) == null) {
+      System.out.println(command.getSecondWord() + " is not a vaild item");
+      return;
+    } else {
       playerInventory.addItem(currentRoom.removeItem(command.getSecondWord()));
       System.out.println("You took: " + command.getSecondWord());
-    } else
-      System.out.println(command.getSecondWord() + " is not a vaild item");
-    return;
+    }
   }
 
   private void dropItem(Command command) {
-    if (playerInventory.contains(command.getSecondWord()) == null) {
-      System.out.println("You do not have a " + command.getSecondWord());
-    }
-    if (!command.hasSecondWord() && command.getCommandWord().equals("drop")) {
+    if (!command.hasSecondWord()) {
       System.out.println("Drop what?");
       return;
-    } else if (!command.hasSecondWord()) {
-      System.out.println("Throw what?");
-      return;
     }
-    if (currentRoom.contains("Cheese") != null) {
-      playerInventory.addItem(currentRoom.contains("PantryMouse").contains("MouseNote"));
+    if (playerInventory.contains(command.getSecondWord()) == null) {
+      System.out.println("You do not have a " + command.getSecondWord());
     }
     Item item = playerInventory.removeItem(command.getSecondWord());
     currentRoom.addItem(item);
     System.out.println("You dropped " + item.getName());
-    if (item.getName().equalsIgnoreCase("bowling ball"))
-      bowling(); // TODO finish bowling
+    if (command.getSecondWord().equalsIgnoreCase("Cheese")) {
+      playerInventory.addItem(currentRoom.contains("PantryMouse").contains("MouseNote"));
+      System.out.println("The mice take the cheese and retreat, leaving behind a note which you pick up.");
+      System.out.println("The letter reads as");
+    }
   }
 
   private void bowling() {
-    if (currentRoom.contains("bowling pins") != null) {
-      System.out.println("I need bowling pins to bowl.");
+    if (playerInventory.contains("bowling ball") == null) {
+      System.out.println("You need a bowling ball, try to take one.");
       return;
     }
-    if ((int) (Math.random()) == 0) {
+    if (currentRoom.contains("bowling pins") == null) {
+      System.out.println("You bowling pins to bowl.");
+      return;
+    }
+    currentRoom.addItem(playerInventory.removeItem("bowling ball"));
+    if ((int) (Math.random() * 2) == 0) {
       System.out.println("Strike!!");
       Item strikeKey = new Key("strikeKey", "Key", 1);
       playerInventory.addItem(strikeKey);
       currentRoom.removeItem("bowling pins");
     } else {
-      System.out.println("Try again");
+      System.out.println("Take the bowling ball to try again.");
     }
   }
 
