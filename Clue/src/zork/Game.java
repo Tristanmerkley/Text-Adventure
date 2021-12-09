@@ -209,15 +209,20 @@ public class Game {
   // implementations of user commands:
 
   private void unlockDoor(Command command) {
+    if (!command.hasSecondWord()) {
+      System.out.println("Open what?");
+      return;
+    }
 
   }
 
   private void openObject(Command command) {
-    if (command.getSecondWord() == null) {
-      System.out.println(command.getSecondWord() + " is not a valid object");
-    }
     if (!command.hasSecondWord()) {
       System.out.println("Open what?");
+      return;
+    }
+    if (currentRoom.contains(command.getSecondWord()) == null) {
+      System.out.println(command.getSecondWord() + " is not a vaild object");
       return;
     }
     Item object = currentRoom.contains(command.getSecondWord());
@@ -286,7 +291,7 @@ public class Game {
       return;
     }
     currentRoom.addItem(playerInventory.removeItem("bowling ball"));
-    if ((int) (Math.random() * 2) == 0) {
+    if ((int) (Math.random() * 1) == 0) { //! change * for chance for testing
       System.out.println("Strike!!");
       Item strikeKey = new Key("strikeKey", "Key", 1);
       playerInventory.addItem(strikeKey);
