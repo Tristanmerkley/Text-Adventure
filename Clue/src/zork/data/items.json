@@ -204,7 +204,7 @@
             "description": "A map of floor 0, this will be useful",
             "weight": 2,
             "startingitem": "Desk"
-        },  
+        },
         {
             "id": "Floor1Map1/2",
             "name": "Floor1 map(1/2)",

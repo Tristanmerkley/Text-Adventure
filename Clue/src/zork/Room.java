@@ -74,23 +74,18 @@ public class Room {
    */
   public Room nextRoom(String direction, Room currentRoom) {
     try {
-      boolean non = false;
       for (Exit exit : exits) {
 
         if (exit.getDirection().equalsIgnoreCase(direction) && !exit.isLocked()) {
           String adjacentRoom = exit.getAdjacentRoom();
-          non = true;
           return Game.roomMap.get(adjacentRoom);
         }
       }
-      if (non)
-        return currentRoom;
     } catch (IllegalArgumentException ex) {
       System.out.println(direction + " is not a valid direction.");
       return null;
     }
-    System.out.println(direction + " is not a valid direction.");
-    return null;
+    return currentRoom;
   }
 
   /*
@@ -129,8 +124,10 @@ public class Room {
   }
 
   public void displayInventory() {
+    if (inventory.getInventory().size() > 0)
+      System.out.println("Contains:");
     for (Item i : inventory.getInventory()) {
-      System.out.println(i.getName() + ": " + i.getDescription());
+      System.out.println(i.getName() + " - " + i.getDescription());
     }
   }
 

@@ -25,8 +25,8 @@ public class Game {
    */
   public Game() {
     try {
-      initRooms("src\\zork\\data\\rooms.json");
-      initItems("src\\zork\\data\\items.json");
+      initRooms("src/zork/data/rooms.json");
+      initItems("src/zork/data/items.json");
       currentRoom = roomMap.get("BowlingAlley"); // ! spawn room
       playerInventory = new Inventory(300); // ! player max inventory weight
     } catch (Exception e) {
@@ -47,18 +47,29 @@ public class Game {
       Item item = new Item();
       String itemName = (String) ((JSONObject) itemObj).get("name");
       String itemId = (String) ((JSONObject) itemObj).get("id");
-      long weight = ((JSONObject) itemObj).get("weight") != null ? (Long) ((JSONObject) itemObj).get("weight") : Integer.MAX_VALUE;
+      long weight = ((JSONObject) itemObj).get("weight") != null ? (Long) ((JSONObject) itemObj).get("weight")
+          : Integer.MAX_VALUE;
       long holdingWeight; // ! how much an item can hold in its inventory
-      boolean isLocked = ((JSONObject) itemObj).get("isLocked") != null ? (Boolean) ((JSONObject) itemObj).get("isLocked") : false;
-      boolean isOpenable = ((JSONObject) itemObj).get("isOpenable") != null ? (Boolean) ((JSONObject) itemObj).get("isOpenable") : false;
+      boolean isLocked = ((JSONObject) itemObj).get("isLocked") != null
+          ? (Boolean) ((JSONObject) itemObj).get("isLocked")
+          : false;
+      boolean isOpenable = ((JSONObject) itemObj).get("isOpenable") != null
+          ? (Boolean) ((JSONObject) itemObj).get("isOpenable")
+          : false;
       if (!isOpenable)
         holdingWeight = 0;
       else
-        holdingWeight = ((JSONObject) itemObj).get("holdingWeight") != null ? (Long) ((JSONObject) itemObj).get("holdingWeight") : Long.MAX_VALUE;
+        holdingWeight = ((JSONObject) itemObj).get("holdingWeight") != null
+            ? (Long) ((JSONObject) itemObj).get("holdingWeight")
+            : Long.MAX_VALUE;
 
       String itemDescription = (String) ((JSONObject) itemObj).get("description");
-      String startingRoom = ((JSONObject) itemObj).get("startingroom") != null ? (String) ((JSONObject) itemObj).get("startingroom") : null;
-      String startingItem = ((JSONObject) itemObj).get("startingitem") != null ? (String) ((JSONObject) itemObj).get("startingitem") : null;
+      String startingRoom = ((JSONObject) itemObj).get("startingroom") != null
+          ? (String) ((JSONObject) itemObj).get("startingroom")
+          : null;
+      String startingItem = ((JSONObject) itemObj).get("startingitem") != null
+          ? (String) ((JSONObject) itemObj).get("startingitem")
+          : null;
 
       item.setDescription(itemDescription);
       item.setName(itemName);
@@ -144,7 +155,7 @@ public class Game {
    * Print out the opening message for the player.
    */
   private void printWelcome() {
-    //!welcome.title(); //disabled for testing
+    // !welcome.title(); //disabled for testing
     System.out.println();
     System.out.println("Welcome to _____."); // TODO need to pick game name
     System.out.println("Type 'help' if you need help.");
@@ -170,7 +181,8 @@ public class Game {
     String commandWord = command.getCommandWord().toLowerCase();
     if (commandWord.equals("help"))
       printHelp();
-    else if (commandWord.equals("south") || commandWord.equals("north") || commandWord.equals("east") || commandWord.equals("west"))
+    else if (commandWord.equals("south") || commandWord.equals("north") || commandWord.equals("east")
+        || commandWord.equals("west"))
       goRoom(command);
     else if (commandWord.equals("quit")) {
       if (command.hasSecondWord())
@@ -191,10 +203,12 @@ public class Game {
     } else if (commandWord.equals("look")) {
       lookAround();
       // gives room definition and items in the room
-      //printInventory();
-      /*} else if (commandWord.equals("put")) { // put item into another items inventory
-      placeItem();
-      */ }
+      // printInventory();
+      /*
+       * } else if (commandWord.equals("put")) { // put item into another items
+       * inventory
+       * placeItem();
+       */ }
     return false;
   }
 
@@ -228,22 +242,38 @@ public class Game {
   }
 
   private void dropItem(Command command) {
-    if (!command.hasSecondWord()) {
+    if (playerInventory.contains(command.getSecondWord()) == null) {
+      System.out.println("You do not have a " + command.getSecondWord());
+    }
+    if (!command.hasSecondWord() && command.getCommandWord().equals("drop")) {
       System.out.println("Drop what?");
+      return;
+    } else if (!command.hasSecondWord()) {
+      System.out.println("Throw what?");
       return;
     }
     if (currentRoom.contains("Cheese") != null) {
       playerInventory.addItem(currentRoom.contains("PantryMouse").contains("MouseNote"));
     }
-    String item = command.getSecondWord();
-    currentRoom.addItem(playerInventory.removeItem(item));
-    if (item == "Bowling ball")
-      bowling();
+    Item item = playerInventory.removeItem(command.getSecondWord());
+    currentRoom.addItem(item);
+    System.out.println("You dropped " + item.getName());
+    if (item.getName().equalsIgnoreCase("bowling ball"))
+      bowling(); // TODO finish bowling
   }
 
   private void bowling() {
+    if (currentRoom.contains("bowling pins") != null) {
+      System.out.println("I need bowling pins to bowl.");
+      return;
+    }
     if ((int) (Math.random()) == 0) {
-
+      System.out.println("Strike!!");
+      Item strikeKey = new Key("strikeKey", "Key", 1);
+      playerInventory.addItem(strikeKey);
+      currentRoom.removeItem("bowling pins");
+    } else {
+      System.out.println("Try again");
     }
   }
 
@@ -299,12 +329,8 @@ public class Game {
       System.out.println("You cannot go there, it is locked.");
     else {
       currentRoom = nextRoom;
-      if (currentRoom.getInventory().size() > 0) {
-        System.out.println(currentRoom.longDescription() + "\nContains:");
-        for (int i = 0; i < currentRoom.getInventory().size(); i++)
-          System.out.println(currentRoom.getInventory().get(i).getName() + " - " + currentRoom.getDescription(i));
-      } else
-        System.out.println(currentRoom.longDescription());
+      System.out.println(currentRoom.longDescription());
+      currentRoom.displayInventory();
     }
   }
 }
