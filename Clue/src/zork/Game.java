@@ -255,7 +255,7 @@ public class Game {
       System.out.println("You must first unlock: " + object.getName());
       return;
     }
-    if (command.getSecondWord().equals("Main floor map") || command.getSecondWord().equals("Upstairs left map") || command.getSecondWord().equals("Upstairs right map")) {
+    if (command.getSecondWord().equalsIgnoreCase("Main floor map") || command.getSecondWord().equalsIgnoreCase("Upstairs left map") || command.getSecondWord().equalsIgnoreCase("Upstairs right map")) {
       printMap(command.getSecondWord());
       return;
     }
@@ -263,7 +263,7 @@ public class Game {
   }
 
   private void printMap(String map) {
-    if (map.equals("Main floor map")) {
+    if (map.equalsIgnoreCase("Main floor map")) {
       try {
         Scanner in = new Scanner(new File("src/floor0.map"));
         while (in.hasNextLine()) {
@@ -272,7 +272,7 @@ public class Game {
       } catch (FileNotFoundException e) {
         e.printStackTrace();
       }
-    } else if (map.equals("Upstairs left map")) {
+    } else if (map.equalsIgnoreCase("Upstairs left map")) {
       try {
         Scanner in = new Scanner(new File("src/floor1secondhalf.map"));
         while (in.hasNextLine()) {
