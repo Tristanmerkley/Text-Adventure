@@ -62,7 +62,7 @@ public class Room {
   private String exitString() {
     String returnString = "Exits:\n";
     for (Exit exit : exits) {
-      returnString += exit.getAdjacentRoom() + " (" + exit.getDirection() + ")\n";
+      returnString += Game.roomMap.get(exit.getAdjacentRoom()).getRoomName() + " (" + exit.getDirection() + ")\n";
     }
 
     return returnString;
@@ -73,19 +73,15 @@ public class Room {
    * "direction". If there is no room in that direction, return null.
    */
   public Room nextRoom(String direction, Room currentRoom) {
-    try {
-      for (Exit exit : exits) {
-
-        if (exit.getDirection().equalsIgnoreCase(direction) && !exit.isLocked()) {
-          String adjacentRoom = exit.getAdjacentRoom();
-          return Game.roomMap.get(adjacentRoom);
-        }
+    for (Exit exit : exits) {
+      if (exit.getDirection().equalsIgnoreCase(direction)) {
+        String adjacentRoom = exit.getAdjacentRoom();
+        if (exit.isLocked())
+          return currentRoom;
+        return Game.roomMap.get(adjacentRoom);
       }
-    } catch (IllegalArgumentException ex) {
-      System.out.println(direction + " is not a valid direction.");
-      return null;
     }
-    return currentRoom;
+    return null;
   }
 
   /*
