@@ -1,5 +1,7 @@
 package zork;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -170,8 +172,7 @@ public class Game {
     String commandWord = command.getCommandWord().toLowerCase();
     if (commandWord.equals("help"))
       printHelp();
-    else if (commandWord.equals("south") || commandWord.equals("north") || commandWord.equals("east") || commandWord.equals("west") || commandWord.equals("northeast")
-        || commandWord.equals("northwest") || commandWord.equals("southeast") || commandWord.equals("southwest"))
+    else if (commandWord.equals("south") || commandWord.equals("north") || commandWord.equals("east") || commandWord.equals("west") || commandWord.equals("northeast") || commandWord.equals("northwest") || commandWord.equals("southeast") || commandWord.equals("southwest"))
       goRoom(command);
     else if (commandWord.equals("quit")) {
       if (command.hasSecondWord())
@@ -248,7 +249,43 @@ public class Game {
       System.out.println("You must first unlock: " + object.getName());
       return;
     }
+    if (command.getSecondWord().equals("Main floor map") || command.getSecondWord().equals("Upstairs left map") || command.getSecondWord().equals("Upstairs right map")){
+      printMap(command.getSecondWord());
+      return;
+    }
     object.setOpen(true);
+  }
+
+  private void printMap(String map) {
+    if (map.equals("Main floor map")) {
+      try {
+        Scanner in = new Scanner(new File("src/floor0.map"));
+        while (in.hasNextLine()) {
+           System.out.println(in.nextLine());
+        }
+      } catch (FileNotFoundException e) {
+        e.printStackTrace();
+      }
+    } else if (map.equals("Upstairs left map")){
+      try {
+        Scanner in = new Scanner(new File("src/floor1secondhalf.map"));
+        while (in.hasNextLine()) {
+           System.out.println(in.nextLine());
+        }
+      } catch (FileNotFoundException e) {
+        e.printStackTrace();
+      }
+    } else{
+      try {
+        Scanner in = new Scanner(new File("src/floor1firsthalf.map"));
+        while (in.hasNextLine()) {
+           System.out.println(in.nextLine());
+        }
+      } catch (FileNotFoundException e) {
+        e.printStackTrace();
+      }
+    }
+
   }
 
   private void lookAround() {

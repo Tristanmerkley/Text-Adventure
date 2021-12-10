@@ -196,7 +196,7 @@
         },
         {
             "id": "Floor0Map",
-            "name": "Floor0 map",
+            "name": "Main floor map",
             "description": "A map of floor 0, this will be useful",
             "weight": 2,
             "isOpenable": true,
@@ -204,7 +204,7 @@
         },
         {
             "id": "Floor1Map1/2",
-            "name": "Floor1 map(1/2)",
+            "name": "Upstairs right map",
             "description": "East half of the floor1 map",
             "weight": 1,
             "isOpenable": true,
@@ -219,7 +219,7 @@
         },
          {
             "id": "Floor1Map2/2",
-            "name": "Floor1 map(2/2)",
+            "name": "Upstairs left map",
             "description": "West half of the floor1 map",
             "weight": 1,
             "isOpenable": true,
