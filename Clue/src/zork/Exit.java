@@ -40,4 +40,7 @@ public class Exit extends OpenableObject {
     this.adjacentRoom = adjacentRoom;
   }
 
+  public void setLocked(boolean isLocked) {
+    super.setLocked(isLocked);
+  }
 }
