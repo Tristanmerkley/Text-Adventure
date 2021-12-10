@@ -229,7 +229,7 @@
     {
       "id":"BowlingAlley",
       "name":"Bowling Alley",
-      "description":"You are in the bowling alley. 6 lilac pins wait to be hit at the end of an aisle.",
+      "description":"You are in the bowling alley. 6 lilac pins wait to be hit at the end of an aisle and a bowling ball sits beside them.",
       "exits":[
         {
           "isLocked":false,

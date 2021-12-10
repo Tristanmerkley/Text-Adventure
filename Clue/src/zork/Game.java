@@ -170,7 +170,8 @@ public class Game {
     String commandWord = command.getCommandWord().toLowerCase();
     if (commandWord.equals("help"))
       printHelp();
-    else if (commandWord.equals("south") || commandWord.equals("north") || commandWord.equals("east") || commandWord.equals("west"))
+    else if (commandWord.equals("south") || commandWord.equals("north") || commandWord.equals("east") || commandWord.equals("west") || commandWord.equals("northeast")
+        || commandWord.equals("northwest") || commandWord.equals("southeast") || commandWord.equals("southwest"))
       goRoom(command);
     else if (commandWord.equals("quit")) {
       if (command.hasSecondWord())
