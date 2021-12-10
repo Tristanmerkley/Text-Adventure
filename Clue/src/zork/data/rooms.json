@@ -541,7 +541,7 @@
     },
     {
       "id":"Closet2",
-      "name":"Closet2",
+      "name":"Closet",
       "description":"You are in a small closet with empty shelves.",
       "exits":[
         {

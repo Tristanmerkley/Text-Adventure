@@ -223,16 +223,16 @@ public class Game {
     for (Exit i : currentRoom.getExits()) {
       if (i.getDirection().equalsIgnoreCase(command.getSecondWord())) {
         if (!i.isLocked()) {
-          System.out.println(i.getAdjacentRoom() + " is already unlocked.");
+          System.out.println(Game.roomMap.get(i.getAdjacentRoom()).getRoomName() + " is already unlocked.");
           return;
         }
         for (Item j : playerInventory.getInventory()) {
           if (j.getKeyId().equals(i.getKeyId())) {
             i.setLocked(false);
-            System.out.println("Unlocked the " + i.getAdjacentRoom() + " door.");
+            System.out.println("Unlocked the " + Game.roomMap.get(i.getAdjacentRoom()).getRoomName() + " door.");
             return;
           } else {
-            System.out.println("You do not have the correct key for the " + i.getAdjacentRoom() + " door.");
+            System.out.println("You do not have the correct key for the " + Game.roomMap.get(i.getAdjacentRoom()).getRoomName() + " door.");
             return;
           }
         }
