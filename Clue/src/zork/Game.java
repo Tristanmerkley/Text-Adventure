@@ -154,8 +154,7 @@ public class Game {
     System.out.println("Every ten decisions made, an hour will pass.");
     System.out.println("Pay attention to detail, everything is there for a reason. ");
     System.out.println("Don't stray from the path, follow the clues to escape in time");
-    System.out.println("Your time starts now… What are you waiting for?");
-    System.out.println();
+    System.out.println("Your time starts now… What are you waiting for? \n");
     System.out.println(currentRoom.longDescription());
   }
 
@@ -163,7 +162,7 @@ public class Game {
    * Given a command, process (that is: execute) the command. If this command ends
    * the game, true is returned, otherwise false is returned.
    */
-  private boolean processCommand(Command command) {
+  private boolean processCommand(Command command) { // returning true ends game
     if (command.isUnknown()) {
       System.out.println("I don't know what you mean...");
       return false;
@@ -172,7 +171,7 @@ public class Game {
     String commandWord = command.getCommandWord().toLowerCase();
     if (commandWord.equals("help"))
       printHelp();
-    else if (commandWord.equalsIgnoreCase("south") || commandWord.equalsIgnoreCase("north") || commandWord.equalsIgnoreCase("east") || commandWord.equalsIgnoreCase("west") || commandWord.equalsIgnoreCase("northeast") || commandWord.equalsIgnoreCase("northwest") || commandWord.equalsIgnoreCase("southeast") || commandWord.equalsIgnoreCase("southwest"))
+    else if (commandWord.equalsIgnoreCase("south") || commandWord.equalsIgnoreCase("north") || commandWord.equalsIgnoreCase("east") || commandWord.equalsIgnoreCase("west") || commandWord.equalsIgnoreCase("northeast") || commandWord.equalsIgnoreCase("northwest") || commandWord.equalsIgnoreCase("southeast") || commandWord.equalsIgnoreCase("southwest")) //TODO create method public boolean commandEquals(ArrayList<String> command)
       goRoom(command);
     else if (commandWord.equals("quit")) {
       if (command.hasSecondWord())
@@ -187,18 +186,11 @@ public class Game {
       takeItem(command);
     } else if (commandWord.equalsIgnoreCase("drop")) {
       dropItem(command);
-    } else if (commandWord.equalsIgnoreCase("give")) { // give cheese to mouse
-      System.out.println(""); // say something about note mouse dropped
+    } else if (commandWord.equalsIgnoreCase("give") || commandWord.equalsIgnoreCase("place")) { // give cheese to mouse
       placeItem(command);
     } else if (commandWord.equalsIgnoreCase("look")) {
       lookAround();
-      // gives room definition and items in the room
-      // printInventory();
-      /*
-       * } else if (commandWord.equals("put")) { // put item into another items
-       * inventory
-       * placeItem();
-       */ } else if (commandWord.equalsIgnoreCase("bowl")) {
+    } else if (commandWord.equalsIgnoreCase("bowl")) {
       bowling();
     } else if (commandWord.equalsIgnoreCase("open")) {
       openObject(command);
@@ -216,7 +208,7 @@ public class Game {
       System.out.println("Which direction is the door you want to unlock?");
       return;
     }
-    if (!(direction.equalsIgnoreCase("south") || direction.equalsIgnoreCase("north") || direction.equalsIgnoreCase("east") || direction.equalsIgnoreCase("west") || direction.equalsIgnoreCase("northeast") || direction.equalsIgnoreCase("northwest") || direction.equalsIgnoreCase("southeast") || direction.equalsIgnoreCase("southwest"))) {
+    if (!(direction.equalsIgnoreCase("south") || direction.equalsIgnoreCase("north") || direction.equalsIgnoreCase("east") || direction.equalsIgnoreCase("west") || direction.equalsIgnoreCase("northeast") || direction.equalsIgnoreCase("northwest") || direction.equalsIgnoreCase("southeast") || direction.equalsIgnoreCase("southwest"))) { //TODO create public boolean isDirection(direction) in commands
       System.out.println(command.getSecondWord() + " is not a vaild direction");
       return;
     }
@@ -341,7 +333,7 @@ public class Game {
     if (command.getSecondWord().equalsIgnoreCase("Cheese")) {
       playerInventory.addItem(currentRoom.contains("PantryMouse").contains("MouseNote"));
       System.out.println("The mice take the cheese and retreat, leaving behind a note which you pick up.");
-      System.out.println("The letter reads as");
+      System.out.println("The letter reads as"); //TODO incomplete
     }
   }
 
@@ -399,7 +391,6 @@ public class Game {
     System.out.println("\nYour command words are:");
     parser.showCommands();
     System.out.println("To unlock a room, enter [unlock (and the direction of the room you are unlocking)]");
-
   }
 
   /**
