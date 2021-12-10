@@ -260,6 +260,10 @@ public class Game {
       System.out.println("Take what?");
       return;
     }
+    if (currentRoom.getInventory().size() <= 0) {
+      System.out.println("There are no items to take.");
+      return;
+    }
     if (command.getSecondWord().equals("all")) {
       ArrayList<Item> inventory = currentRoom.getInventory();
       String taken = "";
