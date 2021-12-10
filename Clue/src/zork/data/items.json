@@ -25,7 +25,6 @@
             "id": "GrandEntryPainting",
             "name": "Painting",
             "description": "This is a beautiful painting with shades of purple covering the canvas.",
-            "isOpenable": true,
             "startingroom": "GrandEntry"
         },
         {
@@ -35,7 +34,7 @@
             "isOpenable": true,
             "isLocked": true,
             "holdingWeight": 1,
-            "startingitem": "GrandEntryPainting",
+            "startingroom": "GrandEntry",
             "keyId": "6351"
         },
         {
