@@ -172,7 +172,7 @@ public class Game {
     String commandWord = command.getCommandWord().toLowerCase();
     if (commandWord.equals("help"))
       printHelp();
-    else if (commandWord.equals("south") || commandWord.equals("north") || commandWord.equals("east") || commandWord.equals("west") || commandWord.equals("northeast") || commandWord.equals("northwest") || commandWord.equals("southeast") || commandWord.equals("southwest"))
+    else if (commandWord.equalsIgnoreCase("south") || commandWord.equalsIgnoreCase("north") || commandWord.equalsIgnoreCase("east") || commandWord.equalsIgnoreCase("west") || commandWord.equalsIgnoreCase("northeast") || commandWord.equalsIgnoreCase("northwest") || commandWord.equalsIgnoreCase("southeast") || commandWord.equalsIgnoreCase("southwest"))
       goRoom(command);
     else if (commandWord.equals("quit")) {
       if (command.hasSecondWord())
@@ -216,12 +216,16 @@ public class Game {
       System.out.println("Which direction is the door you want to unlock?");
       return;
     }
-    if (!(direction.equalsIgnoreCase("south") || direction.equalsIgnoreCase("north") || direction.equalsIgnoreCase("west") || direction.equalsIgnoreCase("east"))) {
+    if (!(direction.equalsIgnoreCase("south") || direction.equalsIgnoreCase("north") || direction.equalsIgnoreCase("east") || direction.equalsIgnoreCase("west") || direction.equalsIgnoreCase("northeast") || direction.equalsIgnoreCase("northwest") || direction.equalsIgnoreCase("southeast") || direction.equalsIgnoreCase("southwest"))) {
       System.out.println(command.getSecondWord() + " is not a vaild direction");
       return;
     }
     for (Exit i : currentRoom.getExits()) {
       if (i.getDirection().equalsIgnoreCase(command.getSecondWord())) {
+        if (!i.isLocked()) {
+          System.out.println(i.getAdjacentRoom() + " is already unlocked.");
+          return;
+        }
         for (Item j : playerInventory.getInventory()) {
           if (j.getKeyId().equals(i.getKeyId())) {
             i.setLocked(false);
@@ -229,10 +233,12 @@ public class Game {
             return;
           } else {
             System.out.println("You do not have the correct key for the " + i.getAdjacentRoom() + " door.");
+            return;
           }
         }
       }
     }
+    System.out.println("There is no door there!");
   }
 
   private void openObject(Command command) {
@@ -249,7 +255,7 @@ public class Game {
       System.out.println("You must first unlock: " + object.getName());
       return;
     }
-    if (command.getSecondWord().equals("Main floor map") || command.getSecondWord().equals("Upstairs left map") || command.getSecondWord().equals("Upstairs right map")){
+    if (command.getSecondWord().equals("Main floor map") || command.getSecondWord().equals("Upstairs left map") || command.getSecondWord().equals("Upstairs right map")) {
       printMap(command.getSecondWord());
       return;
     }
@@ -261,25 +267,25 @@ public class Game {
       try {
         Scanner in = new Scanner(new File("src/floor0.map"));
         while (in.hasNextLine()) {
-           System.out.println(in.nextLine());
+          System.out.println(in.nextLine());
         }
       } catch (FileNotFoundException e) {
         e.printStackTrace();
       }
-    } else if (map.equals("Upstairs left map")){
+    } else if (map.equals("Upstairs left map")) {
       try {
         Scanner in = new Scanner(new File("src/floor1secondhalf.map"));
         while (in.hasNextLine()) {
-           System.out.println(in.nextLine());
+          System.out.println(in.nextLine());
         }
       } catch (FileNotFoundException e) {
         e.printStackTrace();
       }
-    } else{
+    } else {
       try {
         Scanner in = new Scanner(new File("src/floor1firsthalf.map"));
         while (in.hasNextLine()) {
-           System.out.println(in.nextLine());
+          System.out.println(in.nextLine());
         }
       } catch (FileNotFoundException e) {
         e.printStackTrace();
