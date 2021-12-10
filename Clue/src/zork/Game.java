@@ -172,7 +172,8 @@ public class Game {
     String commandWord = command.getCommandWord().toLowerCase();
     if (commandWord.equals("help"))
       printHelp();
-    else if (commandWord.equals("south") || commandWord.equals("north") || commandWord.equals("east") || commandWord.equals("west"))
+    else if (commandWord.equals("south") || commandWord.equals("north") || commandWord.equals("east") || commandWord.equals("west") || commandWord.equals("northeast")
+        || commandWord.equals("northwest") || commandWord.equals("southeast") || commandWord.equals("southwest"))
       goRoom(command);
     else if (commandWord.equals("quit")) {
       if (command.hasSecondWord())
@@ -198,7 +199,7 @@ public class Game {
        * } else if (commandWord.equals("put")) { // put item into another items
        * inventory
        * placeItem();
-      */ } else if (commandWord.equalsIgnoreCase("bowl")) {
+       */ } else if (commandWord.equalsIgnoreCase("bowl")) {
       bowling();
     } else if (commandWord.equalsIgnoreCase("open")) {
       openObject(command);
@@ -327,6 +328,7 @@ public class Game {
     }
     if (playerInventory.contains(command.getSecondWord()) == null) {
       System.out.println("You do not have a " + command.getSecondWord());
+      return;
     }
     Item item = playerInventory.removeItem(command.getSecondWord());
     currentRoom.addItem(item);
@@ -348,7 +350,7 @@ public class Game {
       return;
     }
     currentRoom.addItem(playerInventory.removeItem("bowling ball"));
-    if ((int) (Math.random() * 1) == 0) { //! change * for chance for testing
+    if ((int) (Math.random() * 1) == 0) { // ! change * for chance for testing
       System.out.println("Strike!!");
       Item strikeKey = new Key("strikeKey", "Key", 1);
       playerInventory.addItem(strikeKey);
@@ -389,9 +391,10 @@ public class Game {
    */
   private void printHelp() {
     System.out.println("These are all the valid commands you can use.");
-
     System.out.println("\nYour command words are:");
     parser.showCommands();
+    System.out.println("To unlock a room, enter [unlock (and the direction of the room you are unlocking)]");
+
   }
 
   /**
