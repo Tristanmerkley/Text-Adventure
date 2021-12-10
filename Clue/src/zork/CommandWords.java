@@ -4,7 +4,7 @@ public class CommandWords {
   // a constant array that holds all valid command words
   private static final String validCommands[] = { "quit", "help", "eat", "drink", "take", "drop", "give", "inspect",
       "inventory", "look", "bowl", "insert", "place", "open", "time", "put", "east", "south", "north", "west", "unlock",
-      "dig" }; // time tells the player how much time they have left
+      "dig", "southeast", "southwest", "northeast", "northwest" }; // time tells the player how much time they have left
 
   /**
    * Constructor - initialise the command words.
