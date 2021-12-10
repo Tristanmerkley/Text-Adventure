@@ -209,11 +209,28 @@ public class Game {
   // implementations of user commands:
 
   private void unlockDoor(Command command) {
+    String direction = command.getSecondWord();
     if (!command.hasSecondWord()) {
-      System.out.println("Open what?");
+      System.out.println("Which direction is the door you want to unlock?");
       return;
     }
-
+    if (!(direction.equalsIgnoreCase("south") || direction.equalsIgnoreCase("north") || direction.equalsIgnoreCase("west") || direction.equalsIgnoreCase("east"))) {
+      System.out.println(command.getSecondWord() + " is not a vaild direction");
+      return;
+    }
+    for (Exit i : currentRoom.getExits()) {
+      if (i.getDirection().equalsIgnoreCase(command.getSecondWord())) {
+        for (Item j : playerInventory.getInventory()) {
+          if (j.getKeyId().equals(i.getKeyId())) {
+            i.setLocked(false);
+            System.out.println("Unlocked the " + i.getAdjacentRoom() + " door.");
+            return;
+          } else {
+            System.out.println("You do not have the correct key for the " + i.getAdjacentRoom() + " door.");
+          }
+        }
+      }
+    }
   }
 
   private void openObject(Command command) {
@@ -253,10 +270,8 @@ public class Game {
         taken += remove.getName();
       }
       System.out.println("You took: " + taken.replaceFirst(", ", ""));
-    }
-    if (currentRoom.contains(command.getSecondWord()) == null) {
+    } else if (currentRoom.contains(command.getSecondWord()) == null) {
       System.out.println(command.getSecondWord() + " is not a vaild item");
-      return;
     } else {
       playerInventory.addItem(currentRoom.removeItem(command.getSecondWord()));
       System.out.println("You took: " + command.getSecondWord());
