@@ -49,29 +49,18 @@ public class Game {
       Item item = new Item();
       String itemName = (String) ((JSONObject) itemObj).get("name");
       String itemId = (String) ((JSONObject) itemObj).get("id");
-      long weight = ((JSONObject) itemObj).get("weight") != null ? (Long) ((JSONObject) itemObj).get("weight")
-          : Integer.MAX_VALUE;
+      long weight = ((JSONObject) itemObj).get("weight") != null ? (Long) ((JSONObject) itemObj).get("weight") : Integer.MAX_VALUE;
       long holdingWeight; // ! how much an item can hold in its inventory
-      boolean isLocked = ((JSONObject) itemObj).get("isLocked") != null
-          ? (Boolean) ((JSONObject) itemObj).get("isLocked")
-          : false;
-      boolean isOpenable = ((JSONObject) itemObj).get("isOpenable") != null
-          ? (Boolean) ((JSONObject) itemObj).get("isOpenable")
-          : false;
+      boolean isLocked = ((JSONObject) itemObj).get("isLocked") != null ? (Boolean) ((JSONObject) itemObj).get("isLocked") : false;
+      boolean isOpenable = ((JSONObject) itemObj).get("isOpenable") != null ? (Boolean) ((JSONObject) itemObj).get("isOpenable") : false;
       if (!isOpenable)
         holdingWeight = 0;
       else
-        holdingWeight = ((JSONObject) itemObj).get("holdingWeight") != null
-            ? (Long) ((JSONObject) itemObj).get("holdingWeight")
-            : Long.MAX_VALUE;
+        holdingWeight = ((JSONObject) itemObj).get("holdingWeight") != null ? (Long) ((JSONObject) itemObj).get("holdingWeight") : Long.MAX_VALUE;
 
       String itemDescription = (String) ((JSONObject) itemObj).get("description");
-      String startingRoom = ((JSONObject) itemObj).get("startingroom") != null
-          ? (String) ((JSONObject) itemObj).get("startingroom")
-          : null;
-      String startingItem = ((JSONObject) itemObj).get("startingitem") != null
-          ? (String) ((JSONObject) itemObj).get("startingitem")
-          : null;
+      String startingRoom = ((JSONObject) itemObj).get("startingroom") != null ? (String) ((JSONObject) itemObj).get("startingroom") : null;
+      String startingItem = ((JSONObject) itemObj).get("startingitem") != null ? (String) ((JSONObject) itemObj).get("startingitem") : null;
 
       item.setDescription(itemDescription);
       item.setName(itemName);
@@ -182,21 +171,14 @@ public class Game {
     String commandWord = command.getCommandWord().toLowerCase();
     if (commandWord.equals("help"))
       printHelp();
-    else if (commandWord.equalsIgnoreCase("south") || commandWord.equalsIgnoreCase("north")
-        || commandWord.equalsIgnoreCase("east") || commandWord.equalsIgnoreCase("west")
-        || commandWord.equalsIgnoreCase("northeast") || commandWord.equalsIgnoreCase("northwest")
-        || commandWord.equalsIgnoreCase("southeast") || commandWord.equalsIgnoreCase("southwest")) // TODO create method
-                                                                                                   // public boolean
-                                                                                                   // commandEquals(ArrayList<String>
-                                                                                                   // command)
+    else if (commandWord.equalsIgnoreCase("south") || commandWord.equalsIgnoreCase("north") || commandWord.equalsIgnoreCase("east") || commandWord.equalsIgnoreCase("west") || commandWord.equalsIgnoreCase("northeast") || commandWord.equalsIgnoreCase("northwest") || commandWord.equalsIgnoreCase("southeast") || commandWord.equalsIgnoreCase("southwest")) // TODO create method public boolean commandEquals(ArrayList<String> command)
       goRoom(command);
     else if (commandWord.equals("quit")) {
       if (command.hasSecondWord())
         System.out.println("Quit what?");
       else
         return true; // signal that we want to quit
-    } else if (commandWord.equalsIgnoreCase("eat") || commandWord.equalsIgnoreCase("drink")
-        || commandWord.equalsIgnoreCase("consume")) {
+    } else if (commandWord.equalsIgnoreCase("eat") || commandWord.equalsIgnoreCase("drink") || commandWord.equalsIgnoreCase("consume")) {
       consumeItem();
     } else if (commandWord.equalsIgnoreCase("inventory")) {
       printInventory();
@@ -226,13 +208,7 @@ public class Game {
       System.out.println("Which direction is the door you want to unlock?");
       return;
     }
-    if (!(direction.equalsIgnoreCase("south") || direction.equalsIgnoreCase("north")
-        || direction.equalsIgnoreCase("east") || direction.equalsIgnoreCase("west")
-        || direction.equalsIgnoreCase("northeast") || direction.equalsIgnoreCase("northwest")
-        || direction.equalsIgnoreCase("southeast") || direction.equalsIgnoreCase("southwest"))) { // TODO create public
-                                                                                                  // boolean
-                                                                                                  // isDirection(direction)
-                                                                                                  // in commands
+    if (!(direction.equalsIgnoreCase("south") || direction.equalsIgnoreCase("north") || direction.equalsIgnoreCase("east") || direction.equalsIgnoreCase("west") || direction.equalsIgnoreCase("northeast") || direction.equalsIgnoreCase("northwest") || direction.equalsIgnoreCase("southeast") || direction.equalsIgnoreCase("southwest"))) { // TODO create public boolean isDirection(direction) in commands
       System.out.println(command.getSecondWord() + " is not a vaild direction");
       return;
     }
@@ -248,8 +224,7 @@ public class Game {
             System.out.println("Unlocked the " + Game.roomMap.get(i.getAdjacentRoom()).getRoomName() + " door.");
             return;
           } else {
-            System.out.println("You do not have the correct key for the "
-                + Game.roomMap.get(i.getAdjacentRoom()).getRoomName() + " door.");
+            System.out.println("You do not have the correct key for the " + Game.roomMap.get(i.getAdjacentRoom()).getRoomName() + " door.");
             return;
           }
         }
@@ -272,9 +247,7 @@ public class Game {
       System.out.println("You must first unlock: " + object.getName());
       return;
     }
-    if (command.getSecondWord().equalsIgnoreCase("Main floor map")
-        || command.getSecondWord().equalsIgnoreCase("Upstairs left map")
-        || command.getSecondWord().equalsIgnoreCase("Upstairs right map")) {
+    if (command.getSecondWord().equalsIgnoreCase("Main floor map") || command.getSecondWord().equalsIgnoreCase("Upstairs left map") || command.getSecondWord().equalsIgnoreCase("Upstairs right map")) {
       printMap(command.getSecondWord());
       return;
     }
