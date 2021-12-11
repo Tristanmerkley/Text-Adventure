@@ -182,14 +182,13 @@ public class Game {
     String commandWord = command.getCommandWord().toLowerCase();
     if (commandWord.equals("help"))
       printHelp();
-<<<<<<< HEAD
     else if (commandWord.equalsIgnoreCase("south") || commandWord.equalsIgnoreCase("north")
         || commandWord.equalsIgnoreCase("east") || commandWord.equalsIgnoreCase("west")
         || commandWord.equalsIgnoreCase("northeast") || commandWord.equalsIgnoreCase("northwest")
-        || commandWord.equalsIgnoreCase("southeast") || commandWord.equalsIgnoreCase("southwest"))
-=======
-    else if (commandWord.equalsIgnoreCase("south") || commandWord.equalsIgnoreCase("north") || commandWord.equalsIgnoreCase("east") || commandWord.equalsIgnoreCase("west") || commandWord.equalsIgnoreCase("northeast") || commandWord.equalsIgnoreCase("northwest") || commandWord.equalsIgnoreCase("southeast") || commandWord.equalsIgnoreCase("southwest")) //TODO create method public boolean commandEquals(ArrayList<String> command)
->>>>>>> af70927a1b0ab08293b2048503e1b2db47043237
+        || commandWord.equalsIgnoreCase("southeast") || commandWord.equalsIgnoreCase("southwest")) // TODO create method
+                                                                                                   // public boolean
+                                                                                                   // commandEquals(ArrayList<String>
+                                                                                                   // command)
       goRoom(command);
     else if (commandWord.equals("quit")) {
       if (command.hasSecondWord())
