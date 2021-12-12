@@ -1,5 +1,7 @@
 package zork;
 
+import java.util.ArrayList;
+
 public class Item extends OpenableObject {
   private int weight;
   private String name;
@@ -25,8 +27,8 @@ public class Item extends OpenableObject {
     inventory.displayInventory();
   }
 
-  public String getInventory() {
-    return toString();
+  public ArrayList<Item> getInventory() {
+    return inventory.getInventory();
   }
 
   public String toString() {
