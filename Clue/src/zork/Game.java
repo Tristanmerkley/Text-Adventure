@@ -29,7 +29,7 @@ public class Game {
     try {
       initRooms("src/zork/data/rooms.json");
       initItems("src/zork/data/items.json");
-      currentRoom = roomMap.get("BowlingAlley"); // ! spawn room
+      currentRoom = roomMap.get("GrandEntry"); // ! spawn room
       playerInventory = new Inventory(300); // ! player max inventory weight
     } catch (Exception e) {
       e.printStackTrace();
@@ -57,7 +57,6 @@ public class Game {
         holdingWeight = 0;
       else
         holdingWeight = ((JSONObject) itemObj).get("holdingWeight") != null ? (Long) ((JSONObject) itemObj).get("holdingWeight") : Long.MAX_VALUE;
-
       String itemDescription = (String) ((JSONObject) itemObj).get("description");
       String startingRoom = ((JSONObject) itemObj).get("startingroom") != null ? (String) ((JSONObject) itemObj).get("startingroom") : null;
       String startingItem = ((JSONObject) itemObj).get("startingitem") != null ? (String) ((JSONObject) itemObj).get("startingitem") : null;
@@ -156,6 +155,7 @@ public class Game {
     System.out.println("Don't stray from the path, follow the clues to escape in time");
     System.out.println("Your time starts now… What are you waiting for? \n");
     System.out.println(currentRoom.longDescription());
+    currentRoom.displayInventory();
   }
 
   /**
@@ -167,11 +167,10 @@ public class Game {
       System.out.println("I don't know what you mean...");
       return false;
     }
-
-    String commandWord = command.getCommandWord().toLowerCase();
+    String commandWord = command.getCommandWord();
     if (commandWord.equals("help"))
       printHelp();
-    else if (commandWord.equalsIgnoreCase("south") || commandWord.equalsIgnoreCase("north") || commandWord.equalsIgnoreCase("east") || commandWord.equalsIgnoreCase("west") || commandWord.equalsIgnoreCase("northeast") || commandWord.equalsIgnoreCase("northwest") || commandWord.equalsIgnoreCase("southeast") || commandWord.equalsIgnoreCase("southwest")) // TODO create method public boolean commandEquals(ArrayList<String> command)
+    else if (command.isDirection(commandWord))
       goRoom(command);
     else if (commandWord.equals("quit")) {
       if (command.hasSecondWord())
@@ -203,12 +202,15 @@ public class Game {
   // implementations of user commands:
 
   private void unlockDoor(Command command) {
-    String direction = command.getSecondWord();
     if (!command.hasSecondWord()) {
       System.out.println("Which direction is the door you want to unlock?");
       return;
     }
-    if (!(direction.equalsIgnoreCase("south") || direction.equalsIgnoreCase("north") || direction.equalsIgnoreCase("east") || direction.equalsIgnoreCase("west") || direction.equalsIgnoreCase("northeast") || direction.equalsIgnoreCase("northwest") || direction.equalsIgnoreCase("southeast") || direction.equalsIgnoreCase("southwest"))) { // TODO create public boolean isDirection(direction) in commands
+    if (command.getSecondWord().equalsIgnoreCase("safe")) {
+      unlockSafe(); //TODO
+      return;
+    }
+    if (!command.isDirection(command.getSecondWord())) {
       System.out.println(command.getSecondWord() + " is not a vaild direction");
       return;
     }
@@ -233,25 +235,41 @@ public class Game {
     System.out.println("There is no door there!");
   }
 
+  private void unlockSafe() {}
+
   private void openObject(Command command) {
+    String item = command.getSecondWord();
     if (!command.hasSecondWord()) {
       System.out.println("Open what?");
       return;
     }
-    if (currentRoom.contains(command.getSecondWord()) == null) {
-      System.out.println(command.getSecondWord() + " is not a vaild object");
+    Item object = nonNull(item);
+    if (object == null) {
+      System.out.println(item + " is not a vaild object");
       return;
     }
-    Item object = currentRoom.contains(command.getSecondWord());
-    if (object.isLocked()) {
-      System.out.println("You must first unlock: " + object.getName());
-      return;
-    }
-    if (command.getSecondWord().equalsIgnoreCase("Main floor map") || command.getSecondWord().equalsIgnoreCase("Upstairs left map") || command.getSecondWord().equalsIgnoreCase("Upstairs right map")) {
-      printMap(command.getSecondWord());
-      return;
-    }
-    object.setOpen(true);
+    if (object.isOpenable()) {
+      if (object.isLocked()) {
+        System.out.println("You must first unlock: " + object.getName());
+        return;
+      }
+      if (item.equalsIgnoreCase("Main floor map") || item.equalsIgnoreCase("Upstairs left map") || item.equalsIgnoreCase("Upstairs right map")) {
+        printMap(item);
+        return;
+      }
+      nonNull(item).setOpen(true);
+      System.out.println("Opened " + object.getName() + "\n\nContains:");
+      object.displayInventory();
+    } else
+      System.out.println("You cannot open " + object.getName());
+  }
+
+  private Item nonNull(String item) {
+    if (currentRoom.contains(item) != null)
+      return currentRoom.contains(item);
+    if (playerInventory.contains(item) != null)
+      return playerInventory.contains(item);
+    return null;
   }
 
   private void printMap(String map) {
@@ -296,20 +314,22 @@ public class Game {
       System.out.println("Take what?");
       return;
     }
-    if (currentRoom.getInventory().size() <= 0) {
+    if (currentRoom.getInventory().size() - currentRoom.numItemsCannotMove() <= 0) {
       System.out.println("There are no items to take.");
       return;
     }
     if (command.getSecondWord().equals("all")) {
       ArrayList<Item> inventory = currentRoom.getInventory();
       String taken = "";
-      while (inventory.size() > 0) {
+      while (inventory.size() - currentRoom.numItemsCannotMove() > 0) {
         Item remove = currentRoom.removeItem(inventory.get(0).getName());
-        playerInventory.addItem(remove);
-        taken += ", ";
-        taken += remove.getName();
+        if (remove != null) {
+          playerInventory.addItem(remove);
+          taken += ", ";
+          taken += remove.getName();
+        }
       }
-      System.out.println("You took: " + taken.replaceFirst(", ", ""));
+      System.out.println(taken.length() == 0 ? "There are no items to take." : "You took: " + taken.replaceFirst(", ", ""));
     } else if (currentRoom.contains(command.getSecondWord()) == null) {
       System.out.println(command.getSecondWord() + " is not a vaild item");
     } else {
