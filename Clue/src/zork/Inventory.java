@@ -40,6 +40,10 @@ public class Inventory {
 
   public Item removeItem(String itemName) {
     Item item = contains(itemName);
+    if (item.getWeight() == Integer.MAX_VALUE) {
+      System.out.println("You cannot take " + item.getName());
+      return null;
+    }
     items.remove(item);
     return item;
   }
@@ -56,5 +60,14 @@ public class Inventory {
 
   public String getDescription(int i) {
     return items.get(i).getDescription();
+  }
+
+  public int numItemsCannotMove() {
+    int count = 0;
+    for (Item i : items) {
+      if (i.getWeight() == Integer.MAX_VALUE)
+        count++;
+    }
+    return count;
   }
 }
