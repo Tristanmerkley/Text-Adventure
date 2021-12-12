@@ -51,7 +51,6 @@ public class Room {
    * Exits: north west
    */
   public String longDescription() {
-
     return "Room: " + roomName + "\n\n" + description + "\n" + exitString();
   }
 
@@ -64,7 +63,6 @@ public class Room {
     for (Exit exit : exits) {
       returnString += Game.roomMap.get(exit.getAdjacentRoom()).getRoomName() + " (" + exit.getDirection() + ")\n";
     }
-
     return returnString;
   }
 
@@ -130,4 +128,18 @@ public class Room {
   public ArrayList<Item> getInventory() {
     return inventory.getInventory();
   }
+
+  public int numItemsCannotMove() {
+    return inventory.numItemsCannotMove();
+  }
+
+  public ArrayList<Item> containsOpened() {
+    for (Item i : inventory.getInventory()) {
+      if (i.isOpen()) {
+        return i.getInventory();
+      }
+    }
+    return null;
+  }
+
 }
