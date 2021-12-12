@@ -43,4 +43,10 @@ public class Command {
   public boolean hasSecondWord() {
     return (secondWord != null);
   }
+
+  public boolean isDirection(String commandWord) {
+    if (commandWord.equalsIgnoreCase("south") || commandWord.equalsIgnoreCase("north") || commandWord.equalsIgnoreCase("east") || commandWord.equalsIgnoreCase("west") || commandWord.equalsIgnoreCase("northeast") || commandWord.equalsIgnoreCase("northwest") || commandWord.equalsIgnoreCase("southeast") || commandWord.equalsIgnoreCase("southwest"))
+      return true;
+    return false;
+  }
 }
