@@ -383,14 +383,20 @@ public class Game {
       return;
     }
     String item = command.getSecondWord();
-    System.out.println("Where do you want to put " + item + "?");
-    String area = input.nextLine();
-    while (currentRoom.contains(area) == null) {
-      System.out.println(area + " is not a valid object");
-      System.out.println("Where do you want to put " + item + "?");
-      area = input.nextLine();
+    if (nonNull(item) == null) {
+      System.out.println(item + " is not a valid object.");
+      return;
     }
-    currentRoom.contains(area).addItem(playerInventory.removeItem(item));
+    if (!command.hasThirdWord()) {
+      System.out.println("Where do you want to put " + item + "?");
+      return;
+    }
+    String area = command.getThirdWord();
+    if (playerInventory.contains(area) != null) {
+      ((Inventory) playerInventory).contains(area).addItem(playerInventory.removeItem(item));
+    } else if (currentRoom.contains(area) != null) {
+      currentRoom.contains(area).addItem(playerInventory.removeItem(item));
+    }
   }
 
   private void consumeItem() {
