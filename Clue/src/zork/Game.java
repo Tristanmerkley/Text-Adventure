@@ -195,11 +195,38 @@ public class Game {
       openObject(command);
     } else if (commandWord.equalsIgnoreCase("unlock")) {
       unlockDoor(command);
+    } else if (commandWord.equalsIgnoreCase("read")) {
+      read(command);
     }
     return false;
   }
 
   // implementations of user commands:
+
+  private void read(Command command) {
+    if (!command.hasSecondWord()) {
+      System.out.println("What do you want to read?");
+      return;
+    }
+    String item = command.getSecondWord();
+    Item object = nonNull(item);
+    if (object == null) {
+      System.out.println(item + " is not a vaild object.");
+      return;
+    }
+    if (!item.equalsIgnoreCase("book")) {
+      System.out.println("You can't read that.");
+      return;
+    } else {
+      if (playerInventory.getInventory().contains("KitchenKnife")){
+        System.out.println("You've read the book. You can now unlock doors with basic locks.");
+        playerInventory.addItem(LockPick);//add lock pick item, change key ids for rooms that can be picked, for unlock command: if door can be picked with the knife, check if they have the lock pick item.
+      } else{
+        System.out.println("Find a knife and then read the book to be able to pick basic locks.");
+        return;
+      }
+    }
+  }
 
   private void unlockDoor(Command command) {
     if (!command.hasSecondWord()) {
