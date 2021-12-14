@@ -122,6 +122,10 @@ public class Room {
       System.out.println("Contains:");
     for (Item i : inventory.getInventory()) {
       System.out.println(i.getName() + " - " + i.getDescription());
+      if (i.isOpen()) {
+        System.out.print(i.getName() + " contains:");
+        i.displayInventory();
+      }
     }
   }
 
@@ -139,6 +143,10 @@ public class Room {
         return i.getInventory();
       }
     }
+    return null;
+  }
+
+  public ArrayList<Item> getMoveableItems() {
     return null;
   }
 
