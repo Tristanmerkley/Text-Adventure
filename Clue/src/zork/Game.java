@@ -160,8 +160,8 @@ public class Game {
   }
 
   /**
-   * Given a command, process (that is: execute) the command. If this command ends
-   * the game, true is returned, otherwise false is returned.
+   * Given a command, process (that is: execute) the command. If this command ends the game, true is
+   * returned, otherwise false is returned.
    */
   private boolean processCommand(Command command) { // returning true ends game
     if (command.isUnknown()) {
@@ -179,7 +179,7 @@ public class Game {
       else
         return true; // signal that we want to quit
     } else if (commandWord.equalsIgnoreCase("eat") || commandWord.equalsIgnoreCase("drink") || commandWord.equalsIgnoreCase("consume")) {
-      consumeItem();
+      consumeItem(command);
     } else if (commandWord.equalsIgnoreCase("inventory")) {
       printInventory();
     } else if (commandWord.equalsIgnoreCase("take")) {
@@ -235,7 +235,7 @@ public class Game {
       return;
     }
     if (command.getSecondWord().equalsIgnoreCase("safe")) {
-      unlockSafe(); //TODO
+      unlockSafe(command); // TODO
       return;
     }
     if (!command.isDirection(command.getSecondWord())) {
@@ -271,7 +271,7 @@ public class Game {
     System.out.println("There is no door there!");
   }
 
-  private void unlockSafe() {}
+  private void unlockSafe(Command command) {}
 
   private void openObject(Command command) {
     String item = command.getSecondWord();
@@ -419,17 +419,64 @@ public class Game {
       return;
     }
     String item = command.getSecondWord();
-    System.out.println("Where do you want to put " + item + "?");
-    String area = input.nextLine();
-    while (currentRoom.contains(area) == null) {
-      System.out.println(area + " is not a valid object");
-      System.out.println("Where do you want to put " + item + "?");
-      area = input.nextLine();
+    if (nonNull(item) == null) {
+      System.out.println(item + " is not a valid object.");
+      return;
     }
-    currentRoom.contains(area).addItem(playerInventory.removeItem(item));
+    if (!command.hasThirdWord()) {
+      System.out.println("Where do you want to put " + item + "?");
+      return;
+    }
+    String area = command.getThirdWord();
+    if (playerInventory.contains(area) != null) {
+      ((Inventory) playerInventory).contains(area).addItem(playerInventory.removeItem(item));
+    } else if (currentRoom.contains(area) != null) {
+      currentRoom.contains(area).addItem(playerInventory.removeItem(item));
+    }
   }
 
-  private void consumeItem() {
+  private void consumeItem(Command command) {
+    if (!command.hasSecondWord()) {
+      if (command.getCommandWord().equals("consume")) {
+        System.out.println("Consume what?");
+        return;
+      }
+      if (command.getCommandWord().equals("eat")) {
+        System.out.println("Eat what?");
+        return;
+      }
+      if (command.getCommandWord().equals("drink")) {
+        System.out.println("Drink what?");
+        return;
+      }
+    }
+    if (playerInventory.contains(command.getSecondWord()) == null) {
+      System.out.println("You do not have a " + command.getSecondWord());
+      return;
+    }
+    String item = command.getSecondWord();
+    if (nonNull(item) == null) {
+      System.out.println(item + " is not a valid object.");
+      return;
+    }
+    if (command.getSecondWord().equals("milk") || command.getSecondWord().equals("cheese") || command.getSecondWord().equals("coffee") || command.getSecondWord().equals("wine")) {
+      playerInventory.removeItem(command.getSecondWord());
+      if (command.getCommandWord().equals("eat"))
+        System.out.println("You ate the " + command.getSecondWord());
+      if (command.getCommandWord().equals("drink"))
+        System.out.println("You drank the " + command.getSecondWord());
+      if (command.getCommandWord().equals("consume"))
+        System.out.println("You consumed the " + command.getSecondWord());
+      return;
+    } else {
+      if (command.getCommandWord().equals("eat"))
+        System.out.println("You cannot eat the " + command.getSecondWord());
+      if (command.getCommandWord().equals("drink"))
+        System.out.println("You cannot drink the " + command.getSecondWord());
+      if (command.getCommandWord().equals("consume"))
+        System.out.println("You cannot consume the " + command.getSecondWord());
+      return;
+    }
 
   }
 
@@ -439,8 +486,8 @@ public class Game {
   }
 
   /**
-   * Print out some help information. Here we print some stupid, cryptic message
-   * and a list of the command words.
+   * Print out some help information. Here we print some stupid, cryptic message and a list of the
+   * command words.
    */
   private void printHelp() {
     System.out.println("These are all the valid commands you can use.");
@@ -450,8 +497,8 @@ public class Game {
   }
 
   /**
-   * Try to go to one direction. If there is an exit, enter the new room,
-   * otherwise print an error message.
+   * Try to go to one direction. If there is an exit, enter the new room, otherwise print an error
+   * message.
    */
   private void goRoom(Command command) {
     String direction = command.getCommandWord();

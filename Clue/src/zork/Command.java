@@ -3,6 +3,7 @@ package zork;
 public class Command {
   private String commandWord;
   private String secondWord;
+  private String thirdWord;
 
   /**
    * Create a command object. First and second word must be supplied, but either
@@ -12,6 +13,12 @@ public class Command {
   public Command(String firstWord, String secondWord) {
     commandWord = firstWord;
     this.secondWord = secondWord;
+  }
+
+  public Command(String firstWord, String secondWord, String thirdWord) {
+    commandWord = firstWord;
+    this.secondWord = secondWord;
+    this.thirdWord = thirdWord;
   }
 
   /**
@@ -48,5 +55,13 @@ public class Command {
     if (commandWord.equalsIgnoreCase("south") || commandWord.equalsIgnoreCase("north") || commandWord.equalsIgnoreCase("east") || commandWord.equalsIgnoreCase("west") || commandWord.equalsIgnoreCase("northeast") || commandWord.equalsIgnoreCase("northwest") || commandWord.equalsIgnoreCase("southeast") || commandWord.equalsIgnoreCase("southwest"))
       return true;
     return false;
+  }
+
+  public boolean hasThirdWord() {
+    return (thirdWord != null);
+  }
+
+  public String getThirdWord() {
+    return thirdWord;
   }
 }

@@ -2,7 +2,7 @@ package zork;
 
 public class CommandWords {
   // a constant array that holds all valid command words
-  private static final String validCommands[] = {"quit", "help", "eat", "drink", "take", "drop", "give", "inspect", "inventory", "look", "bowl", "insert", "place", "open", "time", "put", "east", "south", "north", "west", "unlock", "dig", "southeast", "southwest", "northeast", "northwest", "read"}; // time tells the player how much time they have left
+  private static final String validCommands[] = {"quit", "help", "eat", "drink", "consume", "take", "drop", "give", "inspect", "inventory", "look", "bowl", "insert", "place", "open", "time", "put", "east", "south", "north", "west", "unlock", "dig", "southeast", "southwest", "northeast", "northwest", "read"}; // time tells the player how much time they have left
 
   /**
    * Constructor - initialise the command words.
@@ -12,8 +12,7 @@ public class CommandWords {
   }
 
   /**
-   * Check whether a given String is a valid command word. Return true if it is,
-   * false if it isn't.
+   * Check whether a given String is a valid command word. Return true if it is, false if it isn't.
    **/
   public boolean isCommand(String aString) {
     for (String c : validCommands) {
