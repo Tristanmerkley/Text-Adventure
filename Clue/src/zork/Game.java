@@ -359,7 +359,11 @@ public class Game {
       int i = 0;
       String taken = "";
       while (inventory.size() - currentRoom.numItemsCannotMove() > 0) {
-        Item remove = currentRoom.removeItem(inventory.get(i).getName());
+        if (inventory.get(i).isOpenable()){
+          // didnt have time but add an if  else statement for whether or not the item is openable, and if it is, it automatically takes all, since we have at most 1 item in an items inventory
+          // we also have to add a getInventory to the inventory class
+        }
+        //Item remove = currentRoom.removeItem(inventory.get(i).getName());
         if (remove != null) {
           playerInventory.addItem(remove);
           taken += ", ";
