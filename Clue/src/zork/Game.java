@@ -29,7 +29,7 @@ public class Game {
     try {
       initRooms("src/zork/data/rooms.json");
       initItems("src/zork/data/items.json");
-      currentRoom = roomMap.get("GrandEntry"); // ! spawn room
+      currentRoom = roomMap.get("Kitchen"); // ! spawn room
       playerInventory = new Inventory(300); // ! player max inventory weight
     } catch (Exception e) {
       e.printStackTrace();
@@ -217,14 +217,14 @@ public class Game {
     if (!item.equalsIgnoreCase("book")) {
       System.out.println("You can't read that.");
       return;
-    } else {
+      /* } else { // disabled till LockPick is made.
       if (playerInventory.getInventory().contains("KitchenKnife")){
         System.out.println("You've read the book. You can now unlock doors with basic locks.");
         playerInventory.addItem(LockPick);//add lock pick item, change key ids for rooms that can be picked, for unlock command: if door can be picked with the knife, check if they have the lock pick item.
       } else{
         System.out.println("Find a knife and then read the book to be able to pick basic locks.");
         return;
-      }
+      }*/
     }
   }
 
@@ -347,13 +347,16 @@ public class Game {
     }
     if (command.getSecondWord().equals("all")) {
       ArrayList<Item> inventory = currentRoom.getInventory();
+      int i = 0;
       String taken = "";
       while (inventory.size() - currentRoom.numItemsCannotMove() > 0) {
-        Item remove = currentRoom.removeItem(inventory.get(0).getName());
+        Item remove = currentRoom.removeItem(inventory.get(i).getName());
         if (remove != null) {
           playerInventory.addItem(remove);
           taken += ", ";
           taken += remove.getName();
+        } else {
+          i++;
         }
       }
       System.out.println(taken.length() == 0 ? "There are no items to take." : "You took: " + taken.replaceFirst(", ", ""));
