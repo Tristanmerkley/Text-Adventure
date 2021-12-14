@@ -705,9 +705,10 @@
           "adjacentRoom":"Basement"
         },
         {
-          "isLocked":false,
+          "isLocked":true,
           "direction":"East",
-          "adjacentRoom":"Maze1"
+          "adjacentRoom":"Maze1",
+          "keyId":"KitchenKnife"
         }
       ]
     },

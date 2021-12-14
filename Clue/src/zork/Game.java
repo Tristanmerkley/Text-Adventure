@@ -21,6 +21,7 @@ public class Game {
   private Parser parser;
   private Room currentRoom;
   private Inventory playerInventory;
+  private boolean isUseable = false;
 
   /**
    * Create the game and initialise its internal map.
@@ -218,11 +219,11 @@ public class Game {
       System.out.println("You can't read that.");
       return;
     } else {
+      isUseable = true;
       if (playerInventory.getInventory().contains("KitchenKnife")){
         System.out.println("You've read the book. You can now unlock doors with basic locks.");
-        playerInventory.addItem(LockPick);//add lock pick item, change key ids for rooms that can be picked, for unlock command: if door can be picked with the knife, check if they have the lock pick item.
-      } else{
-        System.out.println("Find a knife and then read the book to be able to pick basic locks.");
+        } else{
+        System.out.println("Find a knife and then you will be able to unlock doors with basic locks.");
         return;
       }
     }
@@ -248,7 +249,15 @@ public class Game {
           return;
         }
         for (Item j : playerInventory.getInventory()) {
-          if (j.getKeyId().equals(i.getKeyId())) {
+          if (i.getAdjacentRoom().equals("Library") || (i.getAdjacentRoom().equals("Maze1") && currentRoom.getRoomName().equals("Cellar"))){
+            if (playerInventory.getInventory().contains("KitchenKnife") && isUseable){
+              i.setLocked(false);
+              System.out.println("Unlocked the " + Game.roomMap.get(i.getAdjacentRoom()).getRoomName() + " door.");
+            } else{
+              System.out.println("You need to have read a special book and find a knife before you can unlock this door.");
+            }
+            return;
+          } else if (j.getKeyId().equals(i.getKeyId())) {
             i.setLocked(false);
             System.out.println("Unlocked the " + Game.roomMap.get(i.getAdjacentRoom()).getRoomName() + " door.");
             return;
