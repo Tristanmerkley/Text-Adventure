@@ -17,7 +17,6 @@ public class Game {
   public static HashMap<String, Room> roomMap = new HashMap<String, Room>();
   public static HashMap<String, Item> itemMap = new HashMap<String, Item>();
 
-  private Scanner input;
   private Parser parser;
   private Room currentRoom;
   private Inventory playerInventory;
@@ -220,9 +219,9 @@ public class Game {
       return;
     } else {
       isUseable = true;
-      if (playerInventory.getInventory().contains("KitchenKnife")){
+      if (playerInventory.getInventory().contains("KitchenKnife")) {
         System.out.println("You've read the book. You can now unlock doors with basic locks.");
-        } else{
+      } else {
         System.out.println("Find a knife and then you will be able to unlock doors with basic locks.");
         return;
       }
@@ -249,11 +248,11 @@ public class Game {
           return;
         }
         for (Item j : playerInventory.getInventory()) {
-          if (i.getAdjacentRoom().equals("Library") || (i.getAdjacentRoom().equals("Maze1") && currentRoom.getRoomName().equals("Cellar"))){
-            if (playerInventory.getInventory().contains("KitchenKnife") && isUseable){
+          if (i.getAdjacentRoom().equals("Library") || (i.getAdjacentRoom().equals("Maze1") && currentRoom.getRoomName().equals("Cellar"))) {
+            if (playerInventory.getInventory().contains("KitchenKnife") && isUseable) {
               i.setLocked(false);
               System.out.println("Unlocked the " + Game.roomMap.get(i.getAdjacentRoom()).getRoomName() + " door.");
-            } else{
+            } else {
               System.out.println("You need to have read a special book and find a knife before you can unlock this door.");
             }
             return;
@@ -359,11 +358,17 @@ public class Game {
       int i = 0;
       String taken = "";
       while (inventory.size() - currentRoom.numItemsCannotMove() > 0) {
-        if (inventory.get(i).isOpenable()){
-          // didnt have time but add an if  else statement for whether or not the item is openable, and if it is, it automatically takes all, since we have at most 1 item in an items inventory
-          // we also have to add a getInventory to the inventory class
+        if (inventory.get(i).isOpen()) {
+          ArrayList<Item> items = inventory.get(i).getInventory();
+          while (inventory.get(i).getInventory().size() > 0) {
+            Item remove = items.remove(0);
+            playerInventory.addItem(remove);
+            taken += ", ";
+            taken += remove.getName();
+          }
+          inventory.get(i).setInventory(items);
         }
-        //Item remove = currentRoom.removeItem(inventory.get(i).getName());
+        Item remove = currentRoom.removeItem(inventory.get(i).getName());
         if (remove != null) {
           playerInventory.addItem(remove);
           taken += ", ";
