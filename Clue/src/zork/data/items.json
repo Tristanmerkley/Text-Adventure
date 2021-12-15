@@ -39,7 +39,7 @@
         },
         {
             "id": "BalconyKey",
-            "name": "Key from Safe",
+            "name": "Key from safe",
             "description": "A key with a cloud on it.",
             "weight": 1,
             "startingitem": "Safe"
