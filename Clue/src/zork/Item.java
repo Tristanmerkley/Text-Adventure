@@ -87,4 +87,8 @@ public class Item extends OpenableObject {
     return inventory.contains(itemName);
   }
 
+  public void setInventory(ArrayList<Item> items) {
+    inventory.setInventory(items);
+  }
+
 }
