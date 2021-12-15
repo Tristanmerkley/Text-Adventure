@@ -17,7 +17,6 @@ public class Game {
   public static HashMap<String, Room> roomMap = new HashMap<String, Room>();
   public static HashMap<String, Item> itemMap = new HashMap<String, Item>();
 
-  private Scanner input;
   private Parser parser;
   private Room currentRoom;
   private Inventory playerInventory;
@@ -220,9 +219,13 @@ public class Game {
       return;
     } else {
       isUseable = true;
+<<<<<<< HEAD
       if (playerInventory.contains("KitchenKnife")!=null){
+=======
+      if (playerInventory.getInventory().contains("KitchenKnife")) {
+>>>>>>> 31e0a5e3a54cb61eb820e9ce3c1e7f16924c82c9
         System.out.println("You've read the book. You can now unlock doors with basic locks.");
-        } else{
+      } else {
         System.out.println("Find a knife and then you will be able to unlock doors with basic locks.");
         return;
       }
@@ -235,7 +238,11 @@ public class Game {
       return;
     }
     if (command.getSecondWord().equalsIgnoreCase("safe")) {
-      unlockSafe(command); // TODO
+      unlockSafe(command);
+      return;
+    }
+    if (command.getSecondWord().equalsIgnoreCase("desk")) {
+      unlockDesk(command); // TODO
       return;
     }
     if (!command.isDirection(command.getSecondWord())) {
@@ -276,7 +283,25 @@ public class Game {
     System.out.println("There is no door there!");
   }
 
-  private void unlockSafe(Command command) {}
+  private void unlockDesk(Command command) {
+    System.out.println("The piggy bank seems empty");
+
+    if (currentRoom.contains("PiggyBank").contains("PeculiarCoin").getName().equals("Peculiar coin"))
+      currentRoom.contains("desk").setLocked(false);
+  }
+
+
+  private void unlockSafe(Command command) {
+    Scanner in = new Scanner(System.in);
+    System.out.println("What is the 4-digit code?");
+    String code = in.nextLine();
+    in.close();
+    if (code.equals("6531")) {
+      currentRoom.contains("safe").setLocked(false);
+      System.out.println("The safe is now unlocked");
+    } else
+      System.out.println("That is not the right code");
+  }
 
   private void openObject(Command command) {
     String item = command.getSecondWord();
@@ -364,6 +389,16 @@ public class Game {
       int i = 0;
       String taken = "";
       while (inventory.size() - currentRoom.numItemsCannotMove() > 0) {
+        if (inventory.get(i).isOpen()) {
+          ArrayList<Item> items = inventory.get(i).getInventory();
+          while (inventory.get(i).getInventory().size() > 0) {
+            Item remove = items.remove(0);
+            playerInventory.addItem(remove);
+            taken += ", ";
+            taken += remove.getName();
+          }
+          inventory.get(i).setInventory(items);
+        }
         Item remove = currentRoom.removeItem(inventory.get(i).getName());
         if (remove != null) {
           playerInventory.addItem(remove);
@@ -467,7 +502,19 @@ public class Game {
       System.out.println(item + " is not a valid object.");
       return;
     }
-    if (command.getSecondWord().equals("milk") || command.getSecondWord().equals("cheese") || command.getSecondWord().equals("coffee") || command.getSecondWord().equals("wine")) {
+    if (command.getSecondWord().equals("rotten milk")) {
+      playerInventory.removeItem("RottenMilk");
+      if (command.getCommandWord().equals("eat"))
+        System.out.println("You ate the " + command.getSecondWord());
+      if (command.getCommandWord().equals("drink"))
+        System.out.println("You drank the " + command.getSecondWord());
+      if (command.getCommandWord().equals("consume"))
+        System.out.println("You consumed the " + command.getSecondWord());
+      playerInventory.addItem(currentRoom.contains("RottenMilk").contains("PantryKey"));
+      System.out.println("A key has been added to your inventory");
+      return;
+    }
+    if (command.getSecondWord().equals("cheese") || command.getSecondWord().equals("coffee") || command.getSecondWord().equals("wine")) {
       playerInventory.removeItem(command.getSecondWord());
       if (command.getCommandWord().equals("eat"))
         System.out.println("You ate the " + command.getSecondWord());
