@@ -70,4 +70,8 @@ public class Inventory {
     }
     return count;
   }
+
+  public void setInventory(ArrayList<Item> items) {
+    this.items = items;
+  }
 }

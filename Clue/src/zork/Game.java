@@ -17,7 +17,6 @@ public class Game {
   public static HashMap<String, Room> roomMap = new HashMap<String, Room>();
   public static HashMap<String, Item> itemMap = new HashMap<String, Item>();
 
-  private Scanner input;
   private Parser parser;
   private Room currentRoom;
   private Inventory playerInventory;
@@ -287,6 +286,7 @@ public class Game {
     Scanner in = new Scanner(System.in);
     System.out.println("What is the 4-digit code?");
     String code = in.nextLine();
+    in.close();
     if (code.equals("6531")) {
       currentRoom.contains("safe").setLocked(false);
       System.out.println("The safe is now unlocked");
@@ -380,12 +380,17 @@ public class Game {
       int i = 0;
       String taken = "";
       while (inventory.size() - currentRoom.numItemsCannotMove() > 0) {
-        if (inventory.get(i).isOpenable()) {
-          // didnt have time but add an if else statement for whether or not the item is openable, and if it
-          // is, it automatically takes all, since we have at most 1 item in an items inventory
-          // we also have to add a getInventory to the inventory class
+        if (inventory.get(i).isOpen()) {
+          ArrayList<Item> items = inventory.get(i).getInventory();
+          while (inventory.get(i).getInventory().size() > 0) {
+            Item remove = items.remove(0);
+            playerInventory.addItem(remove);
+            taken += ", ";
+            taken += remove.getName();
+          }
+          inventory.get(i).setInventory(items);
         }
-        // Item remove = currentRoom.removeItem(inventory.get(i).getName());
+        Item remove = currentRoom.removeItem(inventory.get(i).getName());
         if (remove != null) {
           playerInventory.addItem(remove);
           taken += ", ";
