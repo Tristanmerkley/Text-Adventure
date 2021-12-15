@@ -220,7 +220,7 @@ public class Game {
       return;
     } else {
       isUseable = true;
-      if (playerInventory.getInventory().contains("KitchenKnife")){
+      if (playerInventory.contains("KitchenKnife")!=null){
         System.out.println("You've read the book. You can now unlock doors with basic locks.");
         } else{
         System.out.println("Find a knife and then you will be able to unlock doors with basic locks.");
@@ -248,16 +248,21 @@ public class Game {
           System.out.println(Game.roomMap.get(i.getAdjacentRoom()).getRoomName() + " is already unlocked.");
           return;
         }
+        if (i.getAdjacentRoom().equals("Library") || i.getAdjacentRoom().equals("Maze1")){
+          if ((playerInventory.contains("Kitchen Knife")!=null) && isUseable){
+            i.setLocked(false);
+            System.out.println("Unlocked the " + Game.roomMap.get(i.getAdjacentRoom()).getRoomName() + " door.");
+          } else if (!isUseable){
+            System.out.println("Read a special book to be able to pick basic locks.");
+          } else if (playerInventory.contains("Kitchen Knife") == null){
+            System.out.println("Find a knife to be able to pick basic locks.");
+          }else{
+            System.out.println("You need to have read a special book and find a knife before you can unlock this door.");
+          }
+          return;
+        }
         for (Item j : playerInventory.getInventory()) {
-          if (i.getAdjacentRoom().equals("Library") || (i.getAdjacentRoom().equals("Maze1") && currentRoom.getRoomName().equals("Cellar"))){
-            if (playerInventory.getInventory().contains("KitchenKnife") && isUseable){
-              i.setLocked(false);
-              System.out.println("Unlocked the " + Game.roomMap.get(i.getAdjacentRoom()).getRoomName() + " door.");
-            } else{
-              System.out.println("You need to have read a special book and find a knife before you can unlock this door.");
-            }
-            return;
-          } else if (j.getKeyId().equals(i.getKeyId())) {
+          if (j.getKeyId().equals(i.getKeyId())) {
             i.setLocked(false);
             System.out.println("Unlocked the " + Game.roomMap.get(i.getAdjacentRoom()).getRoomName() + " door.");
             return;
