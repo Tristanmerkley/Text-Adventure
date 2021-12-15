@@ -82,14 +82,7 @@
             "holdingWeight": 1,
             "startingitem": "Fridge"
         },
-         {
-            "id": "PantryKey",
-            "name": "Key from rotten milk",
-            "description": "A shiny key with an engraving of a block of cheese. I wonder what this unlocks.",
-            "weight": 1,
-            "startingitem": "RottenMilk"
-        },
-         {
+        {
             "id": "Cheese",
             "name": "Cheese",
             "description": "A block of cheese sits by the milk. Who do you think this cheese is meant for?",
@@ -185,6 +178,7 @@
             "name": "Desk",
             "description": "A big oak desk with a piggy bank on the top left corner of it. There is also 4 drawers on the other side of the desk, there could be something useful in there.",
             "startingroom": "Office1",
+            "isLocked": true,
             "isOpenable": true
         },
         {

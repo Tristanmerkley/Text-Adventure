@@ -238,6 +238,10 @@ public class Game {
       unlockSafe(command);
       return;
     }
+    if (command.getSecondWord().equalsIgnoreCase("desk")) {
+      unlockDesk(command); // TODO
+      return;
+    }
     if (!command.isDirection(command.getSecondWord())) {
       System.out.println(command.getSecondWord() + " is not a vaild direction");
       return;
@@ -270,6 +274,14 @@ public class Game {
     }
     System.out.println("There is no door there!");
   }
+
+  private void unlockDesk(Command command) {
+    System.out.println("The piggy bank seems empty");
+
+    if (currentRoom.contains("PiggyBank").contains("PeculiarCoin").getName().equals("Peculiar coin"))
+      currentRoom.contains("desk").setLocked(false);
+  }
+
 
   private void unlockSafe(Command command) {
     Scanner in = new Scanner(System.in);
@@ -487,14 +499,15 @@ public class Game {
       return;
     }
     if (command.getSecondWord().equals("rotten milk")) {
-      playerInventory.removeItem("RottenMilk");
+      playerInventory.removeItem(command.getSecondWord());
       if (command.getCommandWord().equals("eat"))
         System.out.println("You ate the " + command.getSecondWord());
       if (command.getCommandWord().equals("drink"))
         System.out.println("You drank the " + command.getSecondWord());
       if (command.getCommandWord().equals("consume"))
         System.out.println("You consumed the " + command.getSecondWord());
-      playerInventory.addItem(currentRoom.contains("RottenMilk").contains("PantryKey"));
+      Item PantryKey = new Key("PantryKey", "Key from rotten milk", 1);
+      playerInventory.addItem(PantryKey);
       System.out.println("A key has been added to your inventory");
       return;
     }
