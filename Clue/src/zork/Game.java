@@ -220,9 +220,9 @@ public class Game {
       return;
     } else {
       isUseable = true;
-      if (playerInventory.getInventory().contains("KitchenKnife")){
+      if (playerInventory.getInventory().contains("KitchenKnife")) {
         System.out.println("You've read the book. You can now unlock doors with basic locks.");
-        } else{
+      } else {
         System.out.println("Find a knife and then you will be able to unlock doors with basic locks.");
         return;
       }
@@ -249,11 +249,11 @@ public class Game {
           return;
         }
         for (Item j : playerInventory.getInventory()) {
-          if (i.getAdjacentRoom().equals("Library") || (i.getAdjacentRoom().equals("Maze1") && currentRoom.getRoomName().equals("Cellar"))){
-            if (playerInventory.getInventory().contains("KitchenKnife") && isUseable){
+          if (i.getAdjacentRoom().equals("Library") || (i.getAdjacentRoom().equals("Maze1") && currentRoom.getRoomName().equals("Cellar"))) {
+            if (playerInventory.getInventory().contains("KitchenKnife") && isUseable) {
               i.setLocked(false);
               System.out.println("Unlocked the " + Game.roomMap.get(i.getAdjacentRoom()).getRoomName() + " door.");
-            } else{
+            } else {
               System.out.println("You need to have read a special book and find a knife before you can unlock this door.");
             }
             return;
@@ -271,7 +271,16 @@ public class Game {
     System.out.println("There is no door there!");
   }
 
-  private void unlockSafe(Command command) {}
+  private void unlockSafe(Command command) {
+    Scanner in = new Scanner(System.in);
+    System.out.println("What is the 4-digit code?");
+    String code = in.nextLine();
+    if (code.equals("6531")) {
+      currentRoom.contains("safe").setLocked(false);
+      System.out.println("The safe is now unlocked");
+    } else
+      System.out.println("That is not the right code");
+  }
 
   private void openObject(Command command) {
     String item = command.getSecondWord();
@@ -359,11 +368,12 @@ public class Game {
       int i = 0;
       String taken = "";
       while (inventory.size() - currentRoom.numItemsCannotMove() > 0) {
-        if (inventory.get(i).isOpenable()){
-          // didnt have time but add an if  else statement for whether or not the item is openable, and if it is, it automatically takes all, since we have at most 1 item in an items inventory
+        if (inventory.get(i).isOpenable()) {
+          // didnt have time but add an if else statement for whether or not the item is openable, and if it
+          // is, it automatically takes all, since we have at most 1 item in an items inventory
           // we also have to add a getInventory to the inventory class
         }
-        //Item remove = currentRoom.removeItem(inventory.get(i).getName());
+        // Item remove = currentRoom.removeItem(inventory.get(i).getName());
         if (remove != null) {
           playerInventory.addItem(remove);
           taken += ", ";
@@ -466,7 +476,19 @@ public class Game {
       System.out.println(item + " is not a valid object.");
       return;
     }
-    if (command.getSecondWord().equals("milk") || command.getSecondWord().equals("cheese") || command.getSecondWord().equals("coffee") || command.getSecondWord().equals("wine")) {
+    if (command.getSecondWord().equals("rotten milk")) {
+      playerInventory.removeItem("RottenMilk");
+      if (command.getCommandWord().equals("eat"))
+        System.out.println("You ate the " + command.getSecondWord());
+      if (command.getCommandWord().equals("drink"))
+        System.out.println("You drank the " + command.getSecondWord());
+      if (command.getCommandWord().equals("consume"))
+        System.out.println("You consumed the " + command.getSecondWord());
+      playerInventory.addItem(currentRoom.contains("RottenMilk").contains("PantryKey"));
+      System.out.println("A key has been added to your inventory");
+      return;
+    }
+    if (command.getSecondWord().equals("cheese") || command.getSecondWord().equals("coffee") || command.getSecondWord().equals("wine")) {
       playerInventory.removeItem(command.getSecondWord());
       if (command.getCommandWord().equals("eat"))
         System.out.println("You ate the " + command.getSecondWord());
