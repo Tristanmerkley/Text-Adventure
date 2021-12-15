@@ -185,6 +185,7 @@
             "name": "Desk",
             "description": "A big oak desk with a piggy bank on the top left corner of it. There is also 4 drawers on the other side of the desk, there could be something useful in there.",
             "startingroom": "Office1",
+            "isLocked": true,
             "isOpenable": true
         },
         {
