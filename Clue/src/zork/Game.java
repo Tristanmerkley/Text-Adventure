@@ -21,6 +21,7 @@ public class Game {
   private Room currentRoom;
   private Inventory playerInventory;
   private boolean isUseable = false;
+  private Item itemName;
 
   /**
    * Create the game and initialise its internal map.
@@ -234,7 +235,7 @@ public class Game {
       return;
     }
     if (command.getSecondWord().equalsIgnoreCase("safe")) {
-      unlockSafe(command); // TODO
+      unlockSafe(command);
       return;
     }
     if (!command.isDirection(command.getSecondWord())) {
@@ -314,6 +315,12 @@ public class Game {
       return currentRoom.contains(item);
     if (playerInventory.contains(item) != null)
       return playerInventory.contains(item);
+    for (Item i : currentRoom.getInventory()) {
+      if (i.contains(item) != null) {
+        itemName = i;
+        return i.contains(item);
+      }
+    }
     return null;
   }
 
@@ -373,25 +380,23 @@ public class Game {
           while (inventory.get(i).getInventory().size() > 0) {
             Item remove = items.remove(0);
             playerInventory.addItem(remove);
-            taken += ", ";
-            taken += remove.getName();
+            taken += ", " + remove.getName();
           }
           inventory.get(i).setInventory(items);
         }
         Item remove = currentRoom.removeItem(inventory.get(i).getName());
         if (remove != null) {
           playerInventory.addItem(remove);
-          taken += ", ";
-          taken += remove.getName();
+          taken += ", " + remove.getName();
         } else {
           i++;
         }
       }
       System.out.println(taken.length() == 0 ? "There are no items to take." : "You took: " + taken.replaceFirst(", ", ""));
-    } else if (currentRoom.contains(command.getSecondWord()) == null) {
+    } else if (nonNull(command.getSecondWord()) == null) {
       System.out.println(command.getSecondWord() + " is not a vaild item");
     } else {
-      playerInventory.addItem(currentRoom.removeItem(command.getSecondWord()));
+      playerInventory.addItem(itemName.removeItem(command.getSecondWord()));
       System.out.println("You took: " + command.getSecondWord());
     }
   }
