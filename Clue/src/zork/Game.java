@@ -235,7 +235,11 @@ public class Game {
       return;
     }
     if (command.getSecondWord().equalsIgnoreCase("safe")) {
-      unlockSafe(command); // TODO
+      unlockSafe(command);
+      return;
+    }
+    if (command.getSecondWord().equalsIgnoreCase("desk")) {
+      unlockDesk(command); // TODO
       return;
     }
     if (!command.isDirection(command.getSecondWord())) {
@@ -270,6 +274,14 @@ public class Game {
     }
     System.out.println("There is no door there!");
   }
+
+  private void unlockDesk(Command command) {
+    System.out.println("The piggy bank seems empty");
+
+    if (currentRoom.contains("PiggyBank").contains("PeculiarCoin").getName().equals("Peculiar coin"))
+      currentRoom.contains("desk").setLocked(false);
+  }
+
 
   private void unlockSafe(Command command) {
     Scanner in = new Scanner(System.in);
