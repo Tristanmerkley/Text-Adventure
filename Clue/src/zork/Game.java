@@ -293,6 +293,8 @@ public class Game {
       System.out.println("The safe is now unlocked");
     } else
       System.out.println("That is not the right code");
+
+    return;
   }
 
   private void openObject(Command command) {
@@ -382,6 +384,13 @@ public class Game {
       System.out.println("There are no items to take.");
       return;
     }
+
+    if (command.getSecondWord().equals("Right Shoe")) {
+      System.out.println("A peculiar coin fell out of the shoe");
+      Item coin = new Item(1, "Peculiar Coin", false, 0);
+      playerInventory.addItem(coin);
+    }
+
     if (command.getSecondWord().equals("all")) {
       ArrayList<Item> inventory = currentRoom.getInventory();
       int i = 0;
@@ -422,6 +431,11 @@ public class Game {
       System.out.println("You do not have a " + command.getSecondWord());
       return;
     }
+    Item coin = playerInventory.removeItem(command.getSecondWord());
+    if (command.getSecondWord().equalsIgnoreCase("Peculiar Coin") && currentRoom.getRoomName().equals("Office")) {
+      currentRoom.contains("Piggy Bank").addItem(coin);
+    }
+
     Item item = playerInventory.removeItem(command.getSecondWord());
     currentRoom.addItem(item);
     System.out.println("You dropped " + item.getName());
