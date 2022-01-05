@@ -91,4 +91,8 @@ public class Item extends OpenableObject {
     inventory.setInventory(items);
   }
 
+  public Item removeItem(String item) {
+    return inventory.removeItem(item);
+  }
+
 }

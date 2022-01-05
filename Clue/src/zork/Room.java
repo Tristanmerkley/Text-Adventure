@@ -121,11 +121,17 @@ public class Room {
     if (inventory.getInventory().size() > 0)
       System.out.println("Contains:");
     for (Item i : inventory.getInventory()) {
-      System.out.println(i.getName() + " - " + i.getDescription());
+      System.out.print(i.getName() + " - " + i.getDescription());
       if (i.isOpen()) {
-        System.out.print(i.getName() + " contains:");
-        i.displayInventory();
+        String res = "";
+        System.out.print(i.getName() + " contains: ");
+        ArrayList<Item> items = i.getInventory();
+        for (Item j : items) {
+          res = ", " + j.getName();
+        }
+        System.out.println(res.replaceFirst(", ", ""));
       }
+      System.out.println();
     }
   }
 

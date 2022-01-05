@@ -21,6 +21,7 @@ public class Game {
   private Room currentRoom;
   private Inventory playerInventory;
   private boolean isUseable = false;
+  private Item itemName;
 
   /**
    * Create the game and initialise its internal map.
@@ -326,6 +327,12 @@ public class Game {
       return currentRoom.contains(item);
     if (playerInventory.contains(item) != null)
       return playerInventory.contains(item);
+    for (Item i : currentRoom.getInventory()) {
+      if (i.contains(item) != null) {
+        itemName = i;
+        return i.contains(item);
+      }
+    }
     return null;
   }
 
@@ -385,25 +392,23 @@ public class Game {
           while (inventory.get(i).getInventory().size() > 0) {
             Item remove = items.remove(0);
             playerInventory.addItem(remove);
-            taken += ", ";
-            taken += remove.getName();
+            taken += ", " + remove.getName();
           }
           inventory.get(i).setInventory(items);
         }
         Item remove = currentRoom.removeItem(inventory.get(i).getName());
         if (remove != null) {
           playerInventory.addItem(remove);
-          taken += ", ";
-          taken += remove.getName();
+          taken += ", " + remove.getName();
         } else {
           i++;
         }
       }
       System.out.println(taken.length() == 0 ? "There are no items to take." : "You took: " + taken.replaceFirst(", ", ""));
-    } else if (currentRoom.contains(command.getSecondWord()) == null) {
+    } else if (nonNull(command.getSecondWord()) == null) {
       System.out.println(command.getSecondWord() + " is not a vaild item");
     } else {
-      playerInventory.addItem(currentRoom.removeItem(command.getSecondWord()));
+      playerInventory.addItem(itemName.removeItem(command.getSecondWord()));
       System.out.println("You took: " + command.getSecondWord());
     }
   }
@@ -494,14 +499,15 @@ public class Game {
       return;
     }
     if (command.getSecondWord().equals("rotten milk")) {
-      playerInventory.removeItem("RottenMilk");
+      playerInventory.removeItem(command.getSecondWord());
       if (command.getCommandWord().equals("eat"))
         System.out.println("You ate the " + command.getSecondWord());
       if (command.getCommandWord().equals("drink"))
         System.out.println("You drank the " + command.getSecondWord());
       if (command.getCommandWord().equals("consume"))
         System.out.println("You consumed the " + command.getSecondWord());
-      playerInventory.addItem(currentRoom.contains("RottenMilk").contains("PantryKey"));
+      Item PantryKey = new Key("PantryKey", "Key from rotten milk", 1);
+      playerInventory.addItem(PantryKey);
       System.out.println("A key has been added to your inventory");
       return;
     }
