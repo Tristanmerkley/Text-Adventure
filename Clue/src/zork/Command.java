@@ -52,7 +52,7 @@ public class Command {
   }
 
   public boolean isDirection(String commandWord) {
-    return CommandWords.directions.contains(commandWord) ? true : false;
+    return CommandWords.directions.contains(commandWord); // returns true or false
   }
 
   public boolean hasThirdWord() {

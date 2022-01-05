@@ -6,21 +6,25 @@ import java.util.HashSet;
 
 public class CommandWords {
   // a constant array that holds all valid command words
-  private static final String validCommands[] = {"quit", "help", "eat", "drink", "consume", "take", "drop", "give", "inspect", "inventory", "look", "bowl", "insert", "place", "open", "time", "put", "east", "south", "north", "west", "unlock", "dig", "southeast", "southwest", "northeast", "northwest", "read"}; // time tells the player how much time they have left
-  public static String[] dirs = {"north", "east", "south", "west", "n", "e", "s", "w", "northeast", "southwest", "southeast", "northwest"};
-  public static final HashSet<String> commands = new HashSet<String>(Arrays.asList(validCommands));
-  public static final HashSet<String> directions = new HashSet<String>(Arrays.asList(dirs));
+  public static final HashSet<String> commands = new HashSet<String>(Arrays.asList("quit", "help", "eat", "drink", "consume", "take", "drop", "give", "inspect", "inventory", "look", "bowl", "insert", "place", "open", "time", "put", "east", "south", "north", "west", "unlock", "dig", "southeast", "southwest", "northeast", "northwest", "read"));
+  public static final HashSet<String> directions = new HashSet<String>(Arrays.asList("north", "east", "south", "west", "n", "e", "s", "w", "northeast", "southwest", "southeast", "northwest", "nw", "ne", "sw", "se"));
   public static HashMap<String, String> dirConversions = new HashMap<String, String>();
 
+  // just combined the Valid Commands and the directions with their respective HashSets 
 
   /**
    * Constructor - initialise the command words.
+   * added nw ne sw se to be converted
    */
   public CommandWords() {
     dirConversions.put("n", "north");
     dirConversions.put("s", "south");
     dirConversions.put("e", "east");
     dirConversions.put("w", "west");
+    dirConversions.put("nw", "northwest");
+    dirConversions.put("ne", "northeast");
+    dirConversions.put("sw", "southwest");
+    dirConversions.put("se", "southeast");
   }
 
   /**
