@@ -124,7 +124,7 @@ public class Room {
       System.out.print(i.getName() + " - " + i.getDescription());
       if (i.isOpen()) {
         String res = "";
-        System.out.print(i.getName() + " contains: ");
+        System.out.print("\n        " + "Contains: ");//! formatting imcomplete
         ArrayList<Item> items = i.getInventory();
         for (Item j : items) {
           res = ", " + j.getName();
