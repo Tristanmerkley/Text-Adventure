@@ -329,8 +329,8 @@ public class Game {
       return playerInventory.contains(item);
     for (Item i : currentRoom.getInventory()) {
       if (i.contains(item) != null) {
-        itemName = i;
-        return i.contains(item);
+        //itemName = i;
+        return i;//.contains(item);
       }
     }
     return null;
@@ -408,7 +408,10 @@ public class Game {
     } else if (nonNull(command.getSecondWord()) == null) {
       System.out.println(command.getSecondWord() + " is not a vaild item");
     } else {
-      playerInventory.addItem(itemName.removeItem(command.getSecondWord()));
+      if (currentRoom.contains(command.getSecondWord()) == null)
+        playerInventory.addItem(nonNull(command.getSecondWord()).removeItem(command.getSecondWord()));
+      else
+        playerInventory.addItem(currentRoom.removeItem(command.getSecondWord()));
       System.out.println("You took: " + command.getSecondWord());
     }
   }
@@ -554,6 +557,10 @@ public class Game {
    */
   private void goRoom(Command command) {
     String direction = command.getCommandWord();
+    // convert n, s, w, e here.
+    String temp = CommandWords.dirConversions.get(command.getCommandWord());
+    if (temp != null)
+      direction = temp;
 
     // Try to leave current room.
     Room nextRoom = currentRoom.nextRoom(direction, currentRoom);
