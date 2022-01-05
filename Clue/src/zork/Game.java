@@ -219,16 +219,7 @@ public class Game {
       return;
     } else {
       isUseable = true;
-<<<<<<< HEAD
-      if (playerInventory.contains("KitchenKnife")!=null){
-=======
-      if (playerInventory.getInventory().contains("KitchenKnife")) {
->>>>>>> 31e0a5e3a54cb61eb820e9ce3c1e7f16924c82c9
-        System.out.println("You've read the book. You can now unlock doors with basic locks.");
-      } else {
-        System.out.println("Find a knife and then you will be able to unlock doors with basic locks.");
-        return;
-      }
+        System.out.println("You've read the book. You can now unlock doors with basic locks using a knife.");
     }
   }
 
