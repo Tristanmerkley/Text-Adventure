@@ -267,7 +267,7 @@
     },
     {
       "id":"Hallway4",
-      "name":"Hallway4",
+      "name":"Hallway",
       "description":"You are in a hallway. There are multiple identical bedrooms on this floor.",
       "exits":[
         {
