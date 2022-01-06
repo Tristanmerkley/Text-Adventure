@@ -10,7 +10,7 @@ public class CommandWords {
   public static final HashSet<String> directions = new HashSet<String>(Arrays.asList("north", "east", "south", "west", "n", "e", "s", "w", "northeast", "southwest", "southeast", "northwest", "nw", "ne", "sw", "se"));
   public static HashMap<String, String> dirConversions = new HashMap<String, String>();
 
-  // just combined the Valid Commands and the directions with their respective HashSets 
+  // just combined the Valid Commands and the directions with their respective HashSets
 
   /**
    * Constructor - initialise the command words.
@@ -38,7 +38,7 @@ public class CommandWords {
    * Print all valid commands to System.out.
    */
   public void showAll() {
-    for (String c : validCommands) {
+    for (String c : commands) {
       System.out.print(c + "  ");
     }
     System.out.println();
