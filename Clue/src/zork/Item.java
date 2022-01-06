@@ -7,6 +7,7 @@ public class Item extends OpenableObject {
   private String name;
   private String alternateName;
   private boolean isOpenable;
+  private boolean isConsumable;
   private Inventory inventory;
   private String description;
 
@@ -65,6 +66,10 @@ public class Item extends OpenableObject {
 
   public void setOpenable(boolean isOpenable) {
     this.isOpenable = isOpenable;
+  }
+
+  public boolean isConsumable() {
+    return isConsumable;
   }
 
   public void setDescription(String description) {

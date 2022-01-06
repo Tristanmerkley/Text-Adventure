@@ -63,7 +63,8 @@
             "name": "Coffee",
             "description": "A cup of coffee, oddly, it's still warm.",
             "weight": 1,
-            "startingroom": "Kitchen"
+            "startingroom": "Kitchen",
+            "isConsumable": true
         },
           {
             "id": "Fridge",
@@ -80,14 +81,16 @@
             "weight": 1,
             "isOpenable": true,
             "holdingWeight": 1,
-            "startingitem": "Fridge"
+            "startingitem": "Fridge",
+            "isConsumable": true
         },
         {
             "id": "Cheese",
             "name": "Cheese",
             "description": "A block of cheese sits by the milk. Who do you think this cheese is meant for?",
             "weight": 1,
-            "startingitem": "Fridge"
+            "startingitem": "Fridge",
+            "isConsumable": true
         },
          {
             "id": "PantryMouse",
