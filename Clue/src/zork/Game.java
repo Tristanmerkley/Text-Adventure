@@ -53,6 +53,7 @@ public class Game {
       long holdingWeight; // ! how much an item can hold in its inventory
       boolean isLocked = ((JSONObject) itemObj).get("isLocked") != null ? (Boolean) ((JSONObject) itemObj).get("isLocked") : false;
       boolean isOpenable = ((JSONObject) itemObj).get("isOpenable") != null ? (Boolean) ((JSONObject) itemObj).get("isOpenable") : false;
+      boolean isConsumable = ((JSONObject) itemObj).get("isConsumable") != null ? (Boolean) ((JSONObject) itemObj).get("isConsumable") : false;
       if (!isOpenable)
         holdingWeight = 0;
       else
@@ -61,6 +62,7 @@ public class Game {
       String startingRoom = ((JSONObject) itemObj).get("startingroom") != null ? (String) ((JSONObject) itemObj).get("startingroom") : null;
       String startingItem = ((JSONObject) itemObj).get("startingitem") != null ? (String) ((JSONObject) itemObj).get("startingitem") : null;
 
+      item.setConsumable(isConsumable);
       item.setDescription(itemDescription);
       item.setName(itemName);
       item.setLocked(isLocked);
