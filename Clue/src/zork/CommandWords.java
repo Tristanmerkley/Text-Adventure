@@ -6,15 +6,14 @@ import java.util.HashSet;
 
 public class CommandWords {
   // a constant array that holds all valid command words
-  public static final HashSet<String> commands = new HashSet<String>(Arrays.asList("quit", "help", "consume", "take", "drop", "give", "inspect", "inventory", "look", "bowl", "insert", "place", "open", "time", "put", "unlock", "dig", "southeast", "southwest", "northeast", "northwest", "read"));
+  public static final HashSet<String> commands = new HashSet<String>(Arrays.asList("quit", "help", "consume", "take", "drop", "give", "inspect", "inventory", "look", "bowl", "insert", "place", "open", "time", "put", "unlock", "dig", "read"));
   public static final HashSet<String> directions = new HashSet<String>(Arrays.asList("north", "east", "south", "west", "n", "e", "s", "w", "northeast", "southwest", "southeast", "northwest", "nw", "ne", "sw", "se"));
   public static HashMap<String, String> dirConversions = new HashMap<String, String>();
 
   // just combined the Valid Commands and the directions with their respective HashSets
 
   /**
-   * Constructor - initialise the command words.
-   * added nw ne sw se to be converted
+   * Constructor - initialise the command words. added nw ne sw se to be converted
    */
   public CommandWords() {
     dirConversions.put("n", "north");

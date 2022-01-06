@@ -179,7 +179,7 @@ public class Game {
         System.out.println("Quit what?");
       else
         return true; // signal that we want to quit
-    } else if (commandWord.equalsIgnoreCase("eat") || commandWord.equalsIgnoreCase("drink") || commandWord.equalsIgnoreCase("consume")) {
+    } else if (commandWord.equalsIgnoreCase("consume")) {
       consumeItem(command);
     } else if (commandWord.equalsIgnoreCase("inventory")) {
       printInventory();
@@ -332,8 +332,8 @@ public class Game {
       return playerInventory.contains(item);
     for (Item i : currentRoom.getInventory()) {
       if (i.contains(item) != null) {
-        //itemName = i;
-        return i;//.contains(item);
+        // itemName = i;
+        return i;// .contains(item);
       }
     }
     return null;
@@ -498,14 +498,6 @@ public class Game {
         System.out.println("Consume what?");
         return;
       }
-      if (command.getCommandWord().equals("eat")) {
-        System.out.println("Eat what?");
-        return;
-      }
-      if (command.getCommandWord().equals("drink")) {
-        System.out.println("Drink what?");
-        return;
-      }
     }
     if (playerInventory.contains(command.getSecondWord()) == null) {
       System.out.println("You do not have a " + command.getSecondWord());
@@ -521,19 +513,11 @@ public class Game {
       Item PantryKey = new Key("PantryKey", "Key from rotten milk", 1);
       playerInventory.addItem(PantryKey);
       System.out.println("A key has been added to your inventory");
-    } else if (!command.getSecondWord().equals("cheese") && !command.getSecondWord().equals("coffee") && !command.getSecondWord().equals("wine")) {
-      if (command.getCommandWord().equals("eat"))
-        System.out.println("You cannot eat the " + command.getSecondWord());
-      if (command.getCommandWord().equals("drink"))
-        System.out.println("You cannot drink the " + command.getSecondWord());
+    } else if (!command.getSecondWord().equals("cheese") && !command.getSecondWord().equals("coffee")) {
       if (command.getCommandWord().equals("consume"))
         System.out.println("You cannot consume the " + command.getSecondWord());
     } else {
       playerInventory.removeItem(command.getSecondWord());
-      if (command.getCommandWord().equals("eat"))
-        System.out.println("You ate the " + command.getSecondWord());
-      if (command.getCommandWord().equals("drink"))
-        System.out.println("You drank the " + command.getSecondWord());
       if (command.getCommandWord().equals("consume"))
         System.out.println("You consumed the " + command.getSecondWord());
     }
