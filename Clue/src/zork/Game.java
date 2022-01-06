@@ -21,7 +21,6 @@ public class Game {
   private Room currentRoom;
   private Inventory playerInventory;
   private boolean isUseable = false;
-  private Item itemName;
 
   /**
    * Create the game and initialise its internal map.
@@ -220,7 +219,7 @@ public class Game {
       return;
     } else {
       isUseable = true;
-        System.out.println("You've read the book. You can now unlock doors with basic locks using a knife.");
+      System.out.println("You've read the book. You can now unlock doors with basic locks using a knife.");
     }
   }
 
@@ -247,15 +246,15 @@ public class Game {
           System.out.println(Game.roomMap.get(i.getAdjacentRoom()).getRoomName() + " is already unlocked.");
           return;
         }
-        if (i.getAdjacentRoom().equals("Library") || i.getAdjacentRoom().equals("Maze1")){
-          if ((playerInventory.contains("Kitchen Knife")!=null) && isUseable){
+        if (i.getAdjacentRoom().equals("Library") || i.getAdjacentRoom().equals("Maze1")) {
+          if ((playerInventory.contains("Kitchen Knife") != null) && isUseable) {
             i.setLocked(false);
             System.out.println("Unlocked the " + Game.roomMap.get(i.getAdjacentRoom()).getRoomName() + " door.");
-          } else if (!isUseable){
+          } else if (!isUseable) {
             System.out.println("Read a special book to be able to pick basic locks.");
-          } else if (playerInventory.contains("Kitchen Knife") == null){
+          } else if (playerInventory.contains("Kitchen Knife") == null) {
             System.out.println("Find a knife to be able to pick basic locks.");
-          }else{
+          } else {
             System.out.println("You need to have read a special book and find a knife before you can unlock this door.");
           }
           return;
@@ -517,18 +516,17 @@ public class Game {
     }
     if (command.getSecondWord().equals("rotten milk")) {
       playerInventory.removeItem(command.getSecondWord());
-      if (command.getCommandWord().equals("eat"))
-        System.out.println("You ate the " + command.getSecondWord());
-      if (command.getCommandWord().equals("drink"))
-        System.out.println("You drank the " + command.getSecondWord());
-      if (command.getCommandWord().equals("consume"))
-        System.out.println("You consumed the " + command.getSecondWord());
       Item PantryKey = new Key("PantryKey", "Key from rotten milk", 1);
       playerInventory.addItem(PantryKey);
       System.out.println("A key has been added to your inventory");
-      return;
-    }
-    if (command.getSecondWord().equals("cheese") || command.getSecondWord().equals("coffee") || command.getSecondWord().equals("wine")) {
+    } else if (!command.getSecondWord().equals("cheese") && !command.getSecondWord().equals("coffee") && !command.getSecondWord().equals("wine")) {
+      if (command.getCommandWord().equals("eat"))
+        System.out.println("You cannot eat the " + command.getSecondWord());
+      if (command.getCommandWord().equals("drink"))
+        System.out.println("You cannot drink the " + command.getSecondWord());
+      if (command.getCommandWord().equals("consume"))
+        System.out.println("You cannot consume the " + command.getSecondWord());
+    } else {
       playerInventory.removeItem(command.getSecondWord());
       if (command.getCommandWord().equals("eat"))
         System.out.println("You ate the " + command.getSecondWord());
@@ -536,15 +534,6 @@ public class Game {
         System.out.println("You drank the " + command.getSecondWord());
       if (command.getCommandWord().equals("consume"))
         System.out.println("You consumed the " + command.getSecondWord());
-      return;
-    } else {
-      if (command.getCommandWord().equals("eat"))
-        System.out.println("You cannot eat the " + command.getSecondWord());
-      if (command.getCommandWord().equals("drink"))
-        System.out.println("You cannot drink the " + command.getSecondWord());
-      if (command.getCommandWord().equals("consume"))
-        System.out.println("You cannot consume the " + command.getSecondWord());
-      return;
     }
 
   }
