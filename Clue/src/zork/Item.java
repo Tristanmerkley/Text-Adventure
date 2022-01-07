@@ -72,6 +72,10 @@ public class Item extends OpenableObject {
     return isConsumable;
   }
 
+  public void setConsumable(boolean isConsumable) {
+    this.isConsumable = isConsumable;
+  }
+
   public void setDescription(String description) {
     this.description = description;
   }

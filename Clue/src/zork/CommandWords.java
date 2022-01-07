@@ -6,7 +6,7 @@ import java.util.HashSet;
 
 public class CommandWords {
   // a constant array that holds all valid command words
-  public static final HashSet<String> commands = new HashSet<String>(Arrays.asList("quit", "help", "consume", "take", "drop", "give", "inspect", "inventory", "look", "bowl", "insert", "place", "open", "time", "put", "east", "south", "north", "west", "unlock", "dig", "southeast", "southwest", "northeast", "northwest", "read"));
+  public static final HashSet<String> commands = new HashSet<String>(Arrays.asList("quit", "help", "consume", "take", "drop", "give", "inspect", "inventory", "look", "bowl", "insert", "place", "open", "time", "put", "unlock", "dig", "read"));
   public static final HashSet<String> directions = new HashSet<String>(Arrays.asList("north", "east", "south", "west", "n", "e", "s", "w", "northeast", "southwest", "southeast", "northwest", "nw", "ne", "sw", "se"));
   public static HashMap<String, String> dirConversions = new HashMap<String, String>();
 
@@ -29,8 +29,8 @@ public class CommandWords {
   /**
    * Check whether a given String is a valid command word. Return true if it is, false if it isn't.
    **/
-  public boolean isCommand(String aString) {
-    return commands.contains(aString);
+  public boolean isCommand(String command) {
+    return commands.contains(command) || directions.contains(command);
   }
 
   /*
