@@ -145,25 +145,9 @@
             "isOpenable": true
         },
         {
-            "id": "LeftShoe",
-            "name": "Left shoe",
-            "description": "A worn out left shoe.",
-            "weight": 2,
-            "isOpenable": true,
-            "holdingWeight": 2,
-            "startingitem": "FirePlace"
-        },
-        {
-            "id": "NoteFromLeftShoe",
-            "name": "Note from left shoe",
-            "description": "A note that says [Find the pair]",
-            "weight": 1,
-            "startingitem": "LeftShoe"
-        },
-        {
-            "id": "RightShoe",
-            "name": "Right shoe",
-            "description": "A worn out right shoe, it seems to match the left one",
+            "id": "Shoe",
+            "name": "Shoe",
+            "description": "A worn out shoe is on the ground, it seems that there is something inside of it",
             "weight": 2,
             "isOpenable": true,
             "holdingWeight": 1,
@@ -174,7 +158,7 @@
             "name": "Peculiar coin",
             "description": "A small gold coin is found in the right shoe, do I have to start collecting money now?",
             "weight": 1,
-            "startingitem": "RightShoe"
+            "startingitem": "Shoe"
         },
         {
             "id": "Desk",
