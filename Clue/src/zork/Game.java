@@ -290,14 +290,11 @@ public class Game {
     Scanner in = new Scanner(System.in);
     System.out.println("What is the 4-digit code?");
     String code = in.nextLine();
-    in.close();
     if (code.equals("6531")) {
       currentRoom.contains("safe").setLocked(false);
       System.out.println("The safe is now unlocked");
     } else
       System.out.println("That is not the right code");
-
-    return;
   }
 
   private void openObject(Command command) {
@@ -389,7 +386,7 @@ public class Game {
     }
 
     String shoe = command.getSecondWord();
-    if (shoe.equals("right shoe")) {
+    if (shoe.equals("shoe")) {
       System.out.println("A peculiar coin fell out of the shoe and it has been added to your inventory");
       Item coin = new Item(1, "Peculiar Coin", false, 0);
       playerInventory.addItem(coin);
