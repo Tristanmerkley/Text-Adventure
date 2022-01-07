@@ -275,10 +275,12 @@ public class Game {
   }
 
   private void unlockDesk(Command command) {
-    System.out.println("The piggy bank seems empty");
-
-    if (currentRoom.contains("PiggyBank").contains("PeculiarCoin").getName().equals("Peculiar coin"))
-      currentRoom.contains("desk").setLocked(false);
+    if (currentRoom.contains("Piggy Bank").getWeight() != 7) {
+      System.out.println("Is there a coin in this office yet?");
+    } else {
+      currentRoom.contains("Desk").setLocked(false);
+      System.out.println("The desk has been unlocked");
+    }
   }
 
 
@@ -384,8 +386,9 @@ public class Game {
       return;
     }
 
-    if (command.getSecondWord().equals("Right Shoe")) {
-      System.out.println("A peculiar coin fell out of the shoe");
+    String shoe = command.getSecondWord();
+    if (shoe.equals("right shoe")) {
+      System.out.println("A peculiar coin fell out of the shoe and it has been added to your inventory");
       Item coin = new Item(1, "Peculiar Coin", false, 0);
       playerInventory.addItem(coin);
     }
@@ -433,9 +436,13 @@ public class Game {
       System.out.println("You do not have a " + command.getSecondWord());
       return;
     }
-    Item coin = playerInventory.removeItem(command.getSecondWord());
-    if (command.getSecondWord().equalsIgnoreCase("Peculiar Coin") && currentRoom.getRoomName().equals("Office")) {
+
+    if (command.getSecondWord().equals("peculiar coin") && currentRoom.getRoomName().equals("Office")) {
+      Item coin = playerInventory.removeItem(command.getSecondWord());
       currentRoom.contains("Piggy Bank").addItem(coin);
+      currentRoom.contains("Piggy Bank").setWeight(7);
+      System.out.println("The coin has been dropped into the piggy bank");
+      return;
     }
 
     Item item = playerInventory.removeItem(command.getSecondWord());
