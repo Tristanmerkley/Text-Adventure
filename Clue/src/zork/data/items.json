@@ -189,7 +189,9 @@
             "name": "Piggy bank",
             "description": "A pink piggy bank with a slot to drop coins in, now I have a spot to place my coin.",
             "weight": 6,
-            "startingroom": "Office1"
+            "startingroom": "Office1",
+            "isOpenable": true,
+            "holdingWeight":  3
         },
         {
             "id": "Floor0Map",
