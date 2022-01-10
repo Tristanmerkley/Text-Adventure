@@ -290,6 +290,7 @@ public class Game {
     Scanner in = new Scanner(System.in);
     System.out.println("What is the 4-digit code?");
     String code = in.nextLine();
+    in.close();
     if (code.equals("6531")) {
       currentRoom.contains("safe").setLocked(false);
       System.out.println("The safe is now unlocked");
