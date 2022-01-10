@@ -52,9 +52,9 @@
             "startingroom": "DiningRoom"
         },
          {
-            "id": "KitchenKnife",
-            "name": "Kitchen knife",
-            "description": "This kitchen knife looks oddly thin.",
+            "id": "Knife",
+            "name": "Knife",
+            "description": "This knife looks oddly thin.",
             "weight": 2,
             "startingroom": "Kitchen"
         },
