@@ -138,8 +138,11 @@ public class Game {
       } catch (IOException e) {
         e.printStackTrace();
       }
-
+      if (currentRoom.getRoomName().equalsIgnoreCase("the end")){
+        finished = true;
+      }
     }
+    System.out.println("Congratulations! You have successfully escaped the house!");
     System.out.println("Thank you for playing.  Good bye.");
   }
 

@@ -678,7 +678,7 @@
         {
           "isLocked":true,
           "direction":"North",
-          "adjacentRoom":"FrontGate",
+          "adjacentRoom":"TheEnd",
           "keyId":"shedKey"
         },
         {
@@ -870,6 +870,17 @@
           "isLocked":false,
           "direction":"South",
           "adjacentRoom":"Basement"
+        }
+      ]
+    },
+    {
+      "id":"TheEnd",
+      "name":"The End",
+      "exits":[
+        {
+          "isLocked":false,
+          "direction":"South",
+          "adjacentRoom":"Outside"
         }
       ]
     }
