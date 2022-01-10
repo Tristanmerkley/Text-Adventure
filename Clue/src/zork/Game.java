@@ -280,8 +280,8 @@ public class Game {
   }
 
   private void unlockDesk(Command command) {
-    if (currentRoom.contains("Piggy Bank").getWeight() != 7) {
-      System.out.println("Is there a coin in this office yet?");
+    if (currentRoom.contains("Piggy Bank").contains("peculiar coin").getName().equals("peculair coin")) {
+      System.out.println("Is there a coin in the piggy bank yet?");
     } else {
       currentRoom.contains("Desk").setLocked(false);
       System.out.println("The desk has been unlocked");
@@ -439,14 +439,6 @@ public class Game {
       return;
     }
 
-    if (command.getSecondWord().equals("peculiar coin") && currentRoom.getRoomName().equals("Office")) {
-      Item coin = playerInventory.removeItem(command.getSecondWord());
-      currentRoom.contains("Piggy Bank").addItem(coin);
-      currentRoom.contains("Piggy Bank").setWeight(7);
-      System.out.println("The coin has been dropped into the piggy bank");
-      return;
-    }
-
     Item item = playerInventory.removeItem(command.getSecondWord());
     currentRoom.addItem(item);
     System.out.println("You dropped " + item.getName());
@@ -482,11 +474,19 @@ public class Game {
       System.out.println("Place what?");
       return;
     }
+
     String item = command.getSecondWord();
     if (nonNull(item) == null) {
       System.out.println(item + " is not a valid object.");
       return;
     }
+
+
+    if (playerInventory.contains(command.getSecondWord()) == null) {
+      System.out.println("You do not have a " + command.getSecondWord());
+      return;
+    }
+
     if (!command.hasThirdWord()) {
       System.out.println("Where do you want to put " + item + "?");
       return;
@@ -494,8 +494,11 @@ public class Game {
     String area = command.getThirdWord();
     if (playerInventory.contains(area) != null) {
       ((Inventory) playerInventory).contains(area).addItem(playerInventory.removeItem(item));
+    } else if (!currentRoom.contains(area).isOpen()) {
+      System.out.println("You must open the " + area + " first.");
     } else if (currentRoom.contains(area) != null) {
       currentRoom.contains(area).addItem(playerInventory.removeItem(item));
+      System.out.println("The " + command.getSecondWord() + " has been added to the " + area + ".");
     }
   }
 
