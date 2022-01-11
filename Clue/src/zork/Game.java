@@ -138,8 +138,11 @@ public class Game {
       } catch (IOException e) {
         e.printStackTrace();
       }
-
+      if (currentRoom.getRoomName().equalsIgnoreCase("the end")){
+        finished = true;
+      }
     }
+    System.out.println("Congratulations! You have successfully escaped the house!");
     System.out.println("Thank you for playing.  Good bye.");
   }
 
@@ -249,12 +252,12 @@ public class Game {
           return;
         }
         if (i.getAdjacentRoom().equals("Library") || i.getAdjacentRoom().equals("Maze1")) {
-          if ((playerInventory.contains("Kitchen Knife") != null) && isUseable) {
+          if ((playerInventory.contains("Knife") != null) && isUseable) {
             i.setLocked(false);
             System.out.println("Unlocked the " + Game.roomMap.get(i.getAdjacentRoom()).getRoomName() + " door.");
           } else if (!isUseable) {
             System.out.println("Read a special book to be able to pick basic locks.");
-          } else if (playerInventory.contains("Kitchen Knife") == null) {
+          } else if (playerInventory.contains("Knife") == null) {
             System.out.println("Find a knife to be able to pick basic locks.");
           } else {
             System.out.println("You need to have read a special book and find a knife before you can unlock this door.");
@@ -277,8 +280,8 @@ public class Game {
   }
 
   private void unlockDesk(Command command) {
-    if (currentRoom.contains("Piggy Bank").getWeight() != 7) {
-      System.out.println("Is there a coin in this office yet?");
+    if (currentRoom.contains("Piggy Bank").contains("peculiar coin").getName().equals("peculair coin")) {
+      System.out.println("Is there a coin in the piggy bank yet?");
     } else {
       currentRoom.contains("Desk").setLocked(false);
       System.out.println("The desk has been unlocked");
@@ -342,7 +345,7 @@ public class Game {
   private void printMap(String map) {
     if (map.equalsIgnoreCase("Main floor map")) {
       try {
-        Scanner in = new Scanner(new File("src/floor0.map"));
+        Scanner in = new Scanner(new File("src\\zork\\floor0.map"));
         while (in.hasNextLine()) {
           System.out.println(in.nextLine());
         }
@@ -351,7 +354,7 @@ public class Game {
       }
     } else if (map.equalsIgnoreCase("Upstairs left map")) {
       try {
-        Scanner in = new Scanner(new File("src/floor1secondhalf.map"));
+        Scanner in = new Scanner(new File("src\\zork\\floor1secondhalf.map"));
         while (in.hasNextLine()) {
           System.out.println(in.nextLine());
         }
@@ -360,7 +363,7 @@ public class Game {
       }
     } else {
       try {
-        Scanner in = new Scanner(new File("src/floor1firsthalf.map"));
+        Scanner in = new Scanner(new File("src\\zork\\floor1firsthalf.map"));
         while (in.hasNextLine()) {
           System.out.println(in.nextLine());
         }
@@ -437,14 +440,6 @@ public class Game {
       return;
     }
 
-    if (command.getSecondWord().equals("peculiar coin") && currentRoom.getRoomName().equals("Office")) {
-      Item coin = playerInventory.removeItem(command.getSecondWord());
-      currentRoom.contains("Piggy Bank").addItem(coin);
-      currentRoom.contains("Piggy Bank").setWeight(7);
-      System.out.println("The coin has been dropped into the piggy bank");
-      return;
-    }
-
     Item item = playerInventory.removeItem(command.getSecondWord());
     currentRoom.addItem(item);
     System.out.println("You dropped " + item.getName());
@@ -480,11 +475,19 @@ public class Game {
       System.out.println("Place what?");
       return;
     }
+
     String item = command.getSecondWord();
     if (nonNull(item) == null) {
       System.out.println(item + " is not a valid object.");
       return;
     }
+
+
+    if (playerInventory.contains(command.getSecondWord()) == null) {
+      System.out.println("You do not have a " + command.getSecondWord());
+      return;
+    }
+
     if (!command.hasThirdWord()) {
       System.out.println("Where do you want to put " + item + "?");
       return;
@@ -492,8 +495,11 @@ public class Game {
     String area = command.getThirdWord();
     if (playerInventory.contains(area) != null) {
       ((Inventory) playerInventory).contains(area).addItem(playerInventory.removeItem(item));
+    } else if (!currentRoom.contains(area).isOpen()) {
+      System.out.println("You must open the " + area + " first.");
     } else if (currentRoom.contains(area) != null) {
       currentRoom.contains(area).addItem(playerInventory.removeItem(item));
+      System.out.println("The " + command.getSecondWord() + " has been added to the " + area + ".");
     }
   }
 
