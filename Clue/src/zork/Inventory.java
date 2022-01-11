@@ -2,7 +2,7 @@ package zork;
 
 import java.util.ArrayList;
 
-public class Inventory {
+public class Inventory implements java.io.Serializable {
   private ArrayList<Item> items;
   private long maxWeight;
   private int currentWeight;
@@ -50,7 +50,7 @@ public class Inventory {
 
   public void displayInventory() {
     for (Item i : items) {
-      System.out.println(i);
+      System.out.println(i + " - " + i.getDescription());
     }
   }
 

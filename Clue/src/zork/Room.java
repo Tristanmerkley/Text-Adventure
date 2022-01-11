@@ -2,7 +2,7 @@ package zork;
 
 import java.util.ArrayList;
 
-public class Room {
+public class Room implements java.io.Serializable {
 
   private String roomName;
   private String description;
@@ -154,6 +154,21 @@ public class Room {
 
   public ArrayList<Item> getMoveableItems() {
     return null;
+  }
+
+  public int getTotalInventorySize() {
+    int total = 0;
+    for (Item i : getInventory()) {
+      total++;
+      if (i.isOpen()) {
+        ArrayList<Item> itemInventory = new ArrayList<Item>(i.getInventory());
+        while (itemInventory.size() > 0) {
+          itemInventory.remove(0);
+          total++;
+        }
+      }
+    }
+    return total;
   }
 
 }
