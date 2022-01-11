@@ -177,6 +177,7 @@ public class Game {
    * returned, otherwise false is returned.
    */
   private boolean processCommand(Command command) { // returning true ends game
+    Scanner in = new Scanner(System.in);
     if (command.isUnknown()) {
       System.out.println("I don't know what you mean...");
       return false;
@@ -190,7 +191,14 @@ public class Game {
       if (command.hasSecondWord())
         System.out.println("Quit what?");
       else
-        return true; // signal that we want to quit
+        System.out.println("\u001B[31m" + "Are you sure you want to quit? You can save your game if you want?");
+        System.out.println("please enter quit again to exit" + "\u001B[0m");
+        String answer = in.nextLine();
+        if (answer.equals("yes") || answer.equals("y")){
+          return true;
+        } else {
+          return false;
+        }
     } else if (commandWord.equalsIgnoreCase("consume")) {
       consumeItem(command);
     } else if (commandWord.equalsIgnoreCase("inventory")) {
