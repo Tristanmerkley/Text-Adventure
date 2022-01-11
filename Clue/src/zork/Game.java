@@ -36,7 +36,7 @@ public class Game {
     try {
       initRooms("src/zork/data/rooms.json");
       initItems("src/zork/data/items.json");
-      currentRoom = roomMap.get("Shed"); // ! spawn room
+      currentRoom = roomMap.get("Kitchen"); // ! spawn room
       playerInventory = new Inventory(300); // ! player max inventory weight
     } catch (Exception e) {
       e.printStackTrace();
@@ -287,7 +287,7 @@ public class Game {
       String temp = CommandWords.dirConversions.get(command.getSecondWord());
       if (temp != null)
         direction = temp;
-      if (i.getDirection().equalsIgnoreCase(direction) || i.getDirection().substring(0,1).equalsIgnoreCase(direction)) {
+      if (i.getDirection().equalsIgnoreCase(direction) || i.getDirection().substring(0, 1).equalsIgnoreCase(direction)) {
         if (!i.isLocked()) {
           System.out.println(Game.roomMap.get(i.getAdjacentRoom()).getRoomName() + " is already unlocked.");
           return;
@@ -366,7 +366,7 @@ public class Game {
         return;
       }
       if (item.equalsIgnoreCase("Hole")) {
-        if (playerInventory.contains("Shovel") != null){
+        if (playerInventory.contains("Shovel") != null) {
           nonNull(item).setOpen(true);
           System.out.println("Opened " + object.getName() + "\n\nContains:");
           object.displayInventory();
@@ -374,7 +374,7 @@ public class Game {
           playerInventory.addItem(shedKey);
           System.out.println("A key has been added to your inventory");
           return;
-        } else{
+        } else {
           System.out.println("You need to use the shovel to open the hole.");
           return;
         }
@@ -517,8 +517,7 @@ public class Game {
       return;
     }
     currentRoom.addItem(playerInventory.removeItem("bowling ball"));
-    int bowl = (int) (Math.random() * 2) + 1;
-    if (bowl == 2) { // ! change * for chance for testing
+    if ((int) (Math.random() * 1) == 0) { // ! change chance for testing (int) (Math.random() * 2) + 1;
       System.out.println("Strike!!");
       Item strikeKey = new Key("strikeKey", "Key", 1);
       playerInventory.addItem(strikeKey);
