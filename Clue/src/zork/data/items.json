@@ -123,19 +123,11 @@
             "startingroom": "LivingRoom"
         },
         {
-            "id": "CouchCushion",
-            "name": "Couch cushion",
-            "description": "The cushion of a couch, a couple stiches hold the fabric together.",
-            "weight": 4,
-            "startingitem": "Couch",
-            "isOpenable": true
-        },
-        {
             "id": "BackDoor/PatioDoorKey",
-            "name": "Key from couch cushion",
+            "name": "Key from couch",
             "description": "Another key with an engraving of a flower on it, does it open more doors?",
             "weight": 1,
-            "startingitem": "CouchCushion"
+            "startingitem": "Couch"
         },
         {
             "id": "FirePlace",
