@@ -34,6 +34,8 @@ public class Command {
    * word.
    */
   public String getSecondWord() {
+    if (isDirection(secondWord))
+      return CommandWords.dirConversions.get(secondWord);
     return secondWord;
   }
 
