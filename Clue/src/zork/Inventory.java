@@ -50,7 +50,7 @@ public class Inventory {
 
   public void displayInventory() {
     for (Item i : items) {
-      System.out.println(i);
+      System.out.println(i + " - " + i.getDescription());
     }
   }
 
