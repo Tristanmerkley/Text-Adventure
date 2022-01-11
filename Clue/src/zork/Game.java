@@ -149,9 +149,9 @@ public class Game {
       }
       if (currentRoom.getRoomName().equalsIgnoreCase("the end")) {
         finished = true;
+        System.out.println("\u001B[31m" + "Congratulations! You have successfully escaped the house!");
       }
     }
-    System.out.println("Congratulations! You have successfully escaped the house!");
     System.out.println("Thank you for playing.  Good bye.");
   }
 
@@ -177,7 +177,7 @@ public class Game {
    * returned, otherwise false is returned.
    */
   private boolean processCommand(Command command) { // returning true ends game
-    
+
     if (command.isUnknown()) {
       System.out.println("I don't know what you mean...");
       return false;
@@ -191,16 +191,14 @@ public class Game {
       if (command.hasSecondWord())
         System.out.println("Quit what?");
       else
-        System.out.println("\u001B[31m" + "Are you sure you want to quit? You can save your game if you want?");
-        System.out.println("please enter quit again to exit" + "\u001B[0m");
-        Scanner in = new Scanner(System.in);
-        String answer = in.nextLine();
-        in.close();
-        if (answer.equals("yes") || answer.equals("y")){
-          return true;
-        } else {
-          return false;
-        }
+        System.out.println("Are you sure you want to quit? You can also save your game if you want.");
+      Scanner input = new Scanner(System.in);
+      String answer = input.nextLine();
+      input.close(); // TODO closing input stream, then not saying yes messes up getCommand()
+      if (answer.equals("yes") || answer.equals("y"))
+        return true;
+      else
+        return false;
     } else if (commandWord.equalsIgnoreCase("consume")) {
       consumeItem(command);
     } else if (commandWord.equalsIgnoreCase("inventory")) {
@@ -227,7 +225,7 @@ public class Game {
       load();
     }
     return false;
-    
+
   }
 
   // implementations of user commands:
