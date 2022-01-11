@@ -138,7 +138,7 @@ public class Game {
       } catch (IOException e) {
         e.printStackTrace();
       }
-      if (currentRoom.getRoomName().equalsIgnoreCase("the end")){
+      if (currentRoom.getRoomName().equalsIgnoreCase("the end")) {
         finished = true;
       }
     }
@@ -265,15 +265,14 @@ public class Game {
           return;
         }
         for (Item j : playerInventory.getInventory()) {
-          if (j.getKeyId().equals(i.getKeyId())) {
+          if (i.getKeyId().equals(j.getKeyId())) {
             i.setLocked(false);
             System.out.println("Unlocked the " + Game.roomMap.get(i.getAdjacentRoom()).getRoomName() + " door.");
             return;
-          } else {
-            System.out.println("You do not have the correct key for the " + Game.roomMap.get(i.getAdjacentRoom()).getRoomName() + " door.");
-            return;
           }
         }
+        System.out.println("You do not have the correct key for the " + Game.roomMap.get(i.getAdjacentRoom()).getRoomName() + " door.");
+        return;
       }
     }
     System.out.println("There is no door there!");
@@ -312,6 +311,10 @@ public class Game {
       System.out.println(item + " is not a vaild object");
       return;
     }
+    if (object.isOpen()) {
+      System.out.println(object.getName() + " is already open!");
+      return;
+    }
     if (object.isOpenable()) {
       if (object.isLocked()) {
         System.out.println("You must first unlock: " + object.getName());
@@ -322,10 +325,10 @@ public class Game {
         return;
       }
       nonNull(item).setOpen(true);
-      System.out.println("Opened " + object.getName() + "\n\nContains:");
+      System.out.println("You opened " + object.getName() + "\n\nContains:");
       object.displayInventory();
     } else
-      System.out.println("You cannot open " + object.getName());
+      System.out.println("You cannot open the " + object.getName());
   }
 
   private Item nonNull(String item) {
@@ -335,8 +338,7 @@ public class Game {
       return playerInventory.contains(item);
     for (Item i : currentRoom.getInventory()) {
       if (i.contains(item) != null) {
-        // itemName = i;
-        return i;// .contains(item);
+        return i;
       }
     }
     return null;
@@ -384,7 +386,7 @@ public class Game {
       System.out.println("Take what?");
       return;
     }
-    if (currentRoom.getInventory().size() - currentRoom.numItemsCannotMove() <= 0) {
+    if (currentRoom.getTotalInventorySize() - currentRoom.numItemsCannotMove() <= 0) {
       System.out.println("There are no items to take.");
       return;
     }
@@ -400,7 +402,7 @@ public class Game {
       ArrayList<Item> inventory = currentRoom.getInventory();
       int i = 0;
       String taken = "";
-      while (inventory.size() - currentRoom.numItemsCannotMove() > 0) {
+      while (currentRoom.getTotalInventorySize() - currentRoom.numItemsCannotMove() > 0) {
         if (inventory.get(i).isOpen()) {
           ArrayList<Item> items = inventory.get(i).getInventory();
           while (inventory.get(i).getInventory().size() > 0) {
@@ -444,7 +446,7 @@ public class Game {
     currentRoom.addItem(item);
     System.out.println("You dropped " + item.getName());
     if (command.getSecondWord().equalsIgnoreCase("Cheese")) {
-      playerInventory.addItem(currentRoom.contains("PantryMouse").contains("MouseNote"));
+      playerInventory.addItem(currentRoom.contains("Mouse").contains("Note from Mouse"));
       System.out.println("The mice take the cheese and retreat, leaving behind a note which you pick up.");
       System.out.println("The letter reads as"); // TODO incomplete
     }
@@ -489,18 +491,18 @@ public class Game {
     }
 
     if (!command.hasThirdWord()) {
-      System.out.println("Where do you want to put " + item + "?");
+      System.out.println("You must specify where to put the " + item + "");
       return;
     }
     String area = command.getThirdWord();
-    if (playerInventory.contains(area) != null) {
-      ((Inventory) playerInventory).contains(area).addItem(playerInventory.removeItem(item));
-    } else if (!currentRoom.contains(area).isOpen()) {
-      System.out.println("You must open the " + area + " first.");
-    } else if (currentRoom.contains(area) != null) {
-      currentRoom.contains(area).addItem(playerInventory.removeItem(item));
-      System.out.println("The " + command.getSecondWord() + " has been added to the " + area + ".");
-    }
+    if (nonNull(area) != null) {
+      if (nonNull(area).isOpen()) {
+        nonNull(area).addItem(playerInventory.removeItem(item));
+        System.out.println("The " + command.getSecondWord() + " has been added to the " + area + ".");
+      } else
+        System.out.println("You must open the " + nonNull(area).getName().toLowerCase() + " first.");
+    } else
+      System.out.println(area + " is not a valid placement");
   }
 
   private void consumeItem(Command command) {
@@ -519,20 +521,17 @@ public class Game {
       System.out.println(item + " is not a valid object.");
       return;
     }
+    if (!playerInventory.contains(command.getSecondWord()).isConsumable()) {
+      System.out.println("You cannot consume the " + command.getSecondWord());
+      return;
+    }
     if (command.getSecondWord().equals("rotten milk")) {
-      playerInventory.removeItem(command.getSecondWord());
       Item PantryKey = new Key("PantryKey", "Key from rotten milk", 1);
       playerInventory.addItem(PantryKey);
       System.out.println("A key has been added to your inventory");
-    } else if (!command.getSecondWord().equals("cheese") && !command.getSecondWord().equals("coffee")) {
-      if (command.getCommandWord().equals("consume"))
-        System.out.println("You cannot consume the " + command.getSecondWord());
-    } else {
-      playerInventory.removeItem(command.getSecondWord());
-      if (command.getCommandWord().equals("consume"))
-        System.out.println("You consumed the " + command.getSecondWord());
     }
-
+    playerInventory.removeItem(command.getSecondWord());
+    System.out.println("You consumed the " + command.getSecondWord());
   }
 
   private void printInventory() {
