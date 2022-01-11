@@ -1,8 +1,14 @@
 package zork;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InvalidClassException;
+import java.io.NotSerializableException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -14,6 +20,7 @@ import org.json.simple.parser.JSONParser;
 
 public class Game {
 
+  private static final String GAME_SAVE_LOCATION = "src/zork/data/game.ser";
   public static HashMap<String, Room> roomMap = new HashMap<String, Room>();
   public static HashMap<String, Item> itemMap = new HashMap<String, Item>();
 
@@ -202,11 +209,41 @@ public class Game {
       unlockDoor(command);
     } else if (commandWord.equalsIgnoreCase("read")) {
       read(command);
+    } else if (commandWord.equalsIgnoreCase("save")) {
+      save();
+    } else if (commandWord.equalsIgnoreCase("load")) {
+      load();
     }
     return false;
   }
 
   // implementations of user commands:
+
+  private void load() {
+    Save save = null;
+    try {
+      FileInputStream fileIn = new FileInputStream(GAME_SAVE_LOCATION);
+      ObjectInputStream in = new ObjectInputStream(fileIn);
+      save = (Save) in.readObject();
+      in.close();
+      fileIn.close();
+    } catch (InvalidClassException i) {
+      System.out.println("File is currupt");
+    } catch (ClassNotFoundException j) {
+      System.out.println("File is incorrect");
+    } catch (FileNotFoundException ex) {
+      System.out.println("No saved games!!");
+    } catch (IOException e) {
+      System.out.println("Can't load game");
+    }
+
+    if (save != null) {
+      roomMap = save.getRoomMap();
+      itemMap = save.getItemMap();
+      currentRoom = save.getCurrentRoom();
+      playerInventory = save.getPlayerInventory();
+    }
+  }
 
   private void read(Command command) {
     if (!command.hasSecondWord()) {
@@ -572,6 +609,21 @@ public class Game {
       currentRoom = nextRoom;
       System.out.println(currentRoom.longDescription());
       currentRoom.displayInventory();
+    }
+  }
+
+  private void save() {
+    Save save = new Save(roomMap, itemMap, currentRoom, playerInventory);
+    try {
+      FileOutputStream fileOut = new FileOutputStream(GAME_SAVE_LOCATION);
+      ObjectOutputStream out = new ObjectOutputStream(fileOut);
+      out.writeObject(save);
+      out.close();
+      fileOut.close();
+    } catch (NotSerializableException ex) {
+      System.out.println("NotSerializableException - A class that needs to be saved does not implement Serializable!");
+    } catch (IOException e) {
+      e.printStackTrace();
     }
   }
 }
