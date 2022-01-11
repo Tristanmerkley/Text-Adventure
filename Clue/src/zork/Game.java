@@ -55,6 +55,7 @@ public class Game {
     for (Object itemObj : jsonItems) {
       Item item = new Item();
       String itemName = (String) ((JSONObject) itemObj).get("name");
+      String itemAlternateName = (String) ((JSONObject) itemObj).get("alternatename");
       String itemId = (String) ((JSONObject) itemObj).get("id");
       long weight = ((JSONObject) itemObj).get("weight") != null ? (Long) ((JSONObject) itemObj).get("weight") : Integer.MAX_VALUE;
       long holdingWeight; // ! how much an item can hold in its inventory
@@ -72,6 +73,7 @@ public class Game {
       item.setConsumable(isConsumable);
       item.setDescription(itemDescription);
       item.setName(itemName);
+      item.setAlternateName(itemAlternateName);
       item.setLocked(isLocked);
       item.setOpenable(isOpenable);
       item.setWeight((int) weight);
@@ -503,7 +505,7 @@ public class Game {
     if (command.getSecondWord().equalsIgnoreCase("Cheese")) {
       playerInventory.addItem(currentRoom.contains("Mouse").contains("Note from Mouse"));
       System.out.println("The mice take the cheese and retreat, leaving behind a note which you pick up.");
-      System.out.println("The letter reads as"); // TODO incomplete
+      System.out.println("The letter reads as 'Sorting things by alphabetical order makes organizing easy'"); // TODO incomplete
     }
   }
 

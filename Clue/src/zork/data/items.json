@@ -3,6 +3,7 @@
         {
             "id": "WineBottle",
             "name": "Wine bottle",
+            "alternatename": "bottle",
             "description": "Will getting drunk help me escape faster?",
             "weight": 1,
             "startingroom": "Cellar"
@@ -17,6 +18,7 @@
         {
             "id": "BowlingPins",
             "name": "Bowling pins",
+            "alternatename": "Pins",
             "description": "There are 6 lilac bowling pins. I should spend some time winning a game.",
             "weight": 6,
             "startingroom": "BowlingAlley"
@@ -225,6 +227,7 @@
         },
          {
             "id": "Shovel",
+            "alternatename": "Digger",
             "name": "Shovel",
             "description": "A rusty shovel.",
             "weight": 5,
