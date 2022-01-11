@@ -177,7 +177,7 @@ public class Game {
    * returned, otherwise false is returned.
    */
   private boolean processCommand(Command command) { // returning true ends game
-    Scanner in = new Scanner(System.in);
+    
     if (command.isUnknown()) {
       System.out.println("I don't know what you mean...");
       return false;
@@ -193,7 +193,9 @@ public class Game {
       else
         System.out.println("\u001B[31m" + "Are you sure you want to quit? You can save your game if you want?");
         System.out.println("please enter quit again to exit" + "\u001B[0m");
+        Scanner in = new Scanner(System.in);
         String answer = in.nextLine();
+        in.close();
         if (answer.equals("yes") || answer.equals("y")){
           return true;
         } else {
@@ -225,6 +227,7 @@ public class Game {
       load();
     }
     return false;
+    
   }
 
   // implementations of user commands:
