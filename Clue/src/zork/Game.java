@@ -495,16 +495,18 @@ public class Game {
       return;
     }
     if (currentRoom.contains("bowling pins") == null) {
-      System.out.println("You bowling pins to bowl.");
+      System.out.println("You need bowling pins to bowl.");
       return;
     }
     currentRoom.addItem(playerInventory.removeItem("bowling ball"));
-    if ((int) (Math.random() * 1) == 0) { // ! change * for chance for testing
+    int bowl = (int) (Math.random() * 2) + 1;
+    if (bowl == 2) { // ! change * for chance for testing
       System.out.println("Strike!!");
       Item strikeKey = new Key("strikeKey", "Key", 1);
       playerInventory.addItem(strikeKey);
       currentRoom.removeItem("bowling pins");
     } else {
+      System.out.println("Not a strike.");
       System.out.println("Take the bowling ball to try again.");
     }
   }
