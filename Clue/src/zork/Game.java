@@ -36,7 +36,7 @@ public class Game {
     try {
       initRooms("src/zork/data/rooms.json");
       initItems("src/zork/data/items.json");
-      currentRoom = roomMap.get("Kitchen"); // ! spawn room
+      currentRoom = roomMap.get("Shed"); // ! spawn room
       playerInventory = new Inventory(300); // ! player max inventory weight
     } catch (Exception e) {
       e.printStackTrace();
@@ -283,7 +283,11 @@ public class Game {
       return;
     }
     for (Exit i : currentRoom.getExits()) {
-      if (i.getDirection().equalsIgnoreCase(command.getSecondWord())) {
+      String direction = command.getSecondWord();
+      String temp = CommandWords.dirConversions.get(command.getSecondWord());
+      if (temp != null)
+        direction = temp;
+      if (i.getDirection().equalsIgnoreCase(direction) || i.getDirection().substring(0,1).equalsIgnoreCase(direction)) {
         if (!i.isLocked()) {
           System.out.println(Game.roomMap.get(i.getAdjacentRoom()).getRoomName() + " is already unlocked.");
           return;
@@ -360,6 +364,20 @@ public class Game {
       if (item.equalsIgnoreCase("Main floor map") || item.equalsIgnoreCase("Upstairs left map") || item.equalsIgnoreCase("Upstairs right map")) {
         printMap(item);
         return;
+      }
+      if (item.equalsIgnoreCase("Hole")) {
+        if (playerInventory.contains("Shovel") != null){
+          nonNull(item).setOpen(true);
+          System.out.println("Opened " + object.getName() + "\n\nContains:");
+          object.displayInventory();
+          Item shedKey = new Key("shedKey", "Key from hole", 1);
+          playerInventory.addItem(shedKey);
+          System.out.println("A key has been added to your inventory");
+          return;
+        } else{
+          System.out.println("You need to use the shovel to open the hole.");
+          return;
+        }
       }
       nonNull(item).setOpen(true);
       System.out.println("You opened " + object.getName() + "\n\nContains:");

@@ -28,7 +28,7 @@
         },
         {
           "isLocked":false,
-          "direction":"East",
+          "direction":"West",
           "adjacentRoom":"DiningRoom"
         },
         {
@@ -50,7 +50,7 @@
         },
         {
           "isLocked": false,
-          "direction": "East",
+          "direction": "West",
           "adjacentRoom": "GrandEntry"
         }
       ]
