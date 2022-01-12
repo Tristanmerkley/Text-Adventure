@@ -28,6 +28,7 @@ public class Game {
   private Room currentRoom;
   private Inventory playerInventory;
   private boolean isUseable = false;
+  private Scanner in;
 
   /**
    * Create the game and initialise its internal map.
@@ -156,6 +157,8 @@ public class Game {
       }
     }
     System.out.println("Thank you for playing.  Good bye.");
+    if (in != null)
+      in.close();
   }
 
   /**
@@ -195,12 +198,13 @@ public class Game {
         System.out.println("Quit what?");
       else
         System.out.println("Are you sure you want to quit? You can also save your game if you want.");
-      Scanner input = new Scanner(System.in);
-      String answer = input.nextLine();
-      input.close(); // TODO closing input stream, then not saying yes messes up getCommand()
-      if (answer.equals("yes") || answer.equals("y"))
+      if (in == null)
+        in = new Scanner(System.in);
+      System.out.print("> ");
+      String answer = in.nextLine();
+      if (answer.equals("yes") || answer.equals("y")) {
         return true;
-      else
+      } else
         return false;
     } else if (commandWord.equalsIgnoreCase("eat") || commandWord.equalsIgnoreCase("drink")) {
       consumeItem(command);
@@ -344,10 +348,11 @@ public class Game {
 
 
   private void unlockSafe(Command command) {
-    Scanner in = new Scanner(System.in);
     System.out.println("What is the 4-digit code?");
+    if (in == null)
+      in = new Scanner(System.in);
+    System.out.print("> ");
     String code = in.nextLine();
-    in.close();
     if (code.equals("6531")) {
       currentRoom.contains("safe").setLocked(false);
       System.out.println("The safe is now unlocked");
@@ -581,15 +586,8 @@ public class Game {
 
   private void consumeItem(Command command) {
     if (!command.hasSecondWord()) {
-      if (command.getCommandWord().equals("eat")) {
-        System.out.println("Eat what?");
-        return;
-      }
-
-      if (command.getCommandWord().equals("drink")) {
-        System.out.println("drink what?");
-        return;
-      }
+      System.out.println(command.getCommandWord().equals("eat") ? "Eat what?" : "Drink what?");
+      return;
     }
     if (playerInventory.contains(command.getSecondWord()) == null) {
       System.out.println("You do not have a " + command.getSecondWord());
@@ -617,10 +615,7 @@ public class Game {
       System.out.println("A key has been added to your inventory");
     }
     playerInventory.removeItem(command.getSecondWord());
-    if (command.getCommandWord().equals("eat"))
-      System.out.println("You ate the " + command.getSecondWord());
-    if (command.getCommandWord().equals("drink"))
-      System.out.println("You drank the " + command.getSecondWord());
+    System.out.println(command.getCommandWord().equals("eat") ? "You ate the " + item : "You drank the " + item);
   }
 
   private void printInventory() {
