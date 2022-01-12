@@ -402,6 +402,7 @@ public class Game {
 
   /**
    * checks the current room, player inventory and items in the current room for a specified item.
+   * 
    * @param item to search for
    * @return the specified item if found, otherwise null
    */
@@ -581,15 +582,8 @@ public class Game {
 
   private void consumeItem(Command command) {
     if (!command.hasSecondWord()) {
-      if (command.getCommandWord().equals("eat")) {
-        System.out.println("Eat what?");
-        return;
-      }
-
-      if (command.getCommandWord().equals("drink")) {
-        System.out.println("drink what?");
-        return;
-      }
+      System.out.println(command.getCommandWord().equals("eat") ? "Eat what?" : "Drink what?");
+      return;
     }
     if (playerInventory.contains(command.getSecondWord()) == null) {
       System.out.println("You do not have a " + command.getSecondWord());
