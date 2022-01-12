@@ -397,6 +397,11 @@ public class Game {
       System.out.println("You cannot open the " + object.getName());
   }
 
+  /**
+   * checks the current room, player inventory and items in the current room for a specified item.
+   * @param item to search for
+   * @return the specified item if found, otherwise null
+   */
   private Item nonNull(String item) {
     if (currentRoom.contains(item) != null)
       return currentRoom.contains(item);
@@ -482,9 +487,8 @@ public class Game {
         if (remove != null) {
           playerInventory.addItem(remove);
           taken += ", " + remove.getName();
-        } else {
+        } else
           i++;
-        }
       }
       System.out.println(taken.length() == 0 ? "There are no items to take." : "You took: " + taken.replaceFirst(", ", ""));
     } else if (nonNull(command.getSecondWord()) == null) {
