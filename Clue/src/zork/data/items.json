@@ -90,7 +90,7 @@
         {
             "id": "RottenMilk",
             "name": "Rotten milk",
-            "alternatename": "forbidden Cheese",
+            "alternatename": "Milk",
             "description": "A cup of milk sits on one of the fridge shelves. The smell makes you gag, but you see something shiny through the rotten chunks.",
             "weight": 1,
             "isOpenable": true,
@@ -125,7 +125,7 @@
         {
             "id": "ToiletPaperRolls",
             "name": "Toilet paper rolls",
-            "alternatename": "toilet paper", 
+            "alternatename": "toilet paper",
             "description": "5 periwinkle toilet paper rolls are stacked in a pyramid",
             "weight": 5,
             "startingroom": "Bathroom1"
