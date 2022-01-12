@@ -61,7 +61,9 @@ public class Game {
       long holdingWeight; // ! how much an item can hold in its inventory
       boolean isLocked = ((JSONObject) itemObj).get("isLocked") != null ? (Boolean) ((JSONObject) itemObj).get("isLocked") : false;
       boolean isOpenable = ((JSONObject) itemObj).get("isOpenable") != null ? (Boolean) ((JSONObject) itemObj).get("isOpenable") : false;
-      boolean isConsumable = ((JSONObject) itemObj).get("isConsumable") != null ? (Boolean) ((JSONObject) itemObj).get("isConsumable") : false;
+      boolean isEdible = ((JSONObject) itemObj).get("isEdible") != null ? (Boolean) ((JSONObject) itemObj).get("isEdible") : false;
+      boolean isDrinkable = ((JSONObject) itemObj).get("isDrinkable") != null ? (Boolean) ((JSONObject) itemObj).get("isDrinkable") : false;
+
       if (!isOpenable)
         holdingWeight = 0;
       else
@@ -70,7 +72,8 @@ public class Game {
       String startingRoom = ((JSONObject) itemObj).get("startingroom") != null ? (String) ((JSONObject) itemObj).get("startingroom") : null;
       String startingItem = ((JSONObject) itemObj).get("startingitem") != null ? (String) ((JSONObject) itemObj).get("startingitem") : null;
 
-      item.setConsumable(isConsumable);
+      item.setEdible(isEdible);
+      item.setDrinkable(isDrinkable);
       item.setDescription(itemDescription);
       item.setName(itemName);
       item.setAlternateName(itemAlternateName);
@@ -199,7 +202,7 @@ public class Game {
         return true;
       else
         return false;
-    } else if (commandWord.equalsIgnoreCase("consume")) {
+    } else if (commandWord.equalsIgnoreCase("eat") || commandWord.equalsIgnoreCase("drink")) {
       consumeItem(command);
     } else if (commandWord.equalsIgnoreCase("inventory")) {
       printInventory();
@@ -574,8 +577,13 @@ public class Game {
 
   private void consumeItem(Command command) {
     if (!command.hasSecondWord()) {
-      if (command.getCommandWord().equals("consume")) {
-        System.out.println("Consume what?");
+      if (command.getCommandWord().equals("eat")) {
+        System.out.println("Eat what?");
+        return;
+      }
+
+      if (command.getCommandWord().equals("drink")) {
+        System.out.println("drink what?");
         return;
       }
     }
@@ -588,17 +596,27 @@ public class Game {
       System.out.println(item + " is not a valid object.");
       return;
     }
-    if (!playerInventory.contains(command.getSecondWord()).isConsumable()) {
-      System.out.println("You cannot consume the " + command.getSecondWord());
+
+    if (!playerInventory.contains(command.getSecondWord()).isEdible() && command.getCommandWord().equals("eat")) {
+      System.out.println("You cannot eat the " + command.getSecondWord());
       return;
     }
+
+    if (!playerInventory.contains(command.getSecondWord()).isDrinkable() && command.getCommandWord().equals("drink")) {
+      System.out.println("You cannot drink the " + command.getSecondWord());
+      return;
+    }
+
     if (command.getSecondWord().equals("rotten milk")) {
       Item PantryKey = new Key("PantryKey", "Key from rotten milk", 1);
       playerInventory.addItem(PantryKey);
       System.out.println("A key has been added to your inventory");
     }
     playerInventory.removeItem(command.getSecondWord());
-    System.out.println("You consumed the " + command.getSecondWord());
+    if (command.getCommandWord().equals("eat"))
+      System.out.println("You ate the " + command.getSecondWord());
+    if (command.getCommandWord().equals("drink"))
+      System.out.println("You drank the " + command.getSecondWord());
   }
 
   private void printInventory() {
