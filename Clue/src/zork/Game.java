@@ -532,6 +532,7 @@ public class Game {
     currentRoom.addItem(playerInventory.removeItem("bowling ball"));
     if ((int) (Math.random() * 1) == 0) { // ! change chance for testing (int) (Math.random() * 2) + 1;
       System.out.println("Strike!!");
+      System.out.println("You hear a lock click upstairs. ");
       Item strikeKey = new Key("strikeKey", "Key", 1);
       playerInventory.addItem(strikeKey);
       currentRoom.removeItem("bowling pins");
