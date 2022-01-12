@@ -28,12 +28,12 @@
         },
         {
           "isLocked":false,
-          "direction":"West",
+          "direction":"East",
           "adjacentRoom":"DiningRoom"
         },
         {
           "isLocked":false,
-          "direction":"West",
+          "direction":"East",
           "adjacentRoom":"Hallway1"
         }
       ]

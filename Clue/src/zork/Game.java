@@ -28,6 +28,7 @@ public class Game {
   private Room currentRoom;
   private Inventory playerInventory;
   private boolean isUseable = false;
+  private Scanner in;
 
   /**
    * Create the game and initialise its internal map.
@@ -61,7 +62,9 @@ public class Game {
       long holdingWeight; // ! how much an item can hold in its inventory
       boolean isLocked = ((JSONObject) itemObj).get("isLocked") != null ? (Boolean) ((JSONObject) itemObj).get("isLocked") : false;
       boolean isOpenable = ((JSONObject) itemObj).get("isOpenable") != null ? (Boolean) ((JSONObject) itemObj).get("isOpenable") : false;
-      boolean isConsumable = ((JSONObject) itemObj).get("isConsumable") != null ? (Boolean) ((JSONObject) itemObj).get("isConsumable") : false;
+      boolean isEdible = ((JSONObject) itemObj).get("isEdible") != null ? (Boolean) ((JSONObject) itemObj).get("isEdible") : false;
+      boolean isDrinkable = ((JSONObject) itemObj).get("isDrinkable") != null ? (Boolean) ((JSONObject) itemObj).get("isDrinkable") : false;
+
       if (!isOpenable)
         holdingWeight = 0;
       else
@@ -70,7 +73,8 @@ public class Game {
       String startingRoom = ((JSONObject) itemObj).get("startingroom") != null ? (String) ((JSONObject) itemObj).get("startingroom") : null;
       String startingItem = ((JSONObject) itemObj).get("startingitem") != null ? (String) ((JSONObject) itemObj).get("startingitem") : null;
 
-      item.setConsumable(isConsumable);
+      item.setEdible(isEdible);
+      item.setDrinkable(isDrinkable);
       item.setDescription(itemDescription);
       item.setName(itemName);
       item.setAlternateName(itemAlternateName);
@@ -149,10 +153,12 @@ public class Game {
       }
       if (currentRoom.getRoomName().equalsIgnoreCase("the end")) {
         finished = true;
+        System.out.println("\u001B[31m" + "Congratulations! You have successfully escaped the house!");
       }
     }
-    System.out.println("Congratulations! You have successfully escaped the house!");
     System.out.println("Thank you for playing.  Good bye.");
+    if (in != null)
+      in.close();
   }
 
   /**
@@ -177,7 +183,7 @@ public class Game {
    * returned, otherwise false is returned.
    */
   private boolean processCommand(Command command) { // returning true ends game
-    
+
     if (command.isUnknown()) {
       System.out.println("I don't know what you mean...");
       return false;
@@ -191,17 +197,16 @@ public class Game {
       if (command.hasSecondWord())
         System.out.println("Quit what?");
       else
-        System.out.println("\u001B[31m" + "Are you sure you want to quit? You can save your game if you want?");
-        System.out.println("please enter quit again to exit" + "\u001B[0m");
-        Scanner in = new Scanner(System.in);
-        String answer = in.nextLine();
-        in.close();
-        if (answer.equals("yes") || answer.equals("y")){
-          return true;
-        } else {
-          return false;
-        }
-    } else if (commandWord.equalsIgnoreCase("consume")) {
+        System.out.println("Are you sure you want to quit? You can also save your game if you want.");
+      if (in == null)
+        in = new Scanner(System.in);
+      System.out.print("> ");
+      String answer = in.nextLine();
+      if (answer.equals("yes") || answer.equals("y")) {
+        return true;
+      } else
+        return false;
+    } else if (commandWord.equalsIgnoreCase("eat") || commandWord.equalsIgnoreCase("drink")) {
       consumeItem(command);
     } else if (commandWord.equalsIgnoreCase("inventory")) {
       printInventory();
@@ -227,7 +232,7 @@ public class Game {
       load();
     }
     return false;
-    
+
   }
 
   // implementations of user commands:
@@ -275,6 +280,7 @@ public class Game {
     } else {
       isUseable = true;
       System.out.println("You've read the book. You can now unlock doors with basic locks using a knife.");
+      playerInventory.removeItem("book");
     }
   }
 
@@ -318,6 +324,18 @@ public class Game {
           }
           return;
         }
+        if (i.getAdjacentRoom().equals("Closet3")) {
+          Scanner in = new Scanner(System.in);
+          System.out.println("What is my favourite colour?");
+          String code = in.nextLine();
+          in.close();
+          if (code.equalsIgnoreCase("purple")) {
+            i.setLocked(false);
+            System.out.println("The closet is now unlocked");
+          } else
+            System.out.println("That is not the right code");
+         return;
+        }
         for (Item j : playerInventory.getInventory()) {
           if (i.getKeyId().equals(j.getKeyId())) {
             i.setLocked(false);
@@ -341,12 +359,12 @@ public class Game {
     }
   }
 
-
   private void unlockSafe(Command command) {
-    Scanner in = new Scanner(System.in);
     System.out.println("What is the 4-digit code?");
+    if (in == null)
+      in = new Scanner(System.in);
+    System.out.print("> ");
     String code = in.nextLine();
-    in.close();
     if (code.equals("6531")) {
       currentRoom.contains("safe").setLocked(false);
       System.out.println("The safe is now unlocked");
@@ -399,6 +417,12 @@ public class Game {
       System.out.println("You cannot open the " + object.getName());
   }
 
+  /**
+   * checks the current room, player inventory and items in the current room for a specified item.
+   * 
+   * @param item to search for
+   * @return the specified item if found, otherwise null
+   */
   private Item nonNull(String item) {
     if (currentRoom.contains(item) != null)
       return currentRoom.contains(item);
@@ -463,6 +487,7 @@ public class Game {
     if (shoe.equals("shoe")) {
       System.out.println("A peculiar coin fell out of the shoe and it has been added to your inventory");
       Item coin = new Item(1, "Peculiar Coin", false, 0);
+      coin.setDescription("This is a weird looking coin, I should find somewhere to keep this safe.");
       playerInventory.addItem(coin);
     }
 
@@ -484,9 +509,8 @@ public class Game {
         if (remove != null) {
           playerInventory.addItem(remove);
           taken += ", " + remove.getName();
-        } else {
+        } else
           i++;
-        }
       }
       System.out.println(taken.length() == 0 ? "There are no items to take." : "You took: " + taken.replaceFirst(", ", ""));
     } else if (nonNull(command.getSecondWord()) == null) {
@@ -577,10 +601,8 @@ public class Game {
 
   private void consumeItem(Command command) {
     if (!command.hasSecondWord()) {
-      if (command.getCommandWord().equals("consume")) {
-        System.out.println("Consume what?");
-        return;
-      }
+      System.out.println(command.getCommandWord().equals("eat") ? "Eat what?" : "Drink what?");
+      return;
     }
     if (playerInventory.contains(command.getSecondWord()) == null) {
       System.out.println("You do not have a " + command.getSecondWord());
@@ -591,17 +613,24 @@ public class Game {
       System.out.println(item + " is not a valid object.");
       return;
     }
-    if (!playerInventory.contains(command.getSecondWord()).isConsumable()) {
-      System.out.println("You cannot consume the " + command.getSecondWord());
+
+    if (!playerInventory.contains(command.getSecondWord()).isEdible() && command.getCommandWord().equals("eat")) {
+      System.out.println("You cannot eat the " + command.getSecondWord());
       return;
     }
+
+    if (!playerInventory.contains(command.getSecondWord()).isDrinkable() && command.getCommandWord().equals("drink")) {
+      System.out.println("You cannot drink the " + command.getSecondWord());
+      return;
+    }
+
     if (command.getSecondWord().equals("rotten milk")) {
       Item PantryKey = new Key("PantryKey", "Key from rotten milk", 1);
       playerInventory.addItem(PantryKey);
       System.out.println("A key has been added to your inventory");
     }
     playerInventory.removeItem(command.getSecondWord());
-    System.out.println("You consumed the " + command.getSecondWord());
+    System.out.println(command.getCommandWord().equals("eat") ? "You ate the " + item : "You drank the " + item);
   }
 
   private void printInventory() {
