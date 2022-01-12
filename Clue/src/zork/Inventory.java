@@ -32,7 +32,7 @@ public class Inventory implements java.io.Serializable {
 
   public Item contains(String itemName) {
     for (int i = 0; i < items.size(); i++) {
-      if (items.get(i).getName().toLowerCase().equals(itemName.toLowerCase()))
+      if (items.get(i).getName().toLowerCase().equals(itemName.toLowerCase()) || (items.get(i).getAlternateName() != null && items.get(i).getAlternateName().toLowerCase().equals(itemName.toLowerCase())) )
         return items.get(i);
     }
     return null;

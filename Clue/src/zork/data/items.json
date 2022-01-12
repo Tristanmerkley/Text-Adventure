@@ -3,9 +3,20 @@
         {
             "id": "WineBottle",
             "name": "Wine bottle",
+            "alternatename": "bottle",
             "description": "Will getting drunk help me escape faster?",
             "weight": 1,
+            "isOpenable": true,
+            "holdingWeight": 1,
             "startingroom": "Cellar"
+        },
+         {
+            "id": "Wine",
+            "name": "Wine",
+            "description": "Red wine, looks a little moldy, I don't think it will taste good ",
+            "weight": 1,
+            "startingitem": "WineBottle",
+            "isDrinkable": true
         },
         {
             "id": "BowlingBall",
@@ -17,6 +28,7 @@
         {
             "id": "BowlingPins",
             "name": "Bowling pins",
+            "alternatename": "Pins",
             "description": "There are 6 lilac bowling pins. I should spend some time winning a game.",
             "weight": 6,
             "startingroom": "BowlingAlley"
@@ -54,6 +66,7 @@
          {
             "id": "Knife",
             "name": "Knife",
+            "alternatename": "stabby",
             "description": "This knife looks oddly thin.",
             "weight": 2,
             "startingroom": "Kitchen"
@@ -64,7 +77,7 @@
             "description": "A cup of coffee, oddly, it's still warm.",
             "weight": 1,
             "startingroom": "Kitchen",
-            "isConsumable": true
+            "isDrinkable": true
         },
           {
             "id": "Fridge",
@@ -77,12 +90,13 @@
         {
             "id": "RottenMilk",
             "name": "Rotten milk",
+            "alternatename": "forbidden Cheese",
             "description": "A cup of milk sits on one of the fridge shelves. The smell makes you gag, but you see something shiny through the rotten chunks.",
             "weight": 1,
             "isOpenable": true,
             "holdingWeight": 1,
             "startingitem": "Fridge",
-            "isConsumable": true
+            "isDrinkable": true
         },
         {
             "id": "Cheese",
@@ -90,7 +104,7 @@
             "description": "A block of cheese sits by the milk. Who do you think this cheese is meant for?",
             "weight": 1,
             "startingitem": "Fridge",
-            "isConsumable": true
+            "isEdible": true
         },
          {
             "id": "PantryMouse",
@@ -103,6 +117,7 @@
         {
             "id": "MouseNote",
             "name": "Note from Mouse",
+            "alternatename": "note",
             "description": "A note given to you by the Mouse, it reads [don't forget your abc's].",
             "weight": 1,
             "startingitem": "PantryMouse"
@@ -110,6 +125,7 @@
         {
             "id": "ToiletPaperRolls",
             "name": "Toilet paper rolls",
+            "alternatename": "toilet paper", 
             "description": "5 periwinkle toilet paper rolls are stacked in a pyramid",
             "weight": 5,
             "startingroom": "Bathroom1"
@@ -125,6 +141,7 @@
         {
             "id": "BackDoor/PatioDoorKey",
             "name": "Key from couch",
+            "alternatename": "key",
             "description": "Another key with an engraving of a flower on it, does it open more doors?",
             "weight": 1,
             "startingitem": "Couch"
@@ -148,6 +165,7 @@
         {
             "id": "PeculiarCoin",
             "name": "Peculiar coin",
+            "alternatename": "coin",
             "description": "A small gold coin is found in the right shoe, do I have to start collecting money now?",
             "weight": 1,
             "startingitem": "Shoe"
@@ -172,6 +190,7 @@
         {
             "id": "Floor0Map",
             "name": "Main floor map",
+            "alternatename": "map",
             "description": "A map of floor 0, this will be useful",
             "weight": 2,
             "isOpenable": true,
@@ -180,6 +199,7 @@
         {
             "id": "Floor1Map1/2",
             "name": "Upstairs right map",
+            "alternatename": "map",
             "description": "East half of the floor1 map",
             "weight": 1,
             "isOpenable": true,
@@ -195,6 +215,7 @@
          {
             "id": "Floor1Map2/2",
             "name": "Upstairs left map",
+            "alternatename": "map",
             "description": "West half of the floor1 map",
             "weight": 1,
             "isOpenable": true,
@@ -212,6 +233,7 @@
         {
             "id": "FrontDoorKey",
             "name": "Key from attic",
+            "alternatename": "key",
             "description": "A shiny key that has a design of an ornate door on it.",
             "weight": 1,
             "startingiroom": "Attic"
@@ -219,12 +241,14 @@
         {
             "id": "NoteOnPatioTable",
             "name": "Patio table note",
+            "alternatename": "note",
             "description": "A note on the patio table that reads [mow the lawn].",
             "weight": 1,
             "startingroom": "Patio"
         },
          {
             "id": "Shovel",
+            "alternatename": "Digger",
             "name": "Shovel",
             "description": "A rusty shovel.",
             "weight": 5,
@@ -241,6 +265,7 @@
          {
             "id": "GateKey",
             "name": "Key from hole",
+            "alternatename": "key",
             "description": "A key with the symbol of the gate on it",
             "weight": 1,
             "startingitem": "Hole"
