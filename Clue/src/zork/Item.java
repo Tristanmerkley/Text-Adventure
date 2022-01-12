@@ -7,7 +7,8 @@ public class Item extends OpenableObject implements java.io.Serializable {
   private String name;
   private String alternateName;
   private boolean isOpenable;
-  private boolean isConsumable;
+  private boolean isEdible;
+  private boolean isDrinkable;
   private Inventory inventory;
   private String description;
 
@@ -68,12 +69,20 @@ public class Item extends OpenableObject implements java.io.Serializable {
     this.isOpenable = isOpenable;
   }
 
-  public boolean isConsumable() {
-    return isConsumable;
+  public boolean isEdible() {
+    return isEdible;
   }
 
-  public void setConsumable(boolean isConsumable) {
-    this.isConsumable = isConsumable;
+  public void setEdible(boolean isEdible) {
+    this.isEdible = isEdible;
+  }
+
+  public boolean isDrinkable() {
+    return isDrinkable;
+  }
+
+  public void setDrinkable(boolean isDrinkable) {
+    this.isDrinkable = isDrinkable;
   }
 
   public void setDescription(String description) {
