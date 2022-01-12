@@ -280,6 +280,7 @@ public class Game {
     } else {
       isUseable = true;
       System.out.println("You've read the book. You can now unlock doors with basic locks using a knife.");
+      playerInventory.removeItem("book");
     }
   }
 
@@ -323,6 +324,18 @@ public class Game {
           }
           return;
         }
+        if (i.getAdjacentRoom().equals("Closet3")) {
+          Scanner in = new Scanner(System.in);
+          System.out.println("What is my favourite colour?");
+          String code = in.nextLine();
+          in.close();
+          if (code.equalsIgnoreCase("purple")) {
+            i.setLocked(false);
+            System.out.println("The closet is now unlocked");
+          } else
+            System.out.println("That is not the right code");
+         return;
+        }
         for (Item j : playerInventory.getInventory()) {
           if (i.getKeyId().equals(j.getKeyId())) {
             i.setLocked(false);
@@ -345,7 +358,6 @@ public class Game {
       System.out.println("The desk has been unlocked");
     }
   }
-
 
   private void unlockSafe(Command command) {
     System.out.println("What is the 4-digit code?");
@@ -407,6 +419,7 @@ public class Game {
 
   /**
    * checks the current room, player inventory and items in the current room for a specified item.
+   * 
    * @param item to search for
    * @return the specified item if found, otherwise null
    */
@@ -474,6 +487,7 @@ public class Game {
     if (shoe.equals("shoe")) {
       System.out.println("A peculiar coin fell out of the shoe and it has been added to your inventory");
       Item coin = new Item(1, "Peculiar Coin", false, 0);
+      coin.setDescription("This is a weird looking coin, I should find somewhere to keep this safe.");
       playerInventory.addItem(coin);
     }
 
