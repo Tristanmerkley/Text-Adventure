@@ -713,6 +713,11 @@ public class Game {
       out.writeObject(save);
       out.close();
       fileOut.close();
+      welcome.slowtext("Saving current game", 9);
+      welcome.slowtext("....................", 9);
+      welcome.slowtext(".....", 500);
+      welcome.slowtext("..", 750);
+      System.out.println("\n\nGame saved!");
     } catch (NotSerializableException ex) {
       System.out.println("NotSerializableException - A class that needs to be saved does not implement Serializable!");
     } catch (IOException e) {
