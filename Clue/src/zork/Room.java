@@ -122,7 +122,7 @@ public class Room implements java.io.Serializable {
       System.out.println("Contains:");
     for (Item i : inventory.getInventory()) {
       System.out.print(i.getName() + " - " + i.getDescription());
-      if (i.isOpen()) {
+      if (i.isOpen() && i.getInventory().size() > 0) {
         String res = "";
         System.out.print("\n        " + "Contains: ");//! formatting imcomplete
         ArrayList<Item> items = i.getInventory();
