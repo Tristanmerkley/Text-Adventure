@@ -22,12 +22,12 @@ import org.json.simple.parser.JSONParser;
 public class Game {
 
   private static final String GAME_SAVE_LOCATION = "src/zork/data/game.ser";
-  private static final Double MAX_ALLOWED_TIME = 500000.0;
+  public static final Double MAX_ALLOWED_TIME = 1200.0; // amount of time before losing in minutes
   public static HashMap<String, Room> roomMap = new HashMap<String, Room>();
   public static HashMap<String, Item> itemMap = new HashMap<String, Item>();
 
-  private Double timeElapsed = 0.0;
-  private Long startTime, endTime;
+  public static Double timeElapsed = 0.0;
+  public static Long startTime, endTime;
   private Parser parser;
   private Room currentRoom;
   private Inventory playerInventory;
@@ -206,7 +206,7 @@ public class Game {
       if (command.hasSecondWord())
         System.out.println("Quit what?");
       else
-        System.out.println("Are you sure you want to quit? You can also save your game if you want.");
+        System.out.println("\033[33;5m Are you sure you want to quit? You can also save your game if you want. \u001B[0m");
       if (in == null)
         in = new Scanner(System.in);
       System.out.print("> ");
@@ -247,6 +247,9 @@ public class Game {
 
   // implementations of user commands:
 
+  /**
+   * Prints out the total run time of the current game
+   */
   private void printTime() {
     endTime = new Date().getTime();
     System.out.printf("%5.2f%n", timeElapsed + (endTime - startTime) / 1000.0);
