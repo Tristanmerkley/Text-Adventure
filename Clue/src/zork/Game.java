@@ -12,6 +12,7 @@ import java.io.ObjectOutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Scanner;
 import org.json.simple.JSONArray;
@@ -21,9 +22,12 @@ import org.json.simple.parser.JSONParser;
 public class Game {
 
   private static final String GAME_SAVE_LOCATION = "src/zork/data/game.ser";
+  private static final Double MAX_ALLOWED_TIME = 500000.0;
   public static HashMap<String, Room> roomMap = new HashMap<String, Room>();
   public static HashMap<String, Item> itemMap = new HashMap<String, Item>();
 
+  private Double timeElapsed = 0.0;
+  private Long startTime, endTime;
   private Parser parser;
   private Room currentRoom;
   private Inventory playerInventory;
@@ -146,8 +150,14 @@ public class Game {
     while (!finished) {
       Command command;
       try {
+        startTime = new Date().getTime();
         command = parser.getCommand();
         finished = processCommand(command);
+        endTime = new Date().getTime();
+        timeElapsed += (endTime - startTime) / 1000.0;
+        if (timeElapsed > MAX_ALLOWED_TIME) {
+          // lost
+        }
       } catch (IOException e) {
         e.printStackTrace();
       }
@@ -183,7 +193,6 @@ public class Game {
    * returned, otherwise false is returned.
    */
   private boolean processCommand(Command command) { // returning true ends game
-
     if (command.isUnknown()) {
       System.out.println("I don't know what you mean...");
       return false;
@@ -230,12 +239,17 @@ public class Game {
       save();
     } else if (commandWord.equalsIgnoreCase("load")) {
       load();
+    } else if (commandWord.equalsIgnoreCase("time")) {
+      time();
     }
     return false;
-
   }
 
   // implementations of user commands:
+
+  private void time() {
+    System.out.printf("%5.2f%n", timeElapsed);
+  }
 
   private void load() {
     Save save = null;
@@ -688,7 +702,7 @@ public class Game {
   }
 
   private void save() {
-    Save save = new Save(roomMap, itemMap, currentRoom, playerInventory);
+    Save save = new Save(roomMap, itemMap, currentRoom, playerInventory, timeElapsed);
     try {
       FileOutputStream fileOut = new FileOutputStream(GAME_SAVE_LOCATION);
       ObjectOutputStream out = new ObjectOutputStream(fileOut);
