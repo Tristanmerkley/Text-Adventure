@@ -37,7 +37,7 @@ public class Game {
     try {
       initRooms("src/zork/data/rooms.json");
       initItems("src/zork/data/items.json");
-      currentRoom = roomMap.get("Kitchen"); // ! spawn room
+      currentRoom = roomMap.get("Theatre"); // ! spawn room
       playerInventory = new Inventory(300); // ! player max inventory weight
     } catch (Exception e) {
       e.printStackTrace();
@@ -214,7 +214,7 @@ public class Game {
       takeItem(command);
     } else if (commandWord.equalsIgnoreCase("drop")) {
       dropItem(command);
-    } else if (commandWord.equalsIgnoreCase("give") || commandWord.equalsIgnoreCase("place")) { // give cheese to mouse
+    } else if (commandWord.equalsIgnoreCase("place")) { // give cheese to mouse
       placeItem(command);
     } else if (commandWord.equalsIgnoreCase("look")) {
       lookAround();
@@ -293,7 +293,7 @@ public class Game {
       unlockSafe(command);
       return;
     }
-    if (command.getSecondWord().equalsIgnoreCase("desk")) {
+    if (command.getSecondWord().equalsIgnoreCase("desk") && currentRoom.contains("desk").isLocked()) {
       unlockDesk(command); // TODO
       return;
     }
@@ -314,7 +314,7 @@ public class Game {
         if (i.getAdjacentRoom().equals("Library") || i.getAdjacentRoom().equals("Maze1")) {
           if ((playerInventory.contains("Knife") != null) && isUseable) {
             i.setLocked(false);
-            System.out.println("Unlocked the " + Game.roomMap.get(i.getAdjacentRoom()).getRoomName() + " door.");
+            System.out.println("You picked the " + Game.roomMap.get(i.getAdjacentRoom()).getRoomName() + " door.");
           } else if (!isUseable) {
             System.out.println("Read a special book to be able to pick basic locks.");
           } else if (playerInventory.contains("Knife") == null) {
@@ -325,16 +325,17 @@ public class Game {
           return;
         }
         if (i.getAdjacentRoom().equals("Closet3")) {
-          Scanner in = new Scanner(System.in);
           System.out.println("What is my favourite colour?");
+          if (in == null)
+            in = new Scanner(System.in);
+          System.out.print("> ");
           String code = in.nextLine();
-          in.close();
           if (code.equalsIgnoreCase("purple")) {
             i.setLocked(false);
             System.out.println("The closet is now unlocked");
           } else
             System.out.println("That is not the right code");
-         return;
+          return;
         }
         for (Item j : playerInventory.getInventory()) {
           if (i.getKeyId().equals(j.getKeyId())) {
@@ -351,7 +352,7 @@ public class Game {
   }
 
   private void unlockDesk(Command command) {
-    if (currentRoom.contains("Piggy Bank").contains("peculiar coin").getName().equals("peculair coin")) {
+    if (currentRoom.contains("Piggy bank").contains("Peculiar coin") == null) {
       System.out.println("Is there a coin in the piggy bank yet?");
     } else {
       currentRoom.contains("Desk").setLocked(false);
@@ -365,7 +366,7 @@ public class Game {
       in = new Scanner(System.in);
     System.out.print("> ");
     String code = in.nextLine();
-    if (code.equals("6531")) {
+    if (code.equals("6351")) {
       currentRoom.contains("safe").setLocked(false);
       System.out.println("The safe is now unlocked");
     } else
@@ -411,7 +412,7 @@ public class Game {
         }
       }
       nonNull(item).setOpen(true);
-      System.out.println("You opened " + object.getName() + "\n\nContains:");
+      System.out.println("You opened the " + object.getName() + "\n\nContains:");
       object.displayInventory();
     } else
       System.out.println("You cannot open the " + object.getName());
@@ -419,7 +420,7 @@ public class Game {
 
   /**
    * checks the current room, player inventory and items in the current room for a specified item.
-   * 
+   *
    * @param item to search for
    * @return the specified item if found, otherwise null
    */
@@ -520,7 +521,7 @@ public class Game {
         playerInventory.addItem(nonNull(command.getSecondWord()).removeItem(command.getSecondWord()));
       else
         playerInventory.addItem(currentRoom.removeItem(command.getSecondWord()));
-      System.out.println("You took: " + command.getSecondWord());
+      System.out.println("You took the " + playerInventory.contains(command.getSecondWord()));
     }
   }
 
@@ -536,11 +537,12 @@ public class Game {
 
     Item item = playerInventory.removeItem(command.getSecondWord());
     currentRoom.addItem(item);
-    System.out.println("You dropped " + item.getName());
+    System.out.println("You dropped the " + item.getName());
     if (command.getSecondWord().equalsIgnoreCase("Cheese")) {
       playerInventory.addItem(currentRoom.contains("Mouse").contains("Note from Mouse"));
       System.out.println("The mice take the cheese and retreat, leaving behind a note which you pick up.");
-      System.out.println("The letter reads as 'Sorting things by alphabetical order makes organizing easy'"); // TODO incomplete
+      System.out.println("The letter reads as follows -- 'Sorting things by alphabetical order makes organizing easy'");
+      currentRoom.removeItem("Cheese");
     }
   }
 
@@ -615,22 +617,21 @@ public class Game {
     }
 
     if (!playerInventory.contains(command.getSecondWord()).isEdible() && command.getCommandWord().equals("eat")) {
-      System.out.println("You cannot eat the " + command.getSecondWord());
+      System.out.println("You cannot eat the " + playerInventory.contains(command.getSecondWord()));
       return;
     }
 
     if (!playerInventory.contains(command.getSecondWord()).isDrinkable() && command.getCommandWord().equals("drink")) {
-      System.out.println("You cannot drink the " + command.getSecondWord());
+      System.out.println("You cannot drink the " + playerInventory.contains(command.getSecondWord()));
       return;
     }
-
-    if (command.getSecondWord().equals("rotten milk")) {
+    item = playerInventory.removeItem(command.getSecondWord()).getName();
+    System.out.println(command.getCommandWord().equals("eat") ? "You ate the " + item : "You drank the " + item);
+    if (item.equalsIgnoreCase("Rotten milk")) {
       Item PantryKey = new Key("PantryKey", "Key from rotten milk", 1);
       playerInventory.addItem(PantryKey);
       System.out.println("A key has been added to your inventory");
     }
-    playerInventory.removeItem(command.getSecondWord());
-    System.out.println(command.getCommandWord().equals("eat") ? "You ate the " + item : "You drank the " + item);
   }
 
   private void printInventory() {
