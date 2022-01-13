@@ -290,11 +290,23 @@ public class Game {
       return;
     }
     if (command.getSecondWord().equalsIgnoreCase("safe")) {
-      unlockSafe(command);
+      if (currentRoom.contains("safe") != null) {
+        if (currentRoom.contains("safe").isLocked())
+          unlockSafe(command);
+        else
+          System.out.println("The safe is already unlocked!");
+      } else
+        System.out.println("There is no safe in the current room!");
       return;
     }
     if (command.getSecondWord().equalsIgnoreCase("desk") && currentRoom.contains("desk").isLocked()) {
-      unlockDesk(command); // TODO
+      if (currentRoom.contains("desk") != null) {
+        if (currentRoom.contains("desk").isLocked())
+          unlockDesk(command); // TODO
+        else
+          System.out.println("The desk is already unlocked!");
+      } else
+        System.out.println("There is no desk in the current room!");
       return;
     }
     if (!command.isDirection(command.getSecondWord())) {
