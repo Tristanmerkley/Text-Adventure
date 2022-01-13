@@ -240,15 +240,16 @@ public class Game {
     } else if (commandWord.equalsIgnoreCase("load")) {
       load();
     } else if (commandWord.equalsIgnoreCase("time")) {
-      time();
+      printTime();
     }
     return false;
   }
 
   // implementations of user commands:
 
-  private void time() {
-    System.out.printf("%5.2f%n", timeElapsed);
+  private void printTime() {
+    endTime = new Date().getTime();
+    System.out.printf("%5.2f%n", timeElapsed + (endTime - startTime) / 1000.0);
   }
 
   private void load() {
