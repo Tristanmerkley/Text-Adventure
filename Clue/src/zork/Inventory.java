@@ -32,7 +32,7 @@ public class Inventory implements java.io.Serializable {
 
   public Item contains(String itemName) {
     for (int i = 0; i < items.size(); i++) {
-      if (items.get(i).getName().toLowerCase().equals(itemName.toLowerCase()) || (items.get(i).getAlternateName() != null && items.get(i).getAlternateName().toLowerCase().equals(itemName.toLowerCase())) )
+      if (items.get(i).getName().toLowerCase().equals(itemName.toLowerCase()) || (items.get(i).getAlternateName() != null && items.get(i).getAlternateName().toLowerCase().equals(itemName.toLowerCase())))
         return items.get(i);
     }
     return null;
@@ -41,7 +41,7 @@ public class Inventory implements java.io.Serializable {
   public Item removeItem(String itemName) {
     Item item = contains(itemName);
     if (item.getWeight() == Integer.MAX_VALUE) {
-      System.out.println("You cannot take " + item.getName());
+      System.out.println("You cannot take the " + item.getName());
       return null;
     }
     items.remove(item);
