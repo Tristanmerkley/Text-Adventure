@@ -3,7 +3,7 @@ package zork;
 /**
  * Exit
  */
-public class Exit extends OpenableObject implements java.io.Serializable {
+public class Exit extends OpenableObject {
   private String direction;
   private String adjacentRoom;
 

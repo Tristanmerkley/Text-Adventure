@@ -2,7 +2,7 @@ package zork;
 
 import java.util.ArrayList;
 
-public class Item extends OpenableObject implements java.io.Serializable {
+public class Item extends OpenableObject {
   private int weight;
   private String name;
   private String alternateName;

@@ -1,6 +1,6 @@
 package zork;
 
-public class OpenableObject {
+public class OpenableObject implements java.io.Serializable {
   private Boolean isLocked;
   private String keyId;
   private Boolean isOpen;
