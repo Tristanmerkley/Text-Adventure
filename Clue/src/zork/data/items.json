@@ -21,6 +21,7 @@
         {
             "id": "BowlingBall",
             "name": "Bowling ball",
+            "alternatename": "Ball",
             "description": "I know I'm on a time limit here, but I wonder if I can get a strike.",
             "weight": 3,
             "startingroom": "BowlingAlley"
@@ -52,6 +53,7 @@
         {
             "id": "BalconyKey",
             "name": "Key from safe",
+            "alternatename": "Safe key",
             "description": "A key with a cloud on it.",
             "weight": 1,
             "startingitem": "Safe"
@@ -117,7 +119,7 @@
         {
             "id": "MouseNote",
             "name": "Note from Mouse",
-            "alternatename": "note",
+            "alternatename": "Note",
             "description": "A note given to you by the Mouse, it reads [don't forget your abc's].",
             "weight": 1,
             "startingitem": "PantryMouse"
@@ -125,7 +127,7 @@
         {
             "id": "ToiletPaperRolls",
             "name": "Toilet paper rolls",
-            "alternatename": "toilet paper",
+            "alternatename": "Tp",
             "description": "5 periwinkle toilet paper rolls are stacked in a pyramid",
             "weight": 5,
             "startingroom": "Bathroom1"
@@ -141,7 +143,7 @@
         {
             "id": "BackDoor/PatioDoorKey",
             "name": "Key from couch",
-            "alternatename": "key",
+            "alternatename": "Couch Key",
             "description": "Another key with an engraving of a flower on it, does it open more doors?",
             "weight": 1,
             "startingitem": "Couch"
@@ -151,7 +153,7 @@
             "name": "Fireplace",
             "description": "The fireplace is lit and doesn't seem like dying out anytime soon.",
             "startingroom": "LivingRoom",
-            "isOpenable": true
+            "isOpenable": false
         },
         {
             "id": "Shoe",
@@ -165,7 +167,7 @@
         {
             "id": "PeculiarCoin",
             "name": "Peculiar coin",
-            "alternatename": "coin",
+            "alternatename": "Coin",
             "description": "A small gold coin is found in the right shoe, do I have to start collecting money now?",
             "weight": 1,
             "startingitem": "Shoe"
@@ -181,6 +183,7 @@
         {
             "id": "PiggyBank",
             "name": "Piggy bank",
+            "alternatename": "Bank",
             "description": "A pink piggy bank with a slot to drop coins in, now I have a spot to place my coin.",
             "weight": 6,
             "startingroom": "Office1",
@@ -190,7 +193,7 @@
         {
             "id": "Floor0Map",
             "name": "Main floor map",
-            "alternatename": "map",
+            "alternatename": "M map",
             "description": "A map of floor 0, this will be useful",
             "weight": 2,
             "isOpenable": true,
@@ -199,7 +202,7 @@
         {
             "id": "Floor1Map1/2",
             "name": "Upstairs right map",
-            "alternatename": "map",
+            "alternatename": "UR Map",
             "description": "East half of the floor1 map",
             "weight": 1,
             "isOpenable": true,
@@ -215,7 +218,7 @@
          {
             "id": "Floor1Map2/2",
             "name": "Upstairs left map",
-            "alternatename": "map",
+            "alternatename": "UL Map",
             "description": "West half of the floor1 map",
             "weight": 1,
             "isOpenable": true,
@@ -224,8 +227,8 @@
         {
             "id": "LooseFloorBoard",
             "name": "Floor board",
+            "alternatename": "Board",
             "description": "A thinner piece of floorboard which looks out of place.",
-            "weight": 2,
             "isOpenable": true,
             "holdingWeight": 1,
             "startingroom": "Attic"
@@ -233,22 +236,21 @@
         {
             "id": "FrontDoorKey",
             "name": "Key from attic",
-            "alternatename": "key",
+            "alternatename": "Attic Key",
             "description": "A shiny key that has a design of an ornate door on it.",
             "weight": 1,
-            "startingiroom": "Attic"
+            "startingitem": "LooseFloorBoard"
         },
         {
             "id": "NoteOnPatioTable",
             "name": "Patio table note",
-            "alternatename": "note",
+            "alternatename": "Note",
             "description": "A note on the patio table that reads [mow the lawn].",
             "weight": 1,
             "startingroom": "Patio"
         },
          {
             "id": "Shovel",
-            "alternatename": "Digger",
             "name": "Shovel",
             "description": "A rusty shovel.",
             "weight": 5,
@@ -265,7 +267,7 @@
          {
             "id": "GateKey",
             "name": "Key from hole",
-            "alternatename": "key",
+            "alternatename": "Hole key",
             "description": "A key with the symbol of the gate on it",
             "weight": 1,
             "startingitem": "Hole"
