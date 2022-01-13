@@ -33,7 +33,7 @@
         },
         {
           "isLocked":false,
-          "direction":"East",
+          "direction":"West",
           "adjacentRoom":"Hallway1"
         }
       ]
@@ -676,13 +676,13 @@
       "description":"You are outside. Weeds grow through the driveway tiles, and vines grow up the house.",
       "exits":[
         {
-          "isLocked":true,
+          "isLocked": true,
           "direction":"North",
           "adjacentRoom":"TheEnd",
           "keyId":"shedKey"
         },
         {
-          "isLocked":false,
+          "isLocked": false,
           "direction":"South",
           "adjacentRoom":"GrandEntry"
         }
