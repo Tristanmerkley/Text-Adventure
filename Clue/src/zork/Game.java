@@ -302,6 +302,11 @@ public class Game {
     }
   }
 
+  /**
+   * unlocks a door using the direction that is inputed. Special cases include, safe, desk, closet.
+   * 
+   * @param command
+   */
   private void unlockDoor(Command command) {
     if (!command.hasSecondWord()) {
       System.out.println("Which direction is the door you want to unlock?");
@@ -381,6 +386,11 @@ public class Game {
     System.out.println("There is no door there!");
   }
 
+  /**
+   * unlocks desk if piggy bank has peculiar coin in its inventory
+   * 
+   * @param command
+   */
   private void unlockDesk(Command command) {
     if (currentRoom.contains("Piggy bank").contains("Peculiar coin") == null) {
       System.out.println("Is there a coin in the piggy bank yet?");
@@ -390,6 +400,11 @@ public class Game {
     }
   }
 
+  /**
+   * unlocks safe if the correct code is input
+   * 
+   * @param command
+   */
   private void unlockSafe(Command command) {
     System.out.println("What is the 4-digit code?");
     if (in == null)
@@ -402,6 +417,7 @@ public class Game {
     } else
       System.out.println("That is not the right code");
   }
+
 
   private void openObject(Command command) {
     String item = command.getSecondWord();
@@ -499,6 +515,9 @@ public class Game {
 
   }
 
+  /**
+   * displays description and inventory of current room
+   */
   private void lookAround() {
     System.out.println(currentRoom.longDescription());
     currentRoom.displayInventory();
@@ -555,6 +574,12 @@ public class Game {
     }
   }
 
+  /**
+   * drops item into the current room. has a special case for when item is dropped into the same room
+   * the mouse is in.
+   * 
+   * @param command
+   */
   private void dropItem(Command command) {
     if (!command.hasSecondWord()) {
       System.out.println("Drop what?");
@@ -576,6 +601,11 @@ public class Game {
     }
   }
 
+  /**
+   * if player inventory contains bowling ball, the bowling ball will be dropped and there is a 50%
+   * chance of getting a strike. if a strike occurs, the player will get a key that unlocks basement
+   * door that leads to grand entry room.
+   */
   private void bowling() {
     if (playerInventory.contains("bowling ball") == null) {
       System.out.println("You need a bowling ball, try to take one.");
@@ -632,6 +662,12 @@ public class Game {
       System.out.println(area + " is not a valid placement");
   }
 
+  /**
+   * will either eat or drink an item depending on its attributes. special case for rotten milk, a key
+   * will be added to player inventory once milk has been drunk.
+   * 
+   * @param command
+   */
   private void consumeItem(Command command) {
     if (!command.hasSecondWord()) {
       System.out.println(command.getCommandWord().equals("eat") ? "Eat what?" : "Drink what?");
@@ -665,6 +701,9 @@ public class Game {
     }
   }
 
+  /**
+   * prints player inventory
+   */
   private void printInventory() {
     System.out.println("Player Inventory :");
     playerInventory.displayInventory();
