@@ -22,7 +22,7 @@ import org.json.simple.parser.JSONParser;
 public class Game {
 
   private static final String GAME_SAVE_LOCATION = "src/zork/data/game.ser";
-  public static final Double MAX_ALLOWED_TIME = 1200.0; // amount of time before losing in minutes
+  public static final Double MAX_ALLOWED_TIME = 1440.0; // amount of time before losing in seconds
   public static HashMap<String, Room> roomMap = new HashMap<String, Room>();
   public static HashMap<String, Item> itemMap = new HashMap<String, Item>();
 
