@@ -211,10 +211,10 @@ public class Game {
         in = new Scanner(System.in);
       System.out.print("> ");
       String answer = in.nextLine();
-      if (answer.equals("yes") || answer.equals("y")) {
+      if (answer.equals("yes") || answer.equals("y"))
         return true;
-      } else
-        return false;
+      System.out.println("Quit aborted");
+      return false;
     } else if (commandWord.equalsIgnoreCase("eat") || commandWord.equalsIgnoreCase("drink")) {
       consumeItem(command);
     } else if (commandWord.equalsIgnoreCase("inventory")) {
@@ -229,7 +229,7 @@ public class Game {
       lookAround();
     } else if (commandWord.equalsIgnoreCase("bowl")) {
       bowling();
-    } else if (commandWord.equalsIgnoreCase("open")) {
+    } else if (commandWord.equalsIgnoreCase("open") || commandWord.equalsIgnoreCase("dig")) {
       openObject(command);
     } else if (commandWord.equalsIgnoreCase("unlock")) {
       unlockDoor(command);
@@ -241,8 +241,6 @@ public class Game {
       load();
     } else if (commandWord.equalsIgnoreCase("time")) {
       printTime();
-    } else if (commandWord.equalsIgnoreCase("dig")) {
-      openObject(command);
     }
     return false;
   }
@@ -256,6 +254,10 @@ public class Game {
     endTime = new Date().getTime();
     System.out.printf("%5.2f%n", timeElapsed + (endTime - startTime) / 1000.0);
   }
+
+  /**
+   * The load function is required to load a previously saved game file
+   */
 
   private void load() {
     Save save = null;
@@ -283,6 +285,11 @@ public class Game {
     }
   }
 
+  /**
+   * This method is required for reading the book on locking picking
+   * 
+   * @param command - the command parameter is the command that the user types after being processed by the parser
+   */
   private void read(Command command) {
     if (!command.hasSecondWord()) {
       System.out.println("What do you want to read?");
@@ -306,7 +313,7 @@ public class Game {
 
   /**
    * unlocks a door using the direction that is inputed. Special cases include, safe, desk, closet.
-   * 
+   *
    * @param command
    */
   private void unlockDoor(Command command) {
@@ -390,7 +397,7 @@ public class Game {
 
   /**
    * unlocks desk if piggy bank has peculiar coin in its inventory
-   * 
+   *
    * @param command
    */
   private void unlockDesk(Command command) {
@@ -404,7 +411,7 @@ public class Game {
 
   /**
    * unlocks safe if the correct code is input
-   * 
+   *
    * @param command
    */
   private void unlockSafe(Command command) {
@@ -420,7 +427,11 @@ public class Game {
       System.out.println("That is not the right code");
   }
 
-
+  /**
+   * The openObject funtion is required to be able to open up an object so that you can take them with the take command
+   * 
+   * @param command 
+   */
   private void openObject(Command command) {
     String item = command.getSecondWord();
     if (!command.hasSecondWord()) {
@@ -485,6 +496,11 @@ public class Game {
     }
     return null;
   }
+
+  /**
+   * figures out which map is supose to be shown then prints out the corresponding map
+   * @param map
+   */
 
   private void printMap(String map) {
     if (map.equalsIgnoreCase("Main floor map")) {
@@ -580,7 +596,7 @@ public class Game {
   /**
    * drops item into the current room. has a special case for when item is dropped into the same room
    * the mouse is in.
-   * 
+   *
    * @param command
    */
   private void dropItem(Command command) {
@@ -668,7 +684,7 @@ public class Game {
   /**
    * will either eat or drink an item depending on its attributes. special case for rotten milk, a key
    * will be added to player inventory once milk has been drunk.
-   * 
+   *
    * @param command
    */
   private void consumeItem(Command command) {
