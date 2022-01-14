@@ -255,6 +255,10 @@ public class Game {
     System.out.printf("%5.2f%n", timeElapsed + (endTime - startTime) / 1000.0);
   }
 
+  /**
+   * The load function is required to load a previously saved game file
+   */
+
   private void load() {
     Save save = null;
     try {
@@ -281,6 +285,11 @@ public class Game {
     }
   }
 
+  /**
+   * This method is required for reading the book on locking picking
+   * 
+   * @param command - the command parameter is the command that the user types after being processed by the parser
+   */
   private void read(Command command) {
     if (!command.hasSecondWord()) {
       System.out.println("What do you want to read?");
@@ -418,7 +427,11 @@ public class Game {
       System.out.println("That is not the right code");
   }
 
-
+  /**
+   * The openObject funtion is required to be able to open up an object so that you can take them with the take command
+   * 
+   * @param command 
+   */
   private void openObject(Command command) {
     String item = command.getSecondWord();
     if (!command.hasSecondWord()) {
@@ -493,6 +506,11 @@ public class Game {
     }
     return null;
   }
+
+  /**
+   * figures out which map is supose to be shown then prints out the corresponding map
+   * @param map
+   */
 
   private void printMap(String map) {
     if (map.equalsIgnoreCase("Main floor map")) {
