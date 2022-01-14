@@ -37,7 +37,7 @@ public class Game {
     try {
       initRooms("src/zork/data/rooms.json");
       initItems("src/zork/data/items.json");
-      currentRoom = roomMap.get("Theatre"); // ! spawn room
+      currentRoom = roomMap.get("BowlingAlley"); // ! spawn room
       playerInventory = new Inventory(300); // ! player max inventory weight
     } catch (Exception e) {
       e.printStackTrace();
@@ -572,6 +572,7 @@ public class Game {
       System.out.println("Strike!!");
       System.out.println("You hear a lock click upstairs. ");
       Item strikeKey = new Key("strikeKey", "Key", 1);
+      strikeKey.setDescription("Maybe this will help me go upstairs...");
       playerInventory.addItem(strikeKey);
       currentRoom.removeItem("bowling pins");
     } else {
