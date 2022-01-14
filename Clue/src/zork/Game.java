@@ -12,6 +12,7 @@ import java.io.ObjectOutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Scanner;
 import org.json.simple.JSONArray;
@@ -21,9 +22,12 @@ import org.json.simple.parser.JSONParser;
 public class Game {
 
   private static final String GAME_SAVE_LOCATION = "src/zork/data/game.ser";
+  public static final Double MAX_ALLOWED_TIME = 1200.0; // amount of time before losing in minutes
   public static HashMap<String, Room> roomMap = new HashMap<String, Room>();
   public static HashMap<String, Item> itemMap = new HashMap<String, Item>();
 
+  public static Double timeElapsed = 0.0;
+  public static Long startTime, endTime;
   private Parser parser;
   private Room currentRoom;
   private Inventory playerInventory;
@@ -146,8 +150,14 @@ public class Game {
     while (!finished) {
       Command command;
       try {
+        startTime = new Date().getTime();
         command = parser.getCommand();
         finished = processCommand(command);
+        endTime = new Date().getTime();
+        timeElapsed += (endTime - startTime) / 1000.0;
+        if (timeElapsed > MAX_ALLOWED_TIME) {
+          // lost
+        }
       } catch (IOException e) {
         e.printStackTrace();
       }
@@ -183,7 +193,6 @@ public class Game {
    * returned, otherwise false is returned.
    */
   private boolean processCommand(Command command) { // returning true ends game
-
     if (command.isUnknown()) {
       System.out.println("I don't know what you mean...");
       return false;
@@ -197,7 +206,7 @@ public class Game {
       if (command.hasSecondWord())
         System.out.println("Quit what?");
       else
-        System.out.println("Are you sure you want to quit? You can also save your game if you want.");
+        System.out.println("\033[33;5m Are you sure you want to quit? You can also save your game if you want. \u001B[0m");
       if (in == null)
         in = new Scanner(System.in);
       System.out.print("> ");
@@ -230,12 +239,21 @@ public class Game {
       save();
     } else if (commandWord.equalsIgnoreCase("load")) {
       load();
+    } else if (commandWord.equalsIgnoreCase("time")) {
+      printTime();
     }
     return false;
-
   }
 
   // implementations of user commands:
+
+  /**
+   * Prints out the total run time of the current game
+   */
+  private void printTime() {
+    endTime = new Date().getTime();
+    System.out.printf("%5.2f%n", timeElapsed + (endTime - startTime) / 1000.0);
+  }
 
   private void load() {
     Save save = null;
@@ -689,13 +707,18 @@ public class Game {
   }
 
   private void save() {
-    Save save = new Save(roomMap, itemMap, currentRoom, playerInventory);
+    Save save = new Save(roomMap, itemMap, currentRoom, playerInventory, timeElapsed);
     try {
       FileOutputStream fileOut = new FileOutputStream(GAME_SAVE_LOCATION);
       ObjectOutputStream out = new ObjectOutputStream(fileOut);
       out.writeObject(save);
       out.close();
       fileOut.close();
+      welcome.slowtext("Saving current game", 9);
+      welcome.slowtext("....................", 9);
+      welcome.slowtext(".....", 500);
+      welcome.slowtext("..", 750);
+      System.out.println("\n\nGame saved!");
     } catch (NotSerializableException ex) {
       System.out.println("NotSerializableException - A class that needs to be saved does not implement Serializable!");
     } catch (IOException e) {
