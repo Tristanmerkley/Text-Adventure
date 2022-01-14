@@ -225,8 +225,8 @@
             "startingroom": "Library"
         },
         {
-            "id": "LooseFloorBoard",
-            "name": "Floor board",
+            "id": "FloorBoard",
+            "name": "Floorboard",
             "alternatename": "Board",
             "description": "A thinner piece of floorboard which looks out of place.",
             "isOpenable": true,
@@ -239,7 +239,7 @@
             "alternatename": "Attic Key",
             "description": "A shiny key that has a design of an ornate door on it.",
             "weight": 1,
-            "startingitem": "LooseFloorBoard"
+            "startingitem": "FloorBoard"
         },
         {
             "id": "NoteOnPatioTable",

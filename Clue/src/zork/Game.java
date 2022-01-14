@@ -41,7 +41,7 @@ public class Game {
     try {
       initRooms("src/zork/data/rooms.json");
       initItems("src/zork/data/items.json");
-      currentRoom = roomMap.get("Theatre"); // ! spawn room
+      currentRoom = roomMap.get("Shed"); // ! spawn room
       playerInventory = new Inventory(300); // ! player max inventory weight
     } catch (Exception e) {
       e.printStackTrace();
@@ -241,6 +241,8 @@ public class Game {
       load();
     } else if (commandWord.equalsIgnoreCase("time")) {
       printTime();
+    } else if (commandWord.equalsIgnoreCase("dig")) {
+      openObject(command);
     }
     return false;
   }
@@ -450,12 +452,23 @@ public class Game {
           object.displayInventory();
           Item shedKey = new Key("shedKey", "Key from hole", 1);
           playerInventory.addItem(shedKey);
+          shedKey.setDescription("I should keep exploring to figure out where this leads.");
           System.out.println("A key has been added to your inventory");
           return;
         } else {
           System.out.println("You need to use the shovel to open the hole.");
           return;
         }
+      }
+      if (item.equalsIgnoreCase("floorboard")) {
+          nonNull(item).setOpen(true);
+          System.out.println("Opened " + object.getName() + "\n\nContains:");
+          object.displayInventory();
+          Item FrontDoorKey = new Key("FrontDoorKey", "Key from attic", 1);
+          playerInventory.addItem(FrontDoorKey);
+          FrontDoorKey.setDescription("A shiny key that has a design of an ornate door on it.");
+          System.out.println("A key has been added to your inventory");
+          return;
       }
       nonNull(item).setOpen(true);
       System.out.println("You opened the " + object.getName() + "\n\nContains:");
