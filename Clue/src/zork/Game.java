@@ -211,10 +211,10 @@ public class Game {
         in = new Scanner(System.in);
       System.out.print("> ");
       String answer = in.nextLine();
-      if (answer.equals("yes") || answer.equals("y")) {
+      if (answer.equals("yes") || answer.equals("y"))
         return true;
-      } else
-        return false;
+      System.out.println("Quit aborted");
+      return false;
     } else if (commandWord.equalsIgnoreCase("eat") || commandWord.equalsIgnoreCase("drink")) {
       consumeItem(command);
     } else if (commandWord.equalsIgnoreCase("inventory")) {
@@ -229,7 +229,7 @@ public class Game {
       lookAround();
     } else if (commandWord.equalsIgnoreCase("bowl")) {
       bowling();
-    } else if (commandWord.equalsIgnoreCase("open")) {
+    } else if (commandWord.equalsIgnoreCase("open") || commandWord.equalsIgnoreCase("dig")) {
       openObject(command);
     } else if (commandWord.equalsIgnoreCase("unlock")) {
       unlockDoor(command);
@@ -241,8 +241,6 @@ public class Game {
       load();
     } else if (commandWord.equalsIgnoreCase("time")) {
       printTime();
-    } else if (commandWord.equalsIgnoreCase("dig")) {
-      openObject(command);
     }
     return false;
   }
@@ -306,7 +304,7 @@ public class Game {
 
   /**
    * unlocks a door using the direction that is inputed. Special cases include, safe, desk, closet.
-   * 
+   *
    * @param command
    */
   private void unlockDoor(Command command) {
@@ -390,7 +388,7 @@ public class Game {
 
   /**
    * unlocks desk if piggy bank has peculiar coin in its inventory
-   * 
+   *
    * @param command
    */
   private void unlockDesk(Command command) {
@@ -404,7 +402,7 @@ public class Game {
 
   /**
    * unlocks safe if the correct code is input
-   * 
+   *
    * @param command
    */
   private void unlockSafe(Command command) {
@@ -461,14 +459,14 @@ public class Game {
         }
       }
       if (item.equalsIgnoreCase("floorboard")) {
-          nonNull(item).setOpen(true);
-          System.out.println("Opened " + object.getName() + "\n\nContains:");
-          object.displayInventory();
-          Item FrontDoorKey = new Key("FrontDoorKey", "Key from attic", 1);
-          playerInventory.addItem(FrontDoorKey);
-          FrontDoorKey.setDescription("A shiny key that has a design of an ornate door on it.");
-          System.out.println("A key has been added to your inventory");
-          return;
+        nonNull(item).setOpen(true);
+        System.out.println("Opened " + object.getName() + "\n\nContains:");
+        object.displayInventory();
+        Item FrontDoorKey = new Key("FrontDoorKey", "Key from attic", 1);
+        playerInventory.addItem(FrontDoorKey);
+        FrontDoorKey.setDescription("A shiny key that has a design of an ornate door on it.");
+        System.out.println("A key has been added to your inventory");
+        return;
       }
       nonNull(item).setOpen(true);
       System.out.println("You opened the " + object.getName() + "\n\nContains:");
@@ -590,7 +588,7 @@ public class Game {
   /**
    * drops item into the current room. has a special case for when item is dropped into the same room
    * the mouse is in.
-   * 
+   *
    * @param command
    */
   private void dropItem(Command command) {
@@ -678,7 +676,7 @@ public class Game {
   /**
    * will either eat or drink an item depending on its attributes. special case for rotten milk, a key
    * will be added to player inventory once milk has been drunk.
-   * 
+   *
    * @param command
    */
   private void consumeItem(Command command) {
