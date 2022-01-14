@@ -460,16 +460,6 @@ public class Game {
           return;
         }
       }
-      if (item.equalsIgnoreCase("floorboard")) {
-          nonNull(item).setOpen(true);
-          System.out.println("Opened " + object.getName() + "\n\nContains:");
-          object.displayInventory();
-          Item FrontDoorKey = new Key("FrontDoorKey", "Key from attic", 1);
-          playerInventory.addItem(FrontDoorKey);
-          FrontDoorKey.setDescription("A shiny key that has a design of an ornate door on it.");
-          System.out.println("A key has been added to your inventory");
-          return;
-      }
       nonNull(item).setOpen(true);
       System.out.println("You opened the " + object.getName() + "\n\nContains:");
       object.displayInventory();
