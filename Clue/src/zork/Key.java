@@ -8,6 +8,9 @@ public class Key extends Item {
     this.keyId = keyId;
   }
 
+  /**
+   * returns the keyId
+   */
   public String getKeyId() {
     return keyId;
   }
