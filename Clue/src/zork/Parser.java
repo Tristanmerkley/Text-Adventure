@@ -15,10 +15,10 @@ public class Parser {
   public Command getCommand() throws java.io.IOException {
     String inputLine = "";
     String[] words;
-    double timeLeft = (Game.MAX_ALLOWED_TIME - (Game.timeElapsed + (new Date().getTime() - Game.startTime) / 1000.0));
-    System.out.printf("\033[1;91m" + "Minutes Remaining: " + "%.0f", timeLeft / 60); // prints minutes left using red font
+    Double timeLeft = (Game.MAX_ALLOWED_TIME - (Game.timeElapsed + (new Date().getTime() - Game.startTime) / 1000.0));
+    System.out.print("\033[1;91m" + "Time Remaining: " + timeLeft.intValue() / 60); // prints minutes left using red font
     if (timeLeft % 60 != 0)
-      System.out.printf(":" + "%2.0f", timeLeft % 60); // prints out seconds remaing when more than 0 seconds
+      System.out.printf(":" + "%02.0f", timeLeft % 60); // prints out seconds remaing when more than 0 seconds
     System.out.print("\n\u001B[0m> "); // print prompt
 
     inputLine = in.nextLine();

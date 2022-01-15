@@ -18,8 +18,8 @@ public class Room implements java.io.Serializable {
   }
 
   /**
-   * Create a room described "description". Initially, it has no exits.
-   * "description" is something like "a kitchen" or "an open court yard".
+   * Create a room described "description". Initially, it has no exits. "description" is something
+   * like "a kitchen" or "an open court yard".
    */
   public Room(String description) {
     inventory = new Inventory(Long.MAX_VALUE);
@@ -39,24 +39,21 @@ public class Room implements java.io.Serializable {
   }
 
   /**
-   * Return the description of the room (the one that was defined in the
-   * constructor).
+   * Return the description of the room (the one that was defined in the constructor).
    */
   public String shortDescription() {
     return "Room: " + roomName + "\n\n" + description;
   }
 
   /**
-   * Return a long description of this room, on the form: You are in the kitchen.
-   * Exits: north west
+   * Return a long description of this room, on the form: You are in the kitchen. Exits: north west
    */
   public String longDescription() {
     return "Room: " + roomName + "\n\n" + description + "\n" + exitString();
   }
 
   /**
-   * Return a string describing the room's exits, for example "Exits: north west
-   * ".
+   * Return a string describing the room's exits, for example "Exits: north west ".
    */
   private String exitString() {
     String returnString = "Exits:\n";
@@ -67,8 +64,8 @@ public class Room implements java.io.Serializable {
   }
 
   /**
-   * Return the room that is reached if we go from this room in direction
-   * "direction". If there is no room in that direction, return null.
+   * Return the room that is reached if we go from this room in direction "direction". If there is no
+   * room in that direction, return null.
    */
   public Room nextRoom(String direction, Room currentRoom) {
     for (Exit exit : exits) {
@@ -83,9 +80,8 @@ public class Room implements java.io.Serializable {
   }
 
   /*
-   * private int getDirectionIndex(String direction) { int dirIndex = 0; for
-   * (String dir : directions) { if (dir.equals(direction)) return dirIndex; else
-   * dirIndex++; }
+   * private int getDirectionIndex(String direction) { int dirIndex = 0; for (String dir : directions)
+   * { if (dir.equals(direction)) return dirIndex; else dirIndex++; }
    *
    * throw new IllegalArgumentException("Invalid Direction"); }
    */
@@ -93,18 +89,38 @@ public class Room implements java.io.Serializable {
     return roomName;
   }
 
+  /**
+   * set a name for the room
+   * 
+   * @param roomName
+   */
   public void setRoomName(String roomName) {
     this.roomName = roomName;
   }
 
+  /**
+   * set a description for the room
+   * 
+   * @param description
+   */
   public void setDescription(String description) {
     this.description = description;
   }
 
+  /**
+   * returns the room description
+   * 
+   * @param i
+   */
   public String getDescription(int i) {
     return inventory.getDescription(i);
   }
 
+  /**
+   * adds an item to the room inventory and returns the item that was added
+   * 
+   * @param item
+   */
   public boolean addItem(Item item) {
     return inventory.addItem(item);
   }
@@ -113,10 +129,18 @@ public class Room implements java.io.Serializable {
     return inventory.contains(itemName);
   }
 
+  /**
+   * removes an item from the room inventory and returns the removed item
+   * 
+   * @param itemName
+   */
   public Item removeItem(String itemName) {
     return inventory.removeItem(itemName);
   }
 
+  /**
+   * displays the room inventory
+   */
   public void displayInventory() {
     if (inventory.getInventory().size() > 0)
       System.out.println("Contains:");
@@ -124,7 +148,7 @@ public class Room implements java.io.Serializable {
       System.out.print(i.getName() + " - " + i.getDescription());
       if (i.isOpen() && i.getInventory().size() > 0) {
         String res = "";
-        System.out.print("\n        " + "Contains: ");//! formatting imcomplete
+        System.out.print("\n        " + "Contains: ");// ! formatting imcomplete
         ArrayList<Item> items = i.getInventory();
         for (Item j : items) {
           res = ", " + j.getName();
@@ -135,10 +159,16 @@ public class Room implements java.io.Serializable {
     }
   }
 
+  /**
+   * returns the room inventory
+   */
   public ArrayList<Item> getInventory() {
     return inventory.getInventory();
   }
 
+  /**
+   * returns the number of items you cannot move in the inventory
+   */
   public int numItemsCannotMove() {
     return inventory.numItemsCannotMove();
   }
