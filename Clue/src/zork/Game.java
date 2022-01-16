@@ -51,7 +51,7 @@ public class Game {
 
   /**
    * converts item's and their properties from a json file type, to an item class
-   * 
+   *
    * @param fileName
    * @throws Exception
    */
@@ -117,7 +117,7 @@ public class Game {
 
   /**
    * converts room's and their properties from a json file type to a rooms class
-   * 
+   *
    * @param fileName
    * @throws Exception
    */
@@ -321,7 +321,7 @@ public class Game {
         isUseable = true;
         System.out.println("You've read the book. You can now unlock doors with basic locks using a knife.");
         playerInventory.removeItem("book");
-      } else 
+      } else
         System.out.println("You don't have a book to read.");
     }
   }
@@ -491,10 +491,6 @@ public class Game {
         currentRoom.addItem(currentRoom.contains("Floorboard").contains("Key from attic"));
         currentRoom.getInventory().remove(currentRoom.contains("Floorboard"));
         System.out.println("You pushed the floor board aside, revealing a key.");
-        Item FrontDoorKey = new Key("FrontDoorKey", "Key from attic", 1);
-        playerInventory.addItem(FrontDoorKey);
-        FrontDoorKey.setDescription("A shiny key that has a design of an ornate door on it.");
-        System.out.println("A key has been added to your inventory");
         return;
       }
       nonNull(item).setOpen(true);
@@ -525,7 +521,7 @@ public class Game {
 
   /**
    * figures out which map is supose to be shown then prints out the corresponding map
-   * 
+   *
    * @param map
    */
 
@@ -571,7 +567,7 @@ public class Game {
 
   /**
    * takes a specified item from the current room, or an item in the current room
-   * 
+   *
    * @param command
    */
   private void takeItem(Command command) {
@@ -682,7 +678,7 @@ public class Game {
 
   /**
    * puts an item from the player inventory into another item in the current room
-   * 
+   *
    * @param command
    */
   private void placeItem(Command command) {
@@ -762,7 +758,7 @@ public class Game {
    * prints the player inventory
    */
   private void printInventory() {
-    System.out.println("Player Inventory :");
+    System.out.println("Player Inventory (" + (int) (((double) playerInventory.getCurrentWeight() / playerInventory.getMaxWeight()) * 100) + "%) :");
     playerInventory.displayInventory();
   }
 
