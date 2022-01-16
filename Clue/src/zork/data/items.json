@@ -111,7 +111,7 @@
          {
             "id": "PantryMouse",
             "name": "Mouse",
-            "description": "A small brown mouse is sitting scurrying around the room. It seems to be holding something in its teeth.",
+            "description": "A small brown mouse is scurrying around the room. It seems to be holding something in its teeth.",
             "startingroom": "Pantry",
             "isOpenable": true,
             "holdingWeight": 1
