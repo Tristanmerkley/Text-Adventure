@@ -23,22 +23,39 @@ public class OpenableObject implements java.io.Serializable {
     this.isOpen = false;
   }
 
+  /**
+   * returns if an item isLocked or not
+   */
   public boolean isLocked() {
     return isLocked;
   }
 
+  /**
+   * can set isLocked to true or false for an item
+   */
   public void setLocked(boolean isLocked) {
     this.isLocked = isLocked;
   }
 
+  /**
+   * returns the keyId for an item
+   */
   public String getKeyId() {
     return keyId;
   }
 
+  /**
+   * returns if an item is open or not
+   */
   public boolean isOpen() {
     return isOpen;
   }
 
+  /**
+   * set isOpen to true or false for an item
+   *
+   * @param isOpen
+   */
   public void setOpen(boolean isOpen) {
     this.isOpen = isOpen;
   }

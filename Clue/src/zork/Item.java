@@ -39,6 +39,9 @@ public class Item extends OpenableObject {
     return inventory.getInventory();
   }
 
+  /**
+   * returns name
+   */
   public String toString() {
     return name;
   }
@@ -52,7 +55,7 @@ public class Item extends OpenableObject {
 
   /**
    * sets weight of an item
-   * 
+   *
    * @param weight
    */
   public void setWeight(int weight) {
@@ -75,7 +78,7 @@ public class Item extends OpenableObject {
 
   /**
    * set name for an item
-   * 
+   *
    * @param name
    */
   public void setName(String name) {
@@ -98,7 +101,7 @@ public class Item extends OpenableObject {
 
   /**
    * can set to true or false
-   * 
+   *
    * @param isOpenable
    */
   public void setOpenable(boolean isOpenable) {
@@ -107,7 +110,7 @@ public class Item extends OpenableObject {
 
   /**
    * returns true if item is edible, false if it isn't
-   * 
+   *
    * @return
    */
   public boolean isEdible() {
@@ -116,7 +119,7 @@ public class Item extends OpenableObject {
 
   /**
    * set's isEdible to true or false
-   * 
+   *
    * @param isEdible
    */
   public void setEdible(boolean isEdible) {
@@ -125,7 +128,7 @@ public class Item extends OpenableObject {
 
   /**
    * returns true if item is drinkable, false if it isn't
-   * 
+   *
    * @return
    */
   public boolean isDrinkable() {
@@ -134,7 +137,7 @@ public class Item extends OpenableObject {
 
   /**
    * set's isDrinable to true or false
-   * 
+   *
    * @param isDrinkable
    */
   public void setDrinkable(boolean isDrinkable) {
@@ -143,7 +146,7 @@ public class Item extends OpenableObject {
 
   /**
    * set description for an item
-   * 
+   *
    * @param description
    */
   public void setDescription(String description) {
@@ -152,7 +155,7 @@ public class Item extends OpenableObject {
 
   /**
    * creates inventory for an item with a max holding weight
-   * 
+   *
    * @param holdingWeight
    */
   public void createInventory(long holdingWeight) {
@@ -161,7 +164,7 @@ public class Item extends OpenableObject {
 
   /**
    * add item to another item's inventory
-   * 
+   *
    * @param item
    */
   public void addItem(Item item) {
@@ -175,18 +178,27 @@ public class Item extends OpenableObject {
     return description;
   }
 
-
+  /**
+   * 
+   * @param itemName
+   * @return the Item with the itemName in the item inventory
+   */
   public Item contains(String itemName) {
     return inventory.contains(itemName);
   }
 
+  /**
+   * sets inventory
+   * 
+   * @param items
+   */
   public void setInventory(ArrayList<Item> items) {
     inventory.setInventory(items);
   }
 
   /**
    * removes item from an items inventory and returns the item that has been removed
-   * 
+   *
    * @param item
    */
   public Item removeItem(String item) {
