@@ -24,22 +24,41 @@ public class Exit extends OpenableObject {
     this.adjacentRoom = adjacentRoom;
   }
 
+  /**
+   * gets the direction of the exit object
+   * @return
+   */
   public String getDirection() {
     return direction;
   }
 
+  /**
+   * sets the direction of the exit object
+   * @param direction
+   */
   public void setDirection(String direction) {
     this.direction = direction;
   }
 
+  /**
+   * gets the name of the room the exit leads to
+   * @return
+   */
   public String getAdjacentRoom() {
     return adjacentRoom;
   }
 
+  /**
+   * sets the name of the room the exit leads to
+   * @param adjacentRoom
+   */
   public void setAdjacentRoom(String adjacentRoom) {
     this.adjacentRoom = adjacentRoom;
   }
 
+  /**
+   * sets the exit object as locked or unlocked
+   */
   public void setLocked(boolean isLocked) {
     super.setLocked(isLocked);
   }

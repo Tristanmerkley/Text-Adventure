@@ -41,7 +41,7 @@ public class Game {
     try {
       initRooms("src/zork/data/rooms.json");
       initItems("src/zork/data/items.json");
-      currentRoom = roomMap.get("Shed"); // ! spawn room
+      currentRoom = roomMap.get("Theatre"); // ! spawn room
       playerInventory = new Inventory(300); // ! player max inventory weight
     } catch (Exception e) {
       e.printStackTrace();
@@ -49,6 +49,11 @@ public class Game {
     parser = new Parser();
   }
 
+  /**
+   * converts item's and their properties from a json file type, to an item class
+   * @param fileName
+   * @throws Exception
+   */
   private void initItems(String fileName) throws Exception {
     Path path = Path.of(fileName);
     String jsonString = Files.readString(path);
@@ -109,6 +114,11 @@ public class Game {
     }
   }
 
+  /**
+   * converts room's and their properties from a json file type to a rooms class
+   * @param fileName
+   * @throws Exception
+   */
   private void initRooms(String fileName) throws Exception {
     Path path = Path.of(fileName);
     String jsonString = Files.readString(path);
@@ -156,7 +166,7 @@ public class Game {
         endTime = new Date().getTime();
         timeElapsed += (endTime - startTime) / 1000.0;
         if (timeElapsed > MAX_ALLOWED_TIME) {
-          // lost
+          // TODO lose message
         }
       } catch (IOException e) {
         e.printStackTrace();
@@ -223,7 +233,7 @@ public class Game {
       takeItem(command);
     } else if (commandWord.equalsIgnoreCase("drop")) {
       dropItem(command);
-    } else if (commandWord.equalsIgnoreCase("place")) { // give cheese to mouse
+    } else if (commandWord.equalsIgnoreCase("place")) {
       placeItem(command);
     } else if (commandWord.equalsIgnoreCase("look")) {
       lookAround();
@@ -287,7 +297,7 @@ public class Game {
 
   /**
    * This method is required for reading the book on locking picking
-   * 
+   *
    * @param command - the command parameter is the command that the user types after being processed by the parser
    */
   private void read(Command command) {
@@ -322,7 +332,7 @@ public class Game {
       return;
     }
     if (command.getSecondWord().equalsIgnoreCase("safe")) {
-      if (currentRoom.contains("safe") != null) {
+      if (currentRoom.contains("safe") != null) { // special case for pin code items
         if (currentRoom.contains("safe").isLocked())
           unlockSafe(command);
         else
@@ -331,7 +341,7 @@ public class Game {
         System.out.println("There is no safe in the current room!");
       return;
     }
-    if (command.getSecondWord().equalsIgnoreCase("desk") && currentRoom.contains("desk").isLocked()) {
+    if (command.getSecondWord().equalsIgnoreCase("desk") && currentRoom.contains("desk").isLocked()) { // special case for unlocking a desk
       if (currentRoom.contains("desk") != null) {
         if (currentRoom.contains("desk").isLocked())
           unlockDesk(command); // TODO
@@ -355,7 +365,7 @@ public class Game {
           System.out.println(Game.roomMap.get(i.getAdjacentRoom()).getRoomName() + " is already unlocked.");
           return;
         }
-        if (i.getAdjacentRoom().equals("Library") || i.getAdjacentRoom().equals("Maze1")) {
+        if (i.getAdjacentRoom().equals("Library") || i.getAdjacentRoom().equals("Maze1")) { // special case for pickable doors
           if ((playerInventory.contains("Knife") != null) && isUseable) {
             i.setLocked(false);
             System.out.println("You picked the " + Game.roomMap.get(i.getAdjacentRoom()).getRoomName() + " door.");
@@ -368,13 +378,13 @@ public class Game {
           }
           return;
         }
-        if (i.getAdjacentRoom().equals("Closet3")) {
+        if (i.getAdjacentRoom().equals("Closet3")) { // special case for password entry door(s)
           System.out.println("What is my favourite colour?");
           if (in == null)
             in = new Scanner(System.in);
           System.out.print("> ");
           String code = in.nextLine();
-          if (code.equalsIgnoreCase("purple")) {
+          if (code.equalsIgnoreCase("purple")) { // checks if it is the correct password
             i.setLocked(false);
             System.out.println("The closet is now unlocked");
           } else
@@ -382,7 +392,7 @@ public class Game {
           return;
         }
         for (Item j : playerInventory.getInventory()) {
-          if (i.getKeyId().equals(j.getKeyId())) {
+          if (i.getKeyId().equals(j.getKeyId())) { // checks if it is the correct key
             i.setLocked(false);
             System.out.println("Unlocked the " + Game.roomMap.get(i.getAdjacentRoom()).getRoomName() + " door.");
             return;
@@ -420,7 +430,7 @@ public class Game {
       in = new Scanner(System.in);
     System.out.print("> ");
     String code = in.nextLine();
-    if (code.equals("6351")) {
+    if (code.equals("6351")) { // checks if the pin is correct
       currentRoom.contains("safe").setLocked(false);
       System.out.println("The safe is now unlocked");
     } else
@@ -429,8 +439,8 @@ public class Game {
 
   /**
    * The openObject funtion is required to be able to open up an object so that you can take them with the take command
-   * 
-   * @param command 
+   *
+   * @param command
    */
   private void openObject(Command command) {
     String item = command.getSecondWord();
@@ -447,16 +457,16 @@ public class Game {
       System.out.println(object.getName() + " is already open!");
       return;
     }
-    if (object.isOpenable()) {
-      if (object.isLocked()) {
+    if (object.isOpenable()) { // checks if you can open the object
+      if (object.isLocked()) { // checks if the item is locked
         System.out.println("You must first unlock: " + object.getName());
         return;
       }
-      if (item.equalsIgnoreCase("Main floor map") || item.equalsIgnoreCase("Upstairs left map") || item.equalsIgnoreCase("Upstairs right map")) {
+      if (item.equalsIgnoreCase("Main floor map") || item.equalsIgnoreCase("Upstairs left map") || item.equalsIgnoreCase("Upstairs right map")) { // special case for opening maps
         printMap(item);
         return;
       }
-      if (item.equalsIgnoreCase("Hole")) {
+      if (item.equalsIgnoreCase("Hole")) { // special case for opening a hole
         if (playerInventory.contains("Shovel") != null) {
           nonNull(item).setOpen(true);
           System.out.println("Opened " + object.getName() + "\n\nContains:");
@@ -471,14 +481,10 @@ public class Game {
           return;
         }
       }
-      if (item.equalsIgnoreCase("floorboard")) {
-        nonNull(item).setOpen(true);
-        System.out.println("Opened " + object.getName() + "\n\nContains:");
-        object.displayInventory();
-        Item FrontDoorKey = new Key("FrontDoorKey", "Key from attic", 1);
-        playerInventory.addItem(FrontDoorKey);
-        FrontDoorKey.setDescription("A shiny key that has a design of an ornate door on it.");
-        System.out.println("A key has been added to your inventory");
+      if (item.equalsIgnoreCase("floorboard")) { // special case for the floorboard
+        currentRoom.addItem(currentRoom.contains("Floorboard").contains("Key from attic"));
+        currentRoom.getInventory().remove(currentRoom.contains("Floorboard"));
+        System.out.println("You pushed the floor board aside, revealing a key.");
         return;
       }
       nonNull(item).setOpen(true);
@@ -552,6 +558,10 @@ public class Game {
     currentRoom.displayInventory();
   }
 
+  /**
+   * takes a specified item from the current room, or an item in the current room
+   * @param command
+   */
   private void takeItem(Command command) {
     if (!command.hasSecondWord()) {
       System.out.println("Take what?");
@@ -563,14 +573,14 @@ public class Game {
     }
 
     String shoe = command.getSecondWord();
-    if (shoe.equals("shoe")) {
+    if (shoe.equals("shoe")) { // special case for the shoe item
       System.out.println("A peculiar coin fell out of the shoe and it has been added to your inventory");
       Item coin = new Item(1, "Peculiar Coin", false, 0);
       coin.setDescription("This is a weird looking coin, I should find somewhere to keep this safe.");
       playerInventory.addItem(coin);
     }
 
-    if (command.getSecondWord().equals("all")) {
+    if (command.getSecondWord().equals("all")) { // implements use of the take "all" command
       ArrayList<Item> inventory = currentRoom.getInventory();
       int i = 0;
       String taken = "";
@@ -622,7 +632,7 @@ public class Game {
     Item item = playerInventory.removeItem(command.getSecondWord());
     currentRoom.addItem(item);
     System.out.println("You dropped the " + item.getName());
-    if (command.getSecondWord().equalsIgnoreCase("Cheese")) {
+    if (command.getSecondWord().equalsIgnoreCase("Cheese")) { // special case for pantry room with mice
       playerInventory.addItem(currentRoom.contains("Mouse").contains("Note from Mouse"));
       System.out.println("The mice take the cheese and retreat, leaving behind a note which you pick up.");
       System.out.println("The letter reads as follows -- 'Sorting things by alphabetical order makes organizing easy'");
@@ -658,6 +668,10 @@ public class Game {
     }
   }
 
+  /**
+   * puts an item from the player inventory into another item in the current room
+   * @param command
+   */
   private void placeItem(Command command) {
     if (!command.hasSecondWord()) {
       System.out.println("Place what?");
@@ -731,7 +745,7 @@ public class Game {
   }
 
   /**
-   * prints player inventory
+   * prints the player inventory
    */
   private void printInventory() {
     System.out.println("Player Inventory :");
@@ -774,10 +788,13 @@ public class Game {
     }
   }
 
+  /**
+   * saves the current game state to come back to later on.
+   */
   private void save() {
     Save save = new Save(roomMap, itemMap, currentRoom, playerInventory, timeElapsed);
     try {
-      FileOutputStream fileOut = new FileOutputStream(GAME_SAVE_LOCATION);
+      FileOutputStream fileOut = new FileOutputStream(GAME_SAVE_LOCATION); // specifies the save location
       ObjectOutputStream out = new ObjectOutputStream(fileOut);
       out.writeObject(save);
       out.close();

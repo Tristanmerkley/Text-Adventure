@@ -12,6 +12,11 @@ public class Parser {
     in = new Scanner(System.in);
   }
 
+  /**
+   * takes a command from the player and tells them how much time is left.
+   * @return
+   * @throws java.io.IOException
+   */
   public Command getCommand() throws java.io.IOException {
     String inputLine = "";
     String[] words;
