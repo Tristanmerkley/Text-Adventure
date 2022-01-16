@@ -193,8 +193,7 @@ public class Game {
    * Print out the opening message for the player.
    */
   private void printWelcome() {
-    // !welcome.title(); //disabled for testing
-    //welcome.slowtext("\n Type 'help' if you need help. \n", 1);
+    welcome.title();
     welcome.slowtext("Do you wanna play a game? \nThe game is simple,\n", 80);
     welcome.slowtext("You have 24 hours", 60);
     welcome.slowtext(" (24 real-time minutes) ", 5);
