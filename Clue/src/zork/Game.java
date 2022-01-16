@@ -134,7 +134,7 @@ public class Game {
       String roomName = (String) ((JSONObject) roomObj).get("name");
       String roomId = (String) ((JSONObject) roomObj).get("id");
       String roomDescription = (String) ((JSONObject) roomObj).get("description");
-      String roomHint = (String) ((JSONObject) roomObj).get("roomHint");
+      String roomHint = (String) ((JSONObject) roomObj).get("hint") != null ? (String) ((JSONObject) roomObj).get("hint") : "I shouldn't waste any time here, i should check the rest of the house.";
       room.setDescription(roomDescription);
       room.setRoomName(roomName);
       room.setRoomHint(roomHint);
@@ -170,7 +170,11 @@ public class Game {
         endTime = new Date().getTime();
         timeElapsed += (endTime - startTime) / 1000.0;
         if (timeElapsed > MAX_ALLOWED_TIME) {
-          // TODO lose message
+          finished = true;
+          System.out.println("You hear a loud thumping sound as the house goes completely dark. You can't see anything and the sound gets louder, you hear a door open up and it sounds like someone else is in the room with you.");
+          System.out.println("You hear someone say \"Time's up\" and you feel something hard knock you on the head.");
+          System.out.println("");
+          System.out.println("You have failed to complete the game. Play again to have another chance at winning.");
         }
       } catch (IOException e) {
         e.printStackTrace();
