@@ -41,7 +41,7 @@ public class Game {
     try {
       initRooms("src/zork/data/rooms.json");
       initItems("src/zork/data/items.json");
-      currentRoom = roomMap.get("Theatre"); // ! spawn room
+      currentRoom = roomMap.get("Office2"); // ! spawn room
       playerInventory = new Inventory(300); // ! player max inventory weight
     } catch (Exception e) {
       e.printStackTrace();
@@ -317,9 +317,12 @@ public class Game {
       System.out.println("You can't read that.");
       return;
     } else {
-      isUseable = true;
-      System.out.println("You've read the book. You can now unlock doors with basic locks using a knife.");
-      playerInventory.removeItem("book");
+      if (playerInventory.contains("Book") != null) {
+        isUseable = true;
+        System.out.println("You've read the book. You can now unlock doors with basic locks using a knife.");
+        playerInventory.removeItem("book");
+      } else 
+        System.out.println("You don't have a book to read.");
     }
   }
 
