@@ -53,7 +53,7 @@ public class OpenableObject implements java.io.Serializable {
 
   /**
    * set isOpen to true or false for an item
-   * 
+   *
    * @param isOpen
    */
   public void setOpen(boolean isOpen) {
