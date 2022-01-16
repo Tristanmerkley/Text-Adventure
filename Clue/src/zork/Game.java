@@ -122,8 +122,10 @@ public class Game {
       String roomName = (String) ((JSONObject) roomObj).get("name");
       String roomId = (String) ((JSONObject) roomObj).get("id");
       String roomDescription = (String) ((JSONObject) roomObj).get("description");
+      String roomHint = (String) ((JSONObject) roomObj).get("roomHint");
       room.setDescription(roomDescription);
       room.setRoomName(roomName);
+      room.setRoomHint(roomHint);
 
       JSONArray jsonExits = (JSONArray) ((JSONObject) roomObj).get("exits");
       ArrayList<Exit> exits = new ArrayList<Exit>();

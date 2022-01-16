@@ -8,6 +8,7 @@ public class Room implements java.io.Serializable {
   private String description;
   private ArrayList<Exit> exits;
   private Inventory inventory;
+  private String roomHint;
 
   public ArrayList<Exit> getExits() {
     return exits;
@@ -169,6 +170,14 @@ public class Room implements java.io.Serializable {
       }
     }
     return total;
+  }
+
+  public void setRoomHint(String roomHint){
+    this.roomHint = roomHint;
+  }
+
+  public String getRoomHint() {
+    return roomHint;
   }
 
 }
