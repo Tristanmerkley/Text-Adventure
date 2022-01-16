@@ -234,6 +234,13 @@
             "startingroom": "Attic"
         },
         {
+            "id": "MagentaChairs",
+            "name": "3 Chairs",
+            "alternatename": "Chairs",
+            "description": "3 Magenta chairs, they look very comfortable.",
+            "startingroom": "DiningRoom"
+        },
+        {
             "id": "FrontDoorKey",
             "name": "Key from attic",
             "alternatename": "Attic Key",
