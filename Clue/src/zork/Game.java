@@ -41,7 +41,7 @@ public class Game {
     try {
       initRooms("src/zork/data/rooms.json");
       initItems("src/zork/data/items.json");
-      currentRoom = roomMap.get("Office2"); // ! spawn room
+      currentRoom = roomMap.get("LivingRoom"); // ! spawn room
       playerInventory = new Inventory(300); // ! player max inventory weight
     } catch (Exception e) {
       e.printStackTrace();
@@ -648,8 +648,8 @@ public class Game {
     System.out.println("You dropped the " + item.getName());
     if (command.getSecondWord().equalsIgnoreCase("Cheese")) { // special case for pantry room with mice
       playerInventory.addItem(currentRoom.contains("Mouse").contains("Note from Mouse"));
-      System.out.println("The mice take the cheese and retreat, leaving behind a note which you pick up.");
-      System.out.println("The letter reads as follows -- 'Sorting things by alphabetical order makes organizing easy'");
+      System.out.println("The mouse took the cheese and retreated, leaving behind a note which you pick up.");
+      System.out.println("The letter reads as follows -- 'You can never go wrong with alphabetical order'");
       currentRoom.removeItem("Cheese");
     }
   }
