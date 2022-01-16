@@ -134,7 +134,7 @@ public class Game {
       String roomName = (String) ((JSONObject) roomObj).get("name");
       String roomId = (String) ((JSONObject) roomObj).get("id");
       String roomDescription = (String) ((JSONObject) roomObj).get("description");
-      String roomHint = (String) ((JSONObject) roomObj).get("roomHint");
+      String roomHint = (String) ((JSONObject) roomObj).get("hint") != null ? (String) ((JSONObject) roomObj).get("hint") : "I shouldn't waste any time here, i should check the rest of the house.";
       room.setDescription(roomDescription);
       room.setRoomName(roomName);
       room.setRoomHint(roomHint);
