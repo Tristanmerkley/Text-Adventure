@@ -41,7 +41,7 @@ public class Game {
     try {
       initRooms("src/zork/data/rooms.json");
       initItems("src/zork/data/items.json");
-      currentRoom = roomMap.get("Shed"); // ! spawn room
+      currentRoom = roomMap.get("Theatre"); // ! spawn room
       playerInventory = new Inventory(300); // ! player max inventory weight
     } catch (Exception e) {
       e.printStackTrace();
@@ -51,6 +51,7 @@ public class Game {
 
   /**
    * converts item's and their properties from a json file type, to an item class
+   * 
    * @param fileName
    * @throws Exception
    */
@@ -116,6 +117,7 @@ public class Game {
 
   /**
    * converts room's and their properties from a json file type to a rooms class
+   * 
    * @param fileName
    * @throws Exception
    */
@@ -189,8 +191,7 @@ public class Game {
     System.out.println();
     System.out.println("Welcome to _____."); // TODO need to pick game name
     System.out.println("Type 'help' if you need help.");
-    System.out.println("You have 24 hours to escape the house and pass the gate, or else you will be killed.");
-    System.out.println("Every ten decisions made, an hour will pass.");
+    System.out.println("You have 24 hours (24 real-time minutes) to escape the house and pass the gate, or else you will be killed.");
     System.out.println("Pay attention to detail, everything is there for a reason. ");
     System.out.println("Don't stray from the path, follow the clues to escape in time");
     System.out.println("Your time starts now… What are you waiting for? \n");
@@ -298,7 +299,8 @@ public class Game {
   /**
    * This method is required for reading the book on locking picking
    *
-   * @param command - the command parameter is the command that the user types after being processed by the parser
+   * @param command - the command parameter is the command that the user types after being processed
+   *        by the parser
    */
   private void read(Command command) {
     if (!command.hasSecondWord()) {
@@ -438,7 +440,8 @@ public class Game {
   }
 
   /**
-   * The openObject funtion is required to be able to open up an object so that you can take them with the take command
+   * The openObject funtion is required to be able to open up an object so that you can take them with
+   * the take command
    *
    * @param command
    */
@@ -519,13 +522,14 @@ public class Game {
 
   /**
    * figures out which map is supose to be shown then prints out the corresponding map
+   * 
    * @param map
    */
 
   private void printMap(String map) {
     if (map.equalsIgnoreCase("Main floor map")) {
       try {
-        Scanner in = new Scanner(new File("src\\zork\\floor0.map"));
+        Scanner in = new Scanner(new File("src/zork/floor0.map"));
         while (in.hasNextLine()) {
           System.out.println(in.nextLine());
         }
@@ -534,7 +538,7 @@ public class Game {
       }
     } else if (map.equalsIgnoreCase("Upstairs left map")) {
       try {
-        Scanner in = new Scanner(new File("src\\zork\\floor1secondhalf.map"));
+        Scanner in = new Scanner(new File("src/zork/floor1secondhalf.map"));
         while (in.hasNextLine()) {
           System.out.println(in.nextLine());
         }
@@ -543,7 +547,7 @@ public class Game {
       }
     } else {
       try {
-        Scanner in = new Scanner(new File("src\\zork\\floor1firsthalf.map"));
+        Scanner in = new Scanner(new File("src/zork/floor1firsthalf.map"));
         while (in.hasNextLine()) {
           System.out.println(in.nextLine());
         }
@@ -564,6 +568,7 @@ public class Game {
 
   /**
    * takes a specified item from the current room, or an item in the current room
+   * 
    * @param command
    */
   private void takeItem(Command command) {
@@ -674,6 +679,7 @@ public class Game {
 
   /**
    * puts an item from the player inventory into another item in the current room
+   * 
    * @param command
    */
   private void placeItem(Command command) {
@@ -743,6 +749,7 @@ public class Game {
     System.out.println(command.getCommandWord().equals("eat") ? "You ate the " + item : "You drank the " + item);
     if (item.equalsIgnoreCase("Rotten milk")) {
       Item PantryKey = new Key("PantryKey", "Key from rotten milk", 1);
+      PantryKey.setDescription("I wonder what other doors are locked on this floor.");
       playerInventory.addItem(PantryKey);
       System.out.println("A key has been added to your inventory");
     }
