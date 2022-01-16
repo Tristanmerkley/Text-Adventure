@@ -203,6 +203,7 @@ public class Game {
     welcome.slowtext("Don't stray from the path, or else you may not make it back. \nFollow the clues to escape in time, make sure not to waste your time.\n", 60);
     welcome.slowtext("Your time has already started, better get MOVING!\n", 50);
     welcome.slowtext("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n\n", 10);
+    System.out.println("Type 'help' if you require assistance.");
     System.out.println(currentRoom.longDescription());
     currentRoom.displayInventory();
   }
