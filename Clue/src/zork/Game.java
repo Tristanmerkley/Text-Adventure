@@ -41,7 +41,7 @@ public class Game {
     try {
       initRooms("src/zork/data/rooms.json");
       initItems("src/zork/data/items.json");
-      currentRoom = roomMap.get("Office2"); // ! spawn room
+      currentRoom = roomMap.get("Theatre"); // ! spawn room
       playerInventory = new Inventory(300); // ! player max inventory weight
     } catch (Exception e) {
       e.printStackTrace();
@@ -159,7 +159,7 @@ public class Game {
    * Main play routine. Loops until end of play.
    */
   public void play() {
-    printWelcome();
+    //! printWelcome(); // Stopped for testing
     boolean finished = false;
     while (!finished) {
       Command command;
@@ -190,13 +190,15 @@ public class Game {
    */
   private void printWelcome() {
     // !welcome.title(); //disabled for testing
-    System.out.println();
-    System.out.println("Welcome to _____."); // TODO need to pick game name
-    System.out.println("Type 'help' if you need help.");
-    System.out.println("You have 24 hours (24 real-time minutes) to escape the house and pass the gate, or else you will be killed.");
-    System.out.println("Pay attention to detail, everything is there for a reason. ");
-    System.out.println("Don't stray from the path, follow the clues to escape in time");
-    System.out.println("Your time starts now… What are you waiting for? \n");
+    //welcome.slowtext("\n Type 'help' if you need help. \n", 1);
+    welcome.slowtext("Do you wanna play a game? \nThe game is simple,\n", 80);
+    welcome.slowtext("You have 24 hours", 60);
+    welcome.slowtext(" (24 real-time minutes) ", 5);
+    welcome.slowtext("to escape the house and pass the gate, or else you will be killed.\n", 50);
+    welcome.slowtext("Pay attention to detail, as everything is there for a reason.\n", 50);
+    welcome.slowtext("Don't stray from the path, or else you may not make it back. \nFollow the clues to escape in time, make sure not to waste your time.\n", 60);
+    welcome.slowtext("Your time has already started, better get MOVING!\n", 50);
+    welcome.slowtext("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n\n", 10);
     System.out.println(currentRoom.longDescription());
     currentRoom.displayInventory();
   }
@@ -582,12 +584,14 @@ public class Game {
       return;
     }
 
-    String shoe = command.getSecondWord();
-    if (shoe.equals("shoe")) { // special case for the shoe item
+    String word = command.getSecondWord();
+    if (currentRoom.contains("Shoe") != null && (word.equals("all") || word.equals("shoe"))) { // special case for the shoe item
       System.out.println("A peculiar coin fell out of the shoe and it has been added to your inventory");
       Item coin = new Item(1, "Peculiar Coin", false, 0);
       coin.setDescription("This is a weird looking coin, I should find somewhere to keep this safe.");
+      coin.setAlternateName("coin");
       playerInventory.addItem(coin);
+      return;
     }
 
     if (command.getSecondWord().equals("all")) { // implements use of the take "all" command
@@ -688,19 +692,15 @@ public class Game {
       System.out.println("Place what?");
       return;
     }
-
     String item = command.getSecondWord();
     if (nonNull(item) == null) {
       System.out.println(item + " is not a valid object.");
       return;
     }
-
-
     if (playerInventory.contains(command.getSecondWord()) == null) {
       System.out.println("You do not have a " + command.getSecondWord());
       return;
     }
-
     if (!command.hasThirdWord()) {
       System.out.println("You must specify where to put the " + item + "");
       return;
