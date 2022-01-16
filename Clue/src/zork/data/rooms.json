@@ -3,6 +3,7 @@
     {
       "id": "GrandEntry",
       "name": "Grand Entry",
+      "Hint": "Pay attention to the numbered objects around the house, and the first letter of the Colour they are.",
       "description": "You are in the Grand Entry. A painting swings on it's hinges to reveal a hidden safe. There are two sets of grand stairs leading up, and another set leading down inbetween them. You look up to see a shiny chandelier hanging from the ceiling.",
       "exits": [
         {
@@ -41,7 +42,8 @@
     {
       "id": "DiningRoom",
       "name": "Dining Room",
-      "description": "You are in the dining room. The walls are covered in flowered wallpaper with empty picture frames hanging on the walls. The lights are dim and the table is set for 4.",
+      "Hint":"Maybe I should take these chairs for later, they look rather comfortable.",
+      "description": "You are in the dining room. The walls are covered in flowered wallpaper with empty picture frames hanging on the walls. The lights are dim and the table is set for 3.",
       "exits": [
         {
           "isLocked": false,
@@ -58,6 +60,7 @@
     {
       "id": "Kitchen",
       "name": "Kitchen",
+      "Hint": "This milk looks rather old, I'm thirsty though so I should drink it. ",
       "description": "You are in the kitchen. The paint is chipping and the tiles are cracked, but the kitchen still looks grand thanks to an impressive island in the middle of the room.",
       "exits": [
         {
@@ -81,6 +84,7 @@
     {
       "id": "LivingRoom",
       "name": "Living Room",
+      "Hint": "I can see a faint shimmer from something inside the stitches of the couch, maybe I should try opening it.",
       "description": "You are in the living room. You can feel a cool breeze coming in from the door, but the fireplace gives off a comforting heat. Out of all the seating in the room, the couch looks the oldest by at least a decade. The carpet is fraying on the ends and is covered in stains, proving it's age.",
       "exits": [
         {
@@ -125,6 +129,7 @@
     {
       "id":"Bathroom1",
       "name":"Bathroom",
+      "Hint": "I should take the toilet paper, you'll never know when you need",
       "description":"You are in a bathroom. You notice there are 5 periwinkle toilet paper rolls in a basket on the floor. The sink is dripping and the light is flickering, giving you an eerie feeling.",
       "exits":[
         {
@@ -171,6 +176,7 @@
     {
       "id":"Pantry",
       "name":"Pantry",
+      "Hint": "The mouse looks hungry, maybe I should drop the cheese for it.",
       "description":"You are in the pantry. There are shelves with rows of jars filled with mysterious substances along the walls. There is water dripping from the ceiling where a water stain grows.",
       "exits":[
         {
@@ -217,6 +223,7 @@
     {
       "id":"Office1",
       "name":"Office",
+      "Hint": "I should reunite the coin with the piggy bank by placing it inside, who knows, maybe it will let me unlock the desk.",
       "description":"You are in an office. Wood panels line the room from floor to ceiling. There is a bear head coming out of the wall as a decoration. A cup with pens sit on the table next to a box of tissues.",
       "exits":[
         {
@@ -229,6 +236,7 @@
     {
       "id":"BowlingAlley",
       "name":"Bowling Alley",
+      "Hint": "Really...? You justed started the game and you already need a hint? Why don't you bowl to get in the right state of mind.",
       "description":"You are in the bowling alley. 6 lilac pins wait to be hit at the end of an aisle and a bowling ball sits beside them.",
       "exits":[
         {
@@ -290,6 +298,7 @@
     {
       "id":"Bedroom3",
       "name":"Bedroom",
+      "Hint": "This is not the correct room, but I'm getting closer, maybe I should check another bedroom.",
       "description":"You are in a bedroom. There is a sign on the door that says \"Warmer\". There is an empty set of drawers nest to a neatly made bed. Instead of a blanket, a layer of dust covers the matress.",
       "exits":[
         {
@@ -346,6 +355,7 @@
     {
       "id":"Bedroom2",
       "name":"Bedroom",
+      "Hint": "This is not the correct room, but I'm getting close, maybe I should check another bedroom.",
       "description":"You are in a bedroom. There is a sign on the door that says \"Warm\". There is an empty set of drawers nest to a neatly made bed. Instead of a blanket, a layer of dust covers the matress.",
       "exits":[
         {
@@ -380,6 +390,7 @@
     {
       "id":"Bedroom1",
       "name":"Bedroom",
+      "Hint": "This is not the correct room, but I'm not close, maybe I should check another bedroom.",
       "description":"You are in a bedroom. There is a sign on the door that says \"Cold\". There is an empty set of drawers nest to a neatly made bed. Instead of a blanket, a layer of dust covers the matress.",
       "exits":[
         {
@@ -437,6 +448,7 @@
     {
       "id":"Library",
       "name":"Library",
+      "Hint":"I should keep the piece of paper incase I find the other one.",
       "description":"You are in an old library filled with books. On one of the shelves lies a ripped piece of paper.",
       "exits":[
         {
@@ -449,6 +461,7 @@
     {
       "id":"Office2",
       "name":"Office",
+      "Hint":"I should read this book so that the knife from the kitchen becomes useful.",
       "description":"You are in an office. A book lies on the desk called \"How To Pick a Lock with a Knife - For Dummies\". That could be helpful...",
       "exits":[
         {
@@ -467,6 +480,7 @@
     {
       "id":"Bedroom4",
       "name":"Bedroom",
+      "Hint":"I think that this is the correct room, I should look around.",
       "description":"You are in a bedroom. There is a sign on the door that says \"HOT\". There is an empty set of drawers nest to a neatly made bed. Instead of a blanket, a layer of dust covers the matress.",
       "exits":[
         {
@@ -485,6 +499,7 @@
     {
       "id":"Closet3",
       "name":"Closet",
+      "Hint":"I wonder what's in the attic, I should take a look.",
       "description":"You are in a small closet. You think back to your shoe collection and how perfectly they would fit on the empty shelves.",
       "exits":[
         {
@@ -502,6 +517,7 @@
     {
       "id":"Attic",
       "name":"Attic",
+      "Hint":"Maybe something is hidden under the floorboard, maybe I should open it up.",
       "description":"You are in a run down attic. While entering the room, you trip over a loose floor board.",
       "exits":[
         {
@@ -514,6 +530,7 @@
     {
       "id":"Basement",
       "name":"Basement",
+      "Hint":"Have you gotten a strike? If so, try checking your inventory.",
       "description":"You are in the basement. The smell of mold fills the old room. There are winding steps leading down, and a larger set of stairs leading up.",
       "exits":[
         {
@@ -637,6 +654,7 @@
     {
       "id":"Shed",
       "name":"Shed",
+      "Hint":"Maybe I should find something to dig the loose dirt.",
       "description":"You are in a small shed. You notice the dirt on the ground next to the door is uneven.",
       "exits":[
         {
@@ -661,7 +679,8 @@
     {
       "id":"Garden",
       "name":"Garden",
-      "description":"You are in the garden. You are surrounded by flowers and theres one violet flower that stands out.",
+      "Hint":"The flowers are really pretty, I should take a one for later.",
+      "description":"You are in the garden. You are surrounded by a variety of flowers.",
       "exits":[
         {
           "isLocked":false,
@@ -696,8 +715,7 @@
         {
           "isLocked":true,
           "direction":"South",
-          "adjacentRoom":"Bunker",
-          "keyId":"safeKey"
+          "adjacentRoom":"Bunker"
         },
         {
           "isLocked":false,
@@ -715,7 +733,7 @@
     {
       "id":"Bunker",
       "name":"Bunker",
-      "description":"You are in the bunker. OH NO! As you walk into the bunker, the door closes and locks behind you. It looks like you already know the code to get out but be careful, who knows what will happen if you get it wrong 5 times...",
+      "description":"I don't know how you got in here, but... have fun? I guess?",
       "exits":[
         {
           "isLocked":false,
@@ -727,6 +745,7 @@
     {
       "id":"Maze1",
       "name":"Maze",
+      "Hint": "I doubt there is anything in the maze, I'm just wasting time",
       "description":"You are in a maze. There are hallways all around you. Remember, time is ticking...",
       "exits":[
         {
@@ -754,6 +773,7 @@
     {
       "id":"Maze2",
       "name":"Maze",
+      "Hint": "I doubt there is anything in the maze, I'm just wasting time",
       "description":"You are in a maze. There are hallways all around you. Remember, time is ticking...",
       "exits":[
         {
@@ -776,6 +796,7 @@
     {
       "id":"Maze6",
       "name":"Maze",
+      "Hint": "I doubt there is anything in the maze, I'm just wasting time",
       "description":"You are in a maze. There are hallways all around you. Remember, time is ticking...",
       "exits":[
         {
@@ -798,6 +819,7 @@
     {
       "id":"Maze3",
       "name":"Maze",
+      "Hint": "I doubt there is anything in the maze, I'm just wasting time",
       "description":"You are in a maze. There are hallways all around you. Remember, time is ticking...",
       "exits":[
         {
@@ -825,6 +847,7 @@
     {
       "id":"Maze4",
       "name":"Maze",
+      "Hint": "I doubt there is anything in the maze, I'm just wasting time",
       "description":"You are in a maze. There are hallways all around you. Remember, time is ticking...",
       "exits":[
         {
@@ -847,6 +870,7 @@
     {
       "id":"Maze5",
       "name":"Maze",
+      "Hint": "I doubt there is anything in the maze, I'm just wasting time",
       "description":"You are in a maze. There are hallways all around you. Remember, time is ticking...",
       "exits":[
         {
