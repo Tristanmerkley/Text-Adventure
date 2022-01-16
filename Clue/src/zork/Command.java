@@ -15,6 +15,10 @@ public class Command {
     this.secondWord = secondWord;
   }
 
+  /**
+   * Creates a command object. First, second, and third word must be supplied, but either one can be
+   * null.
+   */
   public Command(String firstWord, String secondWord, String thirdWord) {
     commandWord = firstWord;
     this.secondWord = secondWord;

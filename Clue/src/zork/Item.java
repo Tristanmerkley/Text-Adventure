@@ -39,6 +39,9 @@ public class Item extends OpenableObject {
     return inventory.getInventory();
   }
 
+  /**
+   * returns name
+   */
   public String toString() {
     return name;
   }
@@ -175,11 +178,20 @@ public class Item extends OpenableObject {
     return description;
   }
 
-
+  /**
+   * 
+   * @param itemName
+   * @return the Item with the itemName in the item inventory
+   */
   public Item contains(String itemName) {
     return inventory.contains(itemName);
   }
 
+  /**
+   * sets inventory
+   * 
+   * @param items
+   */
   public void setInventory(ArrayList<Item> items) {
     inventory.setInventory(items);
   }

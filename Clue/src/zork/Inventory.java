@@ -13,12 +13,16 @@ public class Inventory implements java.io.Serializable {
     this.currentWeight = 0;
   }
 
+  /**
+   * 
+   * @return the max weight
+   */
   public long getMaxWeight() {
     return maxWeight;
   }
 
   /**
-   * @return the current
+   * @return the current weight
    */
   public int getCurrentWeight() {
     return currentWeight;
@@ -26,6 +30,7 @@ public class Inventory implements java.io.Serializable {
 
   /**
    * adds an item to the inventory if it will not excide the max inventory weight
+   * 
    * @param item
    * @return
    */
@@ -41,6 +46,7 @@ public class Inventory implements java.io.Serializable {
 
   /**
    * checks if the inventory contains a item using its name
+   * 
    * @param itemName
    * @return the item
    */
@@ -54,6 +60,7 @@ public class Inventory implements java.io.Serializable {
 
   /**
    * removes an item from the inventory
+   * 
    * @param itemName
    * @return the removed item
    */
@@ -98,6 +105,7 @@ public class Inventory implements java.io.Serializable {
 
   /**
    * sets the entire inventory to the parameter
+   * 
    * @param items
    */
   public void setInventory(ArrayList<Item> items) {
