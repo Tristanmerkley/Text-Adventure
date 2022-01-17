@@ -133,6 +133,14 @@
             "startingroom": "Bathroom1"
         },
         {
+            "id": "Flower",
+            "name": "Violet Flower",
+            "alternatename": "flower",
+            "description": "A singular violet flower, it looks very pretty.",
+            "weight": 1,
+            "startingroom": "Bathroom1"
+        },
+        {
             "id": "Couch",
             "name": "Couch",
             "description": "A big brown couch with 3 cushions, one of the cushions seems to have some stitches on it",

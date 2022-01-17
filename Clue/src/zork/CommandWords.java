@@ -6,7 +6,7 @@ import java.util.HashSet;
 
 public class CommandWords {
   // a constant array that holds all valid command words
-  public static final HashSet<String> commands = new HashSet<String>(Arrays.asList("Quit", "Help", "Eat", "Drink", "Take", "Drop", "Inventory", "Look", "Bowl", "Place", "Open", "Time", "Unlock", "Dig", "Read", "Save", "Load"));
+  public static final HashSet<String> commands = new HashSet<String>(Arrays.asList("Quit", "Help", "Eat", "Drink", "Take", "Drop", "Inventory", "Look", "Bowl", "Place", "Open", "Time", "Unlock", "Dig", "Read", "Save", "Load", "hint"));
   public static final HashSet<String> directions = new HashSet<String>(Arrays.asList("north", "east", "south", "west", "n", "e", "s", "w", "northeast", "southwest", "southeast", "northwest", "nw", "ne", "sw", "se"));
   public static HashMap<String, String> dirConversions = new HashMap<String, String>();
 
