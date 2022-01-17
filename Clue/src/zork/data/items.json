@@ -238,6 +238,7 @@
             "name": "3 Chairs",
             "alternatename": "Chairs",
             "description": "3 Magenta chairs, they look very comfortable.",
+            "weight": 5,
             "startingroom": "DiningRoom"
         },
         {
