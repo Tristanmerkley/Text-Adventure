@@ -134,7 +134,7 @@ public class Game {
       String roomName = (String) ((JSONObject) roomObj).get("name");
       String roomId = (String) ((JSONObject) roomObj).get("id");
       String roomDescription = (String) ((JSONObject) roomObj).get("description");
-      String roomHint = (String) ((JSONObject) roomObj).get("hint") != null ? (String) ((JSONObject) roomObj).get("hint") : "I shouldn't waste any time here, i should check the rest of the house.";
+      String roomHint = (String) ((JSONObject) roomObj).get("hint") != null ? (String) ((JSONObject) roomObj).get("hint") : "I shouldn't waste any time here, I should check the rest of the house.";
       room.setDescription(roomDescription);
       room.setRoomName(roomName);
       room.setRoomHint(roomHint);
@@ -260,11 +260,19 @@ public class Game {
       load();
     } else if (commandWord.equalsIgnoreCase("time")) {
       printTime();
+    } else if (commandWord.equalsIgnoreCase("hint")){
+      printHint();
     }
     return false;
   }
 
   // implementations of user commands:
+
+  private void printHint() {
+    String hint = currentRoom.getRoomHint();
+    System.out.println(hint);
+  }
+    
 
   /**
    * Prints out the total run time of the current game
