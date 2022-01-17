@@ -141,7 +141,7 @@
             "startingroom": "LivingRoom"
         },
         {
-            "id": "BackDoor/PatioDoorKey",
+            "id": "BackyardKey",
             "name": "Key from couch",
             "alternatename": "Couch Key",
             "description": "Another key with an engraving of a flower on it, does it open more doors?",

@@ -93,9 +93,10 @@
           "adjacentRoom": "Hallway2"
         },
         {
-          "isLocked":false,
+          "isLocked":true,
           "direction":"East",
-          "adjacentRoom":"Patio"
+          "adjacentRoom":"Patio",
+          "keyId": "BackyardKey"
         }
       ]
     },
@@ -155,9 +156,10 @@
           "adjacentRoom":"Closet1"
         },
         {
-          "isLocked":false,
+          "isLocked":true,
           "direction":"East",
-          "adjacentRoom":"Path1"
+          "adjacentRoom":"Path1",
+          "keyId":"BackyardKey"
         }
       ]
     },
@@ -591,9 +593,10 @@
       "description":"You are on a dirt path. Grass, weeds and mushrooms surround the path and provide shelter for lingering insects.",
       "exits":[
         {
-          "isLocked":false,
+          "isLocked":true,
           "direction":"North",
-          "adjacentRoom":"Patio"
+          "adjacentRoom":"Patio",
+          "keyId":"BackyardKey"
         },
         {
           "isLocked":false,
