@@ -50,14 +50,6 @@
             "startingroom": "GrandEntry",
             "keyId": "6351"
         },
-        {
-            "id": "BalconyKey",
-            "name": "Key from safe",
-            "alternatename": "Safe key",
-            "description": "A key with a cloud on it.",
-            "weight": 1,
-            "startingitem": "Safe"
-        },
          {
             "id": "Candle",
             "name": "Candle",
@@ -138,7 +130,7 @@
             "alternatename": "flower",
             "description": "A singular violet flower, it looks very pretty.",
             "weight": 1,
-            "startingroom": "Bathroom1"
+            "startingroom": "Garden"
         },
         {
             "id": "Couch",
@@ -147,14 +139,6 @@
             "holdingWeight": 4,
             "isOpenable": true,
             "startingroom": "LivingRoom"
-        },
-        {
-            "id": "BackyardKey",
-            "name": "Key from couch",
-            "alternatename": "Couch Key",
-            "description": "Another key with an engraving of a flower on it, does it open more doors?",
-            "weight": 1,
-            "startingitem": "Couch"
         },
         {
             "id": "FirePlace",
@@ -250,14 +234,6 @@
             "startingroom": "DiningRoom"
         },
         {
-            "id": "FrontDoorKey",
-            "name": "Key from attic",
-            "alternatename": "Attic Key",
-            "description": "A shiny key that has a design of an ornate door on it.",
-            "weight": 1,
-            "startingitem": "FloorBoard"
-        },
-        {
             "id": "NoteOnPatioTable",
             "name": "Patio table note",
             "alternatename": "Note",
@@ -279,14 +255,6 @@
             "isOpenable": true,
             "holdingWeight": 1,
             "startingroom": "Shed"
-        },
-         {
-            "id": "GateKey",
-            "name": "Key from hole",
-            "alternatename": "Hole key",
-            "description": "A key with the symbol of the gate on it",
-            "weight": 1,
-            "startingitem": "Hole"
         }
     ]
 }
