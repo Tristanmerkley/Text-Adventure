@@ -813,6 +813,9 @@ public class Game {
       System.out.println("You cannot go there, it is locked.");
     else {
       currentRoom = nextRoom;
+      if (currentRoom.getRoomName().equals("Bunker")) {
+        System.out.println("The door closes behind you and locks automatically. You are stuck in the bunker with no food and water and eventually die of dehydration.");
+      }
       if (!currentRoom.getRoomName().equals("The End")) {
         System.out.println(currentRoom.longDescription());
         currentRoom.displayInventory();
