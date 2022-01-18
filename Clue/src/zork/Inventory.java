@@ -1,11 +1,13 @@
 package zork;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Inventory implements java.io.Serializable {
   private ArrayList<Item> items;
   private long maxWeight;
   private int currentWeight;
+  private Scanner in;
 
   public Inventory(long maxWeight) {
     this.items = new ArrayList<Item>();
@@ -35,13 +37,21 @@ public class Inventory implements java.io.Serializable {
    * @return
    */
   public boolean addItem(Item item) {
-    if (item.getWeight() + currentWeight <= maxWeight) {
-      currentWeight += item.getWeight();
-      return items.add(item);
-    } else {
-      System.out.println("There is no room to add the item.");
-      return false;
+    boolean noSpace = true;
+    while (noSpace) {
+      if (item.getWeight() + currentWeight > maxWeight) {
+        System.out.println("There is no room to add the" + item.getName() + ", you must choose an item to remove \n Options:");
+        displayInventory();
+        if (in == null)
+          in = new Scanner(System.in);
+        System.out.print("Choose which item to drop: \n> ");
+        String removeItem = in.nextLine();
+        removeItem(removeItem);
+      } else
+        noSpace = false;
     }
+    currentWeight += item.getWeight();
+    return items.add(item);
   }
 
   /**
