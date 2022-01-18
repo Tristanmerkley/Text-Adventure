@@ -479,6 +479,23 @@ public class Game {
       System.out.println(object.getName() + " is already open!");
       return;
     }
+
+    if (item.equals("couch")) {
+      System.out.println("A key fell out of the couch and onto the ground.");
+      Item BackyardKey = new Key("BackyardKey", "Key from Couch", 1);
+      BackyardKey.setDescription("Another key with an engraving of a flower on it, does it open more doors?");
+      currentRoom.addItem(BackyardKey);
+      return;
+    }
+
+    if (item.equals("safe")) {
+      System.out.println("A key fell out of the safe and onto the ground.");
+      Item BalconyKey = new Key("BalconyKey", "Key from safe", 1);
+      BalconyKey.setDescription("A key with a cloud on it.");
+      currentRoom.addItem(BalconyKey);
+      return;
+    }
+
     if (object.isOpenable()) { // checks if you can open the object
       if (object.isLocked()) { // checks if the item is locked
         System.out.println("You must first unlock: " + object.getName());
@@ -507,6 +524,9 @@ public class Game {
         currentRoom.addItem(currentRoom.contains("Floorboard").contains("Key from attic"));
         currentRoom.getInventory().remove(currentRoom.contains("Floorboard"));
         System.out.println("You pushed the floor board aside, revealing a key.");
+        Item frontDoorKey = new Key("FrontDoorKey", "key from floorboard", 1);
+        frontDoorKey.setDescription("A shiny key that has a design of an ornate door on it.");
+        currentRoom.addItem(frontDoorKey);
         return;
       }
       nonNull(item).setOpen(true);
