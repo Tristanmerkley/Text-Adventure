@@ -41,8 +41,8 @@ public class Game {
     try {
       initRooms("src/zork/data/rooms.json");
       initItems("src/zork/data/items.json");
-      currentRoom = roomMap.get("LivingRoom"); // ! spawn room
-      playerInventory = new Inventory(300); // ! player max inventory weight
+      currentRoom = roomMap.get("Theatre"); // ! spawn room
+      playerInventory = new Inventory(150); // ! player max inventory weight
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -159,7 +159,7 @@ public class Game {
    * Main play routine. Loops until end of play.
    */
   public void play() {
-    // ! printWelcome(); // Stopped for testing
+    printWelcome(); // Stopped for testing
     boolean finished = false;
     while (!finished) {
       Command command;
@@ -260,7 +260,7 @@ public class Game {
       load();
     } else if (commandWord.equalsIgnoreCase("time")) {
       printTime();
-    } else if (commandWord.equalsIgnoreCase("hint")){
+    } else if (commandWord.equalsIgnoreCase("hint")) {
       printHint();
     }
     return false;
@@ -272,7 +272,7 @@ public class Game {
     String hint = currentRoom.getRoomHint();
     System.out.println(hint);
   }
-    
+
 
   /**
    * Prints out the total run time of the current game
@@ -365,7 +365,7 @@ public class Game {
     if (command.getSecondWord().equalsIgnoreCase("desk") && currentRoom.contains("desk").isLocked()) { // special case for unlocking a desk
       if (currentRoom.contains("desk") != null) {
         if (currentRoom.contains("desk").isLocked())
-          unlockDesk(command); // TODO
+          unlockDesk(command);
         else
           System.out.println("The desk is already unlocked!");
       } else
@@ -681,7 +681,7 @@ public class Game {
       return;
     }
     currentRoom.addItem(playerInventory.removeItem("bowling ball"));
-    if ((int) (Math.random() * 2) + 1 == 2) { // ! change chance for testing (int) (Math.random() * 2) + 1;
+    if ((int) (Math.random() * 2) + 1 == 2) { // 50% chance of strike
       System.out.println("Strike!!");
       System.out.println("You hear a lock click upstairs. ");
       Item strikeKey = new Key("strikeKey", "Key", 1);
