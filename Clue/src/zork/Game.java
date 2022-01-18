@@ -185,8 +185,8 @@ public class Game {
       }
       if (currentRoom.getRoomName().equalsIgnoreCase("bunker")) {
         finished = true;
-        System.out.println("The door closes behind you and locks automatically. You are stuck in the bunker with no food and water and eventually die of dehydration.");
-        System.out.println("YOU LOSE!!!");
+        System.out.println("\u001B[31m" + "The door closes behind you and locks automatically. You are stuck in the bunker with no food and water and eventually die of dehydration.");
+        System.out.println("\u001B[31m" + "YOU LOSE!!!");
       }
     }
     System.out.println("Thank you for playing.  Good bye.");
@@ -526,10 +526,10 @@ public class Game {
         }
       }
       if (item.equalsIgnoreCase("floorboard")) { // special case for the floorboard
-        currentRoom.addItem(currentRoom.contains("Floorboard").contains("Key from attic"));
-        currentRoom.getInventory().remove(currentRoom.contains("Floorboard"));
+        // currentRoom.addItem(currentRoom.contains("Floorboard").contains("Key from attic"));
+        // currentRoom.getInventory().remove(currentRoom.contains("Floorboard"));
         System.out.println("You pushed the floor board aside, revealing a key.");
-        Item frontDoorKey = new Key("FrontDoorKey", "key from floorboard", 1);
+        Item frontDoorKey = new Key("FrontDoorKey", "Key from floorboard", 1);
         frontDoorKey.setDescription("A shiny key that has a design of an ornate door on it.");
         currentRoom.addItem(frontDoorKey);
         return;
