@@ -493,7 +493,7 @@ public class Game {
       return;
     }
 
-    if (item.equals("safe")) {
+    if (item.equals("safe") && !currentRoom.contains("safe").isLocked()) {
       System.out.println("A key fell out of the safe and onto the ground.");
       Item BalconyKey = new Key("BalconyKey", "Key from safe", 1);
       BalconyKey.setDescription("A key with a cloud on it.");
