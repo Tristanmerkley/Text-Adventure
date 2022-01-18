@@ -159,7 +159,7 @@ public class Game {
    * Main play routine. Loops until end of play.
    */
   public void play() {
-    //printWelcome(); // Stopped for testing
+    printWelcome(); // Stopped for testing
     boolean finished = false;
     while (!finished) {
       Command command;
