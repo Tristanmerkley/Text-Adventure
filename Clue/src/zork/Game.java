@@ -42,7 +42,7 @@ public class Game {
       initRooms("src/zork/data/rooms.json");
       initItems("src/zork/data/items.json");
       currentRoom = roomMap.get("Theatre"); // ! spawn room
-      playerInventory = new Inventory(10); // ! player max inventory weight
+      playerInventory = new Inventory(150); // ! player max inventory weight
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -159,7 +159,7 @@ public class Game {
    * Main play routine. Loops until end of play.
    */
   public void play() {
-    // ! printWelcome(); // Stopped for testing
+    printWelcome(); // Stopped for testing
     boolean finished = false;
     while (!finished) {
       Command command;
@@ -182,6 +182,11 @@ public class Game {
       if (currentRoom.getRoomName().equalsIgnoreCase("the end")) {
         finished = true;
         System.out.println("\u001B[31m" + "Congratulations! You have successfully escaped the house!");
+      }
+      if (currentRoom.getRoomName().equalsIgnoreCase("bunker")) {
+        finished = true;
+        System.out.println("The door closes behind you and locks automatically. You are stuck in the bunker with no food and water and eventually die of dehydration.");
+        System.out.println("YOU LOSE!!!");
       }
     }
     System.out.println("Thank you for playing.  Good bye.");
@@ -365,7 +370,7 @@ public class Game {
     if (command.getSecondWord().equalsIgnoreCase("desk") && currentRoom.contains("desk").isLocked()) { // special case for unlocking a desk
       if (currentRoom.contains("desk") != null) {
         if (currentRoom.contains("desk").isLocked())
-          unlockDesk(command); // TODO
+          unlockDesk(command);
         else
           System.out.println("The desk is already unlocked!");
       } else
@@ -707,7 +712,7 @@ public class Game {
       return;
     }
     currentRoom.addItem(playerInventory.removeItem("bowling ball"));
-    if ((int) (Math.random() * 2) + 1 == 2) { // ! change chance for testing (int) (Math.random() * 2) + 1;
+    if ((int) (Math.random() * 2) + 1 == 2) { // 50% chance of strike
       System.out.println("Strike!!");
       System.out.println("You hear a lock click upstairs. ");
       Item strikeKey = new Key("strikeKey", "Key", 1);
@@ -833,9 +838,6 @@ public class Game {
       System.out.println("You cannot go there, it is locked.");
     else {
       currentRoom = nextRoom;
-      if (currentRoom.getRoomName().equals("Bunker")) {
-        System.out.println("The door closes behind you and locks automatically. You are stuck in the bunker with no food and water and eventually die of dehydration.");
-      }
       if (!currentRoom.getRoomName().equals("The End")) {
         System.out.println(currentRoom.longDescription());
         currentRoom.displayInventory();
