@@ -42,7 +42,7 @@ public class Game {
       initRooms("src/zork/data/rooms.json");
       initItems("src/zork/data/items.json");
       currentRoom = roomMap.get("Theatre"); // ! spawn room
-      playerInventory = new Inventory(150); // ! player max inventory weight
+      playerInventory = new Inventory(50); // ! player max inventory weight
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -159,7 +159,7 @@ public class Game {
    * Main play routine. Loops until end of play.
    */
   public void play() {
-    printWelcome(); // Stopped for testing
+    //printWelcome(); // Stopped for testing
     boolean finished = false;
     while (!finished) {
       Command command;
