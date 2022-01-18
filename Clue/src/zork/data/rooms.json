@@ -716,7 +716,7 @@
       "description":"You are in an empty cellar. It looks like there used to be a big wine collection, but the only bottle left.",
       "exits":[
         {
-          "isLocked":true,
+          "isLocked":false,
           "direction":"South",
           "adjacentRoom":"Bunker"
         },
