@@ -41,8 +41,8 @@ public class Game {
     try {
       initRooms("src/zork/data/rooms.json");
       initItems("src/zork/data/items.json");
-      currentRoom = roomMap.get("LivingRoom"); // ! spawn room
-      playerInventory = new Inventory(300); // ! player max inventory weight
+      currentRoom = roomMap.get("Theatre"); // ! spawn room
+      playerInventory = new Inventory(10); // ! player max inventory weight
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -260,7 +260,7 @@ public class Game {
       load();
     } else if (commandWord.equalsIgnoreCase("time")) {
       printTime();
-    } else if (commandWord.equalsIgnoreCase("hint")){
+    } else if (commandWord.equalsIgnoreCase("hint")) {
       printHint();
     }
     return false;
@@ -272,7 +272,7 @@ public class Game {
     String hint = currentRoom.getRoomHint();
     System.out.println(hint);
   }
-    
+
 
   /**
    * Prints out the total run time of the current game
@@ -596,6 +596,7 @@ public class Game {
       return;
     }
 
+
     String word = command.getSecondWord();
     if (currentRoom.contains("Shoe") != null && (word.equals("all") || word.equals("shoe"))) { // special case for the shoe item
       System.out.println("A peculiar coin fell out of the shoe and it has been added to your inventory");
@@ -626,6 +627,11 @@ public class Game {
           taken += ", " + remove.getName();
         } else
           i++;
+      }
+
+      if (!command.getSecondWord().equals("all") && playerInventory.getCurrentWeight() + currentRoom.contains(command.getSecondWord()).getWeight() > playerInventory.getMaxWeight()) {
+        System.out.println("You do not have enough space in your inventory to take this.");
+        return;
       }
       System.out.println(taken.length() == 0 ? "There are no items to take." : "You took: " + taken.replaceFirst(", ", ""));
     } else if (nonNull(command.getSecondWord()) == null) {

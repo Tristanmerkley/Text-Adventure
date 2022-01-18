@@ -44,6 +44,7 @@ public class Room implements java.io.Serializable {
 
   /**
    * adds an exit to a room
+   * 
    * @param exit
    * @throws Exception
    */
@@ -59,7 +60,8 @@ public class Room implements java.io.Serializable {
   }
 
   /**
-   * Return a long description of this room, on the form: You are in the kitchen. Exits: roomName(north west)
+   * Return a long description of this room, on the form: You are in the kitchen. Exits:
+   * roomName(north west)
    */
   public String longDescription() {
     return "Room: " + roomName + "\n\n" + description + "\n" + exitString();
@@ -79,6 +81,7 @@ public class Room implements java.io.Serializable {
   /**
    * Return the room that is reached if we go from this room in direction "direction". If there is no
    * room in that direction, return null. if the room is locked, return the currentRoom.
+   * 
    * @return
    */
   public Room nextRoom(String direction, Room currentRoom) {
@@ -95,6 +98,7 @@ public class Room implements java.io.Serializable {
 
   /**
    * gets the room's name
+   * 
    * @return
    */
   public String getRoomName() {
@@ -164,6 +168,7 @@ public class Room implements java.io.Serializable {
 
   /**
    * returns the room inventory
+   * 
    * @return
    */
   public ArrayList<Item> getInventory() {
@@ -179,6 +184,7 @@ public class Room implements java.io.Serializable {
 
   /**
    * gets the total amount of items in a room inventory as an integer, including items in other items
+   * 
    * @return
    */
   public int getTotalInventorySize() {
@@ -196,10 +202,18 @@ public class Room implements java.io.Serializable {
     return total;
   }
 
-  public void setRoomHint(String roomHint){
+  /**
+   * set the room hint
+   * 
+   * @param roomHint
+   */
+  public void setRoomHint(String roomHint) {
     this.roomHint = roomHint;
   }
 
+  /**
+   * gets hint for the room
+   */
   public String getRoomHint() {
     return roomHint;
   }

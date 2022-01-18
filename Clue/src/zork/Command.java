@@ -56,6 +56,9 @@ public class Command {
     return (secondWord != null);
   }
 
+  /**
+   * returns true or false depending on if the command word is a direction or not
+   */
   public boolean isDirection(String commandWord) {
     return CommandWords.directions.contains(commandWord); // returns true or false
   }
