@@ -301,7 +301,7 @@
       "id":"Bedroom3",
       "name":"Bedroom",
       "hint": "This is not the correct room, but I'm getting closer, maybe I should check another bedroom.",
-      "description":"You are in a bedroom. There is a sign on the door that says \"Warmer\". There is an empty set of drawers nest to a neatly made bed. Instead of a blanket, a layer of dust covers the matress.",
+      "description":"You are in a bedroom. There is a sign on the door that says \"Warmer\". There is an empty set of drawers next to a neatly made bed. Instead of a blanket, a layer of dust covers the matress.",
       "exits":[
         {
           "isLocked":false,
@@ -716,7 +716,7 @@
       "description":"You are in an empty cellar. It looks like there used to be a big wine collection, but the only bottle left.",
       "exits":[
         {
-          "isLocked":true,
+          "isLocked":false,
           "direction":"South",
           "adjacentRoom":"Bunker"
         },

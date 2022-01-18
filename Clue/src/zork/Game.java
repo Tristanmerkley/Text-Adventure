@@ -183,6 +183,11 @@ public class Game {
         finished = true;
         System.out.println("\u001B[31m" + "Congratulations! You have successfully escaped the house!");
       }
+      if (currentRoom.getRoomName().equalsIgnoreCase("bunker")) {
+        finished = true;
+        System.out.println("The door closes behind you and locks automatically. You are stuck in the bunker with no food and water and eventually die of dehydration.");
+        System.out.println("YOU LOSE!!!");
+      }
     }
     System.out.println("Thank you for playing.  Good bye.");
     if (in != null)
@@ -596,6 +601,7 @@ public class Game {
       return;
     }
 
+
     String word = command.getSecondWord();
     if (currentRoom.contains("Shoe") != null && (word.equals("all") || word.equals("shoe"))) { // special case for the shoe item
       System.out.println("A peculiar coin fell out of the shoe and it has been added to your inventory");
@@ -626,6 +632,11 @@ public class Game {
           taken += ", " + remove.getName();
         } else
           i++;
+      }
+
+      if (!command.getSecondWord().equals("all") && playerInventory.getCurrentWeight() + currentRoom.contains(command.getSecondWord()).getWeight() > playerInventory.getMaxWeight()) {
+        System.out.println("You do not have enough space in your inventory to take this.");
+        return;
       }
       System.out.println(taken.length() == 0 ? "There are no items to take." : "You took: " + taken.replaceFirst(", ", ""));
     } else if (nonNull(command.getSecondWord()) == null) {
