@@ -314,6 +314,7 @@ public class Game {
       itemMap = save.getItemMap();
       currentRoom = save.getCurrentRoom();
       playerInventory = save.getPlayerInventory();
+      timeElapsed = save.getTimeElapsed();
     }
   }
 
